@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">The Head That Feeds</string>
+
+    <string name="intro_1">Hello? Is anyone receiving this?</string>
+    <string name="intro_1_response">Hello? Who is this?</string>
+    <string name="intro_2">Thank god! I\'ve been transmitting for weeks. I thought there were no Nochies left</string>
+    <string name="intro_2_response">Nochies? What are you talking about? Who <i>are</i> you?</string>
+    <string name="intro_3">Nochies. You know, no-tech people. Ones who escaped The Grid. Nevermind, that\'s not important. Are you safe? Can you talk? Is anyone else listening?</string>
+    <string name="intro_3_response">No, it\'s just me. But how did you find this transmission? No one\'s been on this band for years. Maybe decades, I…</string>
+    <string name="intro_4">Listen, don\'t worry about that. All you need to know is that there <i>is</i> a resistance. It exists, beside and under The Grid and its supposed omniscient AI. </string>
+    <string name="intro_4_response">Sure, fine. I used to transmit to others all the time, hatching little plots and thinking of ways of…</string>
+    <string name="intro_5">No! Listen! This is <i>real</i>. We have a <i>network</i>. We have <i>computers</i> not hooked up to The Grid. We have people who know how to use them.</string>
+    <string name="intro_5_response">That\'s impossible. The Pan-Communications Agreement centralized everything. Every known satellite was programmed to…</string>
+    <string name="intro_6">There are always dissidents, pilgrim. Long-sighted partisans who facilitated their own exospheric contingencies. Please, just trust me. It exists.</string>
+    <string name="intro_6_response">Fine. Suppose that is case. What good does it even do? The Grid\'s AI controls every information source, every media outlet. What are you going to do, broadcast a </string>
+</resources>
