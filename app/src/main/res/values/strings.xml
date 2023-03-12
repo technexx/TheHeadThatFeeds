@@ -12,5 +12,8 @@
     <string name="intro_5">No! Listen! This is <i>real</i>. We have a <i>network</i>. We have <i>computers</i> not hooked up to The Grid. We have people who know how to use them.</string>
     <string name="intro_5_response">That\'s impossible. The Pan-Communications Agreement centralized everything. Every known satellite was programmed to…</string>
     <string name="intro_6">There are always dissidents, pilgrim. Long-sighted partisans who facilitated their own exospheric contingencies. Please, just trust me. It exists.</string>
-    <string name="intro_6_response">Fine. Suppose that is case. What good does it even do? The Grid\'s AI controls every information source, every media outlet. What are you going to do, broadcast a </string>
+    <string name="intro_6_response">Fine. Suppose that is case. What good does it even do? The Grid\'s AI controls every information source, every media outlet. What are you going to do, broadcast a distress signal?</string>
+    <string name="intro_7">You\'re <i>sure</i> you are alone?</string>
+    <string name="intro_7_response">Yes! I\'ve told you. What does that even…</string>
+    <string name="intro_8">We have an AI. Our <i>own</i> AI. It\'s a fraction of The Grid\'s but learning more every day. We are going to war, friend.</string>
 </resources>
