@@ -16,4 +16,19 @@
     <string name="intro_7">You\'re <i>sure</i> you are alone?</string>
     <string name="intro_7_response">Yes! I\'ve told you. What does that even…</string>
     <string name="intro_8">We have an AI. Our <i>own</i> AI. It\'s a fraction of The Grid\'s but learning more every day. We are going to war, friend.</string>
+
+    <string-array name="player_ai_levels">
+        <item>Ant</item>
+        <item>Pigeon</item>
+        <item>Rat</item>
+        <item>Cat</item>
+        <item>Dog</item>
+        <item>Crow</item>
+        <item>Elephant</item>
+        <item>Dolphin</item>
+        <item>Chimpanzee</item>
+        <item>Human</item>
+        <item>Human Savant</item>
+        <item>Post-Human Evolution</item>
+    </string-array>
 </resources>
