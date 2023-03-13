@@ -8,6 +8,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.SnackbarDefaults.backgroundColor
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -73,30 +74,61 @@ fun GameStatusBarMainRow(backgroundColor: Int) {
         .fillMaxSize()
         .background(colorResource(id = backgroundColor))
     ) {
-        GameStatsBarSubRows(Arrangement.Center, Alignment.CenterVertically, backgroundColor = R.color.android_yellow)
-        GameStatsBarSubRows(Arrangement.Center, Alignment.CenterVertically, backgroundColor = R.color.android_magenta)
-        GameStatsBarSubRows(Arrangement.Center, Alignment.CenterVertically, backgroundColor = R.color.android_green)
+        GameStatusBarSubRows()
     }
 }
 
 @Composable
-fun GameStatsBarSubRows(arrangement: Arrangement.Horizontal, alignment: Alignment.Vertical, backgroundColor: Int) {
+fun GameStatusBarSubRows() {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp
 
+    StatusBarLeftRow(width = screenWidth/3)
+    StatusBarMiddleRow(width = screenWidth/3)
+    StatusBarRightRow(width = screenWidth/3)
+}
+
+@Composable
+fun StatusBarLeftRow(width: Int) {
     Row (modifier = Modifier
         .fillMaxHeight()
-        .background(colorResource(id = backgroundColor))
-        .width((screenWidth / 3).dp),
-        horizontalArrangement = arrangement,
-        verticalAlignment = alignment
-        ) {
-        StatusBarTexts(textColor = colorResource(id = R.color.white))
+        .background(colorResource(id = R.color.android_yellow))
+        .width(width.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
     }
 }
 
 @Composable
-fun StatusBarTexts(textColor: Color) {
+fun StatusBarMiddleRow(width: Int) {
+    Row (modifier = Modifier
+        .fillMaxHeight()
+        .background(colorResource(id = R.color.android_magenta))
+        .width(width.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+    }
+}
+
+@Composable
+fun StatusBarRightRow(width: Int) {
+    Row (modifier = Modifier
+        .fillMaxHeight()
+        .background(colorResource(id = R.color.android_green))
+        .width(width.dp),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+    }
+}
+
+@Composable
+fun StatusBarTexts(text: String, textColor: Color) {
     Text(text = "Resistance AI", color = textColor)
 }
 
