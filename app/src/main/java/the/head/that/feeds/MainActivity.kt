@@ -11,6 +11,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
@@ -68,26 +69,29 @@ fun GameStatusBarColumn(height: Int) {
 
 @Composable
 fun GameStatusBarMainRow(backgroundColor: Int) {
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp
-
     Row(modifier = Modifier
         .fillMaxSize()
         .background(colorResource(id = backgroundColor))
     ) {
-        GameStatsBarSubRows(screenWidth/3, backgroundColor = R.color.android_yellow)
-        GameStatsBarSubRows(screenWidth/3, backgroundColor = R.color.android_magenta)
-        GameStatsBarSubRows(screenWidth/3, backgroundColor = R.color.android_green)
+        GameStatsBarSubRows(Arrangement.Center, Alignment.CenterVertically, backgroundColor = R.color.android_yellow)
+        GameStatsBarSubRows(Arrangement.Center, Alignment.CenterVertically, backgroundColor = R.color.android_magenta)
+        GameStatsBarSubRows(Arrangement.Center, Alignment.CenterVertically, backgroundColor = R.color.android_green)
     }
 }
 
 @Composable
-fun GameStatsBarSubRows(width: Int, backgroundColor: Int) {
+fun GameStatsBarSubRows(arrangement: Arrangement.Horizontal, alignment: Alignment.Vertical, backgroundColor: Int) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp
+
     Row (modifier = Modifier
         .fillMaxHeight()
         .background(colorResource(id = backgroundColor))
-        .width(width.dp)) {
-
+        .width((screenWidth / 3).dp),
+        horizontalArrangement = arrangement,
+        verticalAlignment = alignment
+        ) {
+        StatusBarTexts(textColor = colorResource(id = R.color.white))
     }
 }
 
