@@ -68,22 +68,25 @@ fun GameStatusBarColumn(height: Int) {
 
 @Composable
 fun GameStatusBarMainRow(backgroundColor: Int) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp
+
     Row(modifier = Modifier
         .fillMaxSize()
         .background(colorResource(id = backgroundColor))
     ) {
-        GameStatsBarSubRows(backgroundColor = R.color.android_yellow)
-        GameStatsBarSubRows(backgroundColor = R.color.android_magenta)
-        GameStatsBarSubRows(backgroundColor = R.color.android_green)
+        GameStatsBarSubRows(screenWidth/3, backgroundColor = R.color.android_yellow)
+        GameStatsBarSubRows(screenWidth/3, backgroundColor = R.color.android_magenta)
+        GameStatsBarSubRows(screenWidth/3, backgroundColor = R.color.android_green)
     }
 }
 
 @Composable
-fun GameStatsBarSubRows(backgroundColor: Int) {
+fun GameStatsBarSubRows(width: Int, backgroundColor: Int) {
     Row (modifier = Modifier
         .fillMaxHeight()
         .background(colorResource(id = backgroundColor))
-        .width(120.dp)) {
+        .width(width.dp)) {
 
     }
 }
