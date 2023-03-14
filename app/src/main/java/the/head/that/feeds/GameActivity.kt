@@ -1,5 +1,6 @@
 package the.head.that.feeds
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -20,11 +21,14 @@ import androidx.compose.ui.unit.dp
 import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 
 private lateinit var gameViewModel : GameViewModel
+@SuppressLint("StaticFieldLeak")
+private lateinit var valuesToStrings : ValuesToStrings
 
 class GameActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        valuesToStrings = ValuesToStrings(this)
         val gameViewModelInit : GameViewModel by viewModels()
         gameViewModel = gameViewModelInit
 
@@ -119,7 +123,7 @@ fun StatusBarMiddleRowColumn() {
     ) {
         Text(text = "Resistance AI", color = Color.White)
         Spacer(modifier = Modifier.height(40.dp))
-        Text(text = "It\'s a NEWT!", color = Color.White)
+        Text(text = valuesToStrings.friendlyAILevelString(0), color = Color.White)
     }
 }
 

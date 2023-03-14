@@ -31,4 +31,7 @@
         <item>Human Savant</item>
         <item>Post-Human Evolution</item>
     </string-array>
+
+    <string-array name="enemy_ai_levels">
+    </string-array>
 </resources>
