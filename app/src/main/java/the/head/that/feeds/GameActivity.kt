@@ -16,8 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 
 private lateinit var gameViewModel : GameViewModel
@@ -94,12 +96,24 @@ fun GameStatusBarSubRows() {
 fun StatusBarLeftRow(width: Int) {
     Row (modifier = Modifier
         .fillMaxHeight()
-        .background(colorResource(id = R.color.android_yellow))
+        .background(colorResource(id = R.color.dark_green))
         .width(width.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
+        StatusBarLeftRowColumn()
+    }
+}
 
+@Composable
+fun StatusBarLeftRowColumn() {
+    Column(
+        verticalArrangement = Arrangement.SpaceAround,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Resistance AI", color = Color.White)
+        Spacer(modifier = Modifier.height(40.dp))
+        Text(text = valuesToStrings.friendlyAILevelString(0), color = Color.White, fontSize = 20.sp)
     }
 }
 
@@ -107,7 +121,7 @@ fun StatusBarLeftRow(width: Int) {
 fun StatusBarMiddleRow(width: Int) {
     Row (modifier = Modifier
         .fillMaxHeight()
-        .background(colorResource(id = R.color.android_magenta))
+        .background(colorResource(id = R.color.fade_white_2))
         .width(width.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
@@ -119,11 +133,10 @@ fun StatusBarMiddleRow(width: Int) {
 @Composable
 fun StatusBarMiddleRowColumn() {
     Column(
-        verticalArrangement = Arrangement.SpaceAround
+        verticalArrangement = Arrangement.SpaceAround,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Resistance AI", color = Color.White)
-        Spacer(modifier = Modifier.height(40.dp))
-        Text(text = valuesToStrings.friendlyAILevelString(0), color = Color.White)
+
     }
 }
 
@@ -131,18 +144,25 @@ fun StatusBarMiddleRowColumn() {
 fun StatusBarRightRow(width: Int) {
     Row (modifier = Modifier
         .fillMaxHeight()
-        .background(colorResource(id = R.color.android_green))
+        .background(colorResource(id = R.color.dark_red))
         .width(width.dp),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
-
+        StatusBarRightRowColumn()
     }
 }
 
 @Composable
-fun StatusBarTexts(text: String, textColor: Color) {
-    Text(text = text, color = textColor)
+fun StatusBarRightRowColumn() {
+    Column(
+        verticalArrangement = Arrangement.SpaceAround,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Grid AI", color = Color.White)
+        Spacer(modifier = Modifier.height(40.dp))
+        Text(text = valuesToStrings.enemyAILevelString(0), color = Color.White, fontSize = 20.sp)
+    }
 }
 
 @Composable

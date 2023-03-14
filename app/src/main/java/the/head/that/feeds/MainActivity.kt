@@ -28,12 +28,13 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 //Todo: As player AI evolves, it gains new abilities.
     //Todo: Requires more power as it grows.
 //Todo: As enemy AI gets closer to locating player, it gains new abilities. Maybe relate to its animal.
+    //Todo: Can be in "Hunting" mode, where it gets closer to finding you. Events can disrupt this.
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val gameIntent = Intent(this, GameActivity::class.java)
-        startActivity(intent)
+        startActivity(gameIntent)
     }
 }
