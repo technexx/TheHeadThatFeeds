@@ -1,5 +1,6 @@
 package the.head.that.feeds
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -31,144 +32,8 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            TheHeadThatFeedsTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(modifier = Modifier.fillMaxSize(),
-                    color = colorResource(id = R.color.onyx)) {
-                    FullGameScreen()
-                }
-            }
-        }
-    }
-}
 
-@Composable
-fun FullGameScreen() {
-    val configuration = LocalConfiguration.current
-    val screenHeight = configuration.screenHeightDp
-
-    Column() {
-        GameStatusBarColumn(screenHeight / 4)
-        Divider(thickness = 2.dp, color = Color.White)
-        GameBody  (screenHeight / 2)
-        Divider(thickness = 2.dp, color = Color.White)
-        GameInteraction(screenHeight / 4)
-    }
-}
-
-//Columns lay down their children vertically, so of course our rows will be stacked.
-@Composable
-fun GameStatusBarColumn(height: Int) {
-    Column(modifier = Modifier
-        .height(height.dp)
-        .background(colorResource(id = R.color.black_denim))
-    ) {
-        GameStatusBarMainRow(backgroundColor = R.color.android_blue)
-    }
-}
-
-@Composable
-fun GameStatusBarMainRow(backgroundColor: Int) {
-    Row(modifier = Modifier
-        .fillMaxSize()
-        .background(colorResource(id = backgroundColor))
-    ) {
-        GameStatusBarSubRows()
-    }
-}
-
-@Composable
-fun GameStatusBarSubRows() {
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp
-
-    StatusBarLeftRow(width = screenWidth/3)
-    StatusBarMiddleRow(width = screenWidth/3)
-    StatusBarRightRow(width = screenWidth/3)
-}
-
-@Composable
-fun StatusBarLeftRow(width: Int) {
-    Row (modifier = Modifier
-        .fillMaxHeight()
-        .background(colorResource(id = R.color.android_yellow))
-        .width(width.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-
-    }
-}
-
-//This is a row and will lay out left to right.
-//Todo: Embed column within row.
-@Composable
-fun StatusBarMiddleRow(width: Int) {
-    Row (modifier = Modifier
-        .fillMaxHeight()
-        .background(colorResource(id = R.color.android_magenta))
-        .width(width.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        StatusBarMiddleRowColumn()
-    }
-}
-
-@Composable
-fun StatusBarMiddleRowColumn() {
-    Column(
-        verticalArrangement = Arrangement.SpaceAround
-    ) {
-        Text(text = "Resistance AI", color = Color.White)
-        Spacer(modifier = Modifier.height(40.dp))
-        Text(text = "It\'s a NEWT!", color = Color.White)
-    }
-}
-
-@Composable
-fun StatusBarRightRow(width: Int) {
-    Row (modifier = Modifier
-        .fillMaxHeight()
-        .background(colorResource(id = R.color.android_green))
-        .width(width.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-
-    }
-}
-
-@Composable
-fun StatusBarTexts(text: String, textColor: Color) {
-    Text(text = text, color = textColor)
-}
-
-@Composable
-fun GameBody(height: Int) {
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .height(height.dp)
-        .background(colorResource(id = R.color.onyx))
-    ) {
-    }
-}
-
-@Composable
-fun GameInteraction(height: Int) {
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .height(height.dp)
-        .background(colorResource(id = R.color.darker_grey))
-    ) {
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    TheHeadThatFeedsTheme {
-        FullGameScreen()
+        val gameIntent = Intent(this, GameActivity::class.java)
+        startActivity(intent)
     }
 }
