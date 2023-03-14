@@ -101,6 +101,8 @@ fun StatusBarLeftRow(width: Int) {
     }
 }
 
+//This is a row and will lay out left to right.
+//Todo: Embed column within row.
 @Composable
 fun StatusBarMiddleRow(width: Int) {
     Row (modifier = Modifier
@@ -110,7 +112,18 @@ fun StatusBarMiddleRow(width: Int) {
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically
     ) {
+        StatusBarMiddleRowColumn()
+    }
+}
 
+@Composable
+fun StatusBarMiddleRowColumn() {
+    Column(
+        verticalArrangement = Arrangement.SpaceAround
+    ) {
+        Text(text = "Resistance AI", color = Color.White)
+        Spacer(modifier = Modifier.height(40.dp))
+        Text(text = "It\'s a NEWT!", color = Color.White)
     }
 }
 
@@ -129,7 +142,7 @@ fun StatusBarRightRow(width: Int) {
 
 @Composable
 fun StatusBarTexts(text: String, textColor: Color) {
-    Text(text = "Resistance AI", color = textColor)
+    Text(text = text, color = textColor)
 }
 
 @Composable
@@ -156,5 +169,6 @@ fun GameInteraction(height: Int) {
 @Composable
 fun DefaultPreview() {
     TheHeadThatFeedsTheme {
+        FullGameScreen()
     }
 }
