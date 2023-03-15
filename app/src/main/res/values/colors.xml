@@ -29,6 +29,7 @@
     <color name="light_green">#4CAF50</color>
     <color name="green">#00C853</color>
     <color name="dark_green">#00a300</color>
+    <color name="darker_green">#2E7D32</color>
     <color name="very_dark_green">#254E0A</color>
     <color name="light_red">#FF8A80</color>
     <color name="red">#FF0000</color>
@@ -80,6 +81,8 @@
     <color name="fade_white_4">#BDBDBD</color>
     <color name="fade_white_5">#9E9E9E</color>
     <color name="fade_white_6">#757575</color>
+    <color name="beige">#f8f4d8</color>
+    <color name="white_chocolate">#e8e6d9</color>
 
     <color name="android_green">#ff00ff00</color>
     <color name="android_red">#ffff0000</color>

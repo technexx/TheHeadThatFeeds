@@ -47,6 +47,7 @@ class GameActivity : ComponentActivity() {
     }
 }
 
+//Default height/width within a column/row is determined by largest element, unless specified.
 @Composable
 fun FullGameScreen() {
     val configuration = LocalConfiguration.current
@@ -54,9 +55,9 @@ fun FullGameScreen() {
 
     Column() {
         GameStatusBarColumn(screenHeight / 4)
-        Divider(thickness = 2.dp, color = Color.White)
+        Divider(thickness = 2.dp, color = Color.Black)
         GameBody  (screenHeight / 2)
-        Divider(thickness = 2.dp, color = Color.White)
+        Divider(thickness = 2.dp, color = Color.Black)
         GameInteraction(screenHeight / 4)
     }
 }
@@ -88,7 +89,13 @@ fun GameStatusBarSubRows() {
     val screenWidth = configuration.screenWidthDp
 
     StatusBarLeftRow(width = screenWidth/3)
+    Divider(color = Color.White, modifier = Modifier
+        .fillMaxHeight()
+        .width(1.dp))
     StatusBarMiddleRow(width = screenWidth/3)
+    Divider(color = Color.White, modifier = Modifier
+        .fillMaxHeight()
+        .width(1.dp))
     StatusBarRightRow(width = screenWidth/3)
 }
 
@@ -96,10 +103,8 @@ fun GameStatusBarSubRows() {
 fun StatusBarLeftRow(width: Int) {
     Row (modifier = Modifier
         .fillMaxHeight()
-        .background(colorResource(id = R.color.dark_green))
+        .background(colorResource(id = R.color.black))
         .width(width.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
     ) {
         StatusBarLeftRowColumn()
     }
@@ -107,11 +112,11 @@ fun StatusBarLeftRow(width: Int) {
 
 @Composable
 fun StatusBarLeftRowColumn() {
-    Column(
-        verticalArrangement = Arrangement.SpaceAround,
+    Column(modifier = Modifier
+        .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Resistance AI", color = Color.White)
+        Text(text = "Resistance AI", color = Color.White, fontSize = 20.sp)
         Spacer(modifier = Modifier.height(40.dp))
         Text(text = valuesToStrings.friendlyAILevelString(0), color = Color.White, fontSize = 20.sp)
     }
@@ -121,10 +126,8 @@ fun StatusBarLeftRowColumn() {
 fun StatusBarMiddleRow(width: Int) {
     Row (modifier = Modifier
         .fillMaxHeight()
-        .background(colorResource(id = R.color.fade_white_2))
+        .background(colorResource(id = R.color.black))
         .width(width.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
     ) {
         StatusBarMiddleRowColumn()
     }
@@ -132,9 +135,8 @@ fun StatusBarMiddleRow(width: Int) {
 
 @Composable
 fun StatusBarMiddleRowColumn() {
-    Column(
-        verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally
+    Column(modifier = Modifier
+        .fillMaxWidth()
     ) {
 
     }
@@ -144,10 +146,8 @@ fun StatusBarMiddleRowColumn() {
 fun StatusBarRightRow(width: Int) {
     Row (modifier = Modifier
         .fillMaxHeight()
-        .background(colorResource(id = R.color.dark_red))
+        .background(colorResource(id = R.color.black))
         .width(width.dp),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
     ) {
         StatusBarRightRowColumn()
     }
@@ -155,15 +155,37 @@ fun StatusBarRightRow(width: Int) {
 
 @Composable
 fun StatusBarRightRowColumn() {
-    Column(
-        verticalArrangement = Arrangement.SpaceAround,
+    Column(modifier = Modifier
+        .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Grid AI", color = Color.White)
+        Text(text = "Grid AI", color = Color.White, fontSize = 20.sp)
         Spacer(modifier = Modifier.height(40.dp))
         Text(text = valuesToStrings.enemyAILevelString(0), color = Color.White, fontSize = 20.sp)
     }
 }
+
+//@Composable
+//fun StatusBarRightRow(width: Int) {
+//    Row (modifier = Modifier
+//        .fillMaxHeight()
+//        .background(colorResource(id = R.color.black))
+//        .width(width.dp),
+//    ) {
+//        StatusBarRightRowColumn()
+//    }
+//}
+////
+//@Composable
+//fun StatusBarRightRowColumn() {
+//    Column(
+//        horizontalAlignment = Alignment.CenterHorizontally
+//    ) {
+//        Text(text = "Grid AI", color = Color.White, fontSize = 20.sp)
+//        Spacer(modifier = Modifier.height(40.dp))
+//        Text(text = valuesToStrings.enemyAILevelString(0), color = Color.White, fontSize = 20.sp)
+//    }
+//}
 
 @Composable
 fun GameBody(height: Int) {
