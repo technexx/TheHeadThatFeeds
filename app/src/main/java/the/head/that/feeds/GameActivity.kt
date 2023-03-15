@@ -54,6 +54,9 @@ class GameActivity : ComponentActivity() {
 
         gameViewModel.setFriendlyAILevel(0)
         gameViewModel.setGridAILevel(0)
+        gameViewModel.setScientists(2)
+        gameViewModel.setHackers(2)
+        gameViewModel.setHunters(2)
         gameViewModel.setCurrentDay(0)
         gameViewModel.setWeather(0)
 
@@ -160,7 +163,9 @@ fun StatusBarMiddleRow(width: Int) {
 
 @Composable
 fun StatusBarMiddleRowColumn() {
-    val scientists
+    val scientists : Int by gameViewModel.scientists.observeAsState(0)
+    val hackers : Int by gameViewModel.hackers.observeAsState(0)
+    val hunters : Int by gameViewModel.hunters.observeAsState(0)
 
     val weather : Int by gameViewModel.weather.observeAsState(0)
 
@@ -168,9 +173,11 @@ fun StatusBarMiddleRowColumn() {
         .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Scientists:" + , color = Color.White, fontSize = 18.sp)
-        Text(text = "Hackers:", color = Color.White, fontSize = 18.sp)
-        Text(text = "Hunters:", color = Color.White, fontSize = 18.sp)
+        Text(text = "Scientists: $scientists", color = Color.White, fontSize = 18.sp)
+        Text(text = "Hackers: $hackers", color = Color.White, fontSize = 18.sp)
+        Text(text = "Hunters: $hunters", color = Color.White, fontSize = 18.sp)
+
+        Spacer(modifier = Modifier.height(30.dp))
 
         Text(text = "Weather", color = Color.White, fontSize = 20.sp)
         Spacer(modifier = Modifier.height(12.dp))
