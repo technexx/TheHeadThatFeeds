@@ -35,8 +35,8 @@ class GameViewModel : ViewModel() {
     fun setCurrentDay(value: Int) { mutableCurrentDay.value = value }
     fun getCurrentDay() : Int { return currentDay.value!! }
 
-    val mutableWeather = MutableLiveData<Int>()
-    val weather : LiveData<Int> get() = mutableWeather
-    fun setWeather(value: Int) { mutableWeather.value = value }
-    fun getWeather() : Int { return weather.value!! }
+    val mutableEnemyActivity = MutableLiveData<Int>()
+    val enemyActivity : LiveData<Int> get() = mutableEnemyActivity
+    fun setEnemyActivity(value: Int) { mutableEnemyActivity.value = value }
+    fun getEnemyActivity() : Int { return enemyActivity.value!! }
 }

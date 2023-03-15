@@ -39,4 +39,12 @@
         <item>Fixated</item>
         <item>Hunting</item>
     </string-array>
+
+    <string-array name="enemy_activity_levels">
+        <item>None</item>
+        <item>Sparse</item>
+        <item>Moderate</item>
+        <item>Heavy</item>
+        <item>Overwhelming</item>
+    </string-array>
 </resources>

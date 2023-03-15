@@ -58,7 +58,7 @@ class GameActivity : ComponentActivity() {
         gameViewModel.setHackers(2)
         gameViewModel.setHunters(2)
         gameViewModel.setCurrentDay(0)
-        gameViewModel.setWeather(0)
+        gameViewModel.setEnemyActivity(0)
 
         setContent {
             TheHeadThatFeedsTheme {
@@ -166,8 +166,7 @@ fun StatusBarMiddleRowColumn() {
     val scientists : Int by gameViewModel.scientists.observeAsState(0)
     val hackers : Int by gameViewModel.hackers.observeAsState(0)
     val hunters : Int by gameViewModel.hunters.observeAsState(0)
-
-    val weather : Int by gameViewModel.weather.observeAsState(0)
+    val enemyActivity : Int by gameViewModel.enemyActivity.observeAsState(0)
 
     Column(modifier = Modifier
         .fillMaxWidth(),
@@ -181,7 +180,7 @@ fun StatusBarMiddleRowColumn() {
 
         Text(text = "Weather", color = Color.White, fontSize = 20.sp)
         Spacer(modifier = Modifier.height(12.dp))
-        Text(text = weather.toString(), color = Color.White, fontSize = 20.sp)
+        Text(text = enemyActivity.toString(), color = Color.White, fontSize = 20.sp)
     }
 }
 
