@@ -16,5 +16,4 @@ class GameViewModel : ViewModel() {
 
     fun setGridAILevel(value: Int) { mutableGridAILevel.value = value }
     fun getGridAILevel() : Int { return gridAILevel.value!! }
-
 }

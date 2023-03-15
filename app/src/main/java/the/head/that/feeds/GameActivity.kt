@@ -2,6 +2,7 @@ package the.head.that.feeds
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -12,6 +13,8 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -26,7 +29,7 @@ private lateinit var gameViewModel : GameViewModel
 @SuppressLint("StaticFieldLeak")
 private lateinit var statusBarViews : StatusBarViews
 
-private var friendlyAILevel = 0
+//private var friendlyAILevel = 0
 private var gridAILevel = 0
 
 class GameActivity : ComponentActivity() {
@@ -37,13 +40,8 @@ class GameActivity : ComponentActivity() {
         val gameViewModelInit : GameViewModel by viewModels()
         gameViewModel = gameViewModelInit
 
-        friendlyAILevel = gameViewModel.getFriendlyAILevel()
-        gridAILevel = gameViewModel.getGridAILevel()
-
-        //Todo: Decide whether to use composable states or our ViewModel.
-//        gameViewModel.gridAILevel.observe (this) {
-//
-//        }
+        gameViewModel.setFriendlyAILevel(0)
+        gameViewModel.setGridAILevel(0)
 
         setContent {
             TheHeadThatFeedsTheme {
@@ -123,13 +121,16 @@ fun StatusBarLeftRow(width: Int) {
 
 @Composable
 fun StatusBarLeftRowColumn() {
+    val friendlyAILevel : Int by gameViewModel.friendlyAILevel.observeAsState(0)
+    Log.i("testClick", "Status Bar Column recomposed!")
+
     Column(modifier = Modifier
         .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Resistance AI", color = colorResource(id = statusBarViews.friendlyAILevelColor(friendlyAILevel)), fontSize = 20.sp)
         Spacer(modifier = Modifier.height(40.dp))
-        Text(text = statusBarViews.friendlyAILevelString(0), color = colorResource(id = statusBarViews.friendlyAILevelColor(friendlyAILevel)), fontSize = 20.sp)
+        Text(text = statusBarViews.friendlyAILevelString(friendlyAILevel), color = colorResource(id = statusBarViews.friendlyAILevelColor(friendlyAILevel)), fontSize = 20.sp)
     }
 }
 
@@ -172,7 +173,7 @@ fun StatusBarRightRowColumn() {
     ) {
         Text(text = "Grid AI", color = Color.White, fontSize = 20.sp)
         Spacer(modifier = Modifier.height(40.dp))
-        Text(text = statusBarViews.enemyAILevelString(0), color = Color.White, fontSize = 20.sp)
+        Text(text = statusBarViews.enemyAILevelString(gridAILevel), color = Color.White, fontSize = 20.sp)
     }
 }
 
@@ -197,7 +198,9 @@ fun GameInteraction(height: Int) {
     ) {
         Button(onClick = {
             gridAILevel++
-            friendlyAILevel++
+            val newLevel = gameViewModel.getFriendlyAILevel() + 1
+            gameViewModel.setFriendlyAILevel(newLevel)
+            Log.i("testClick", "level is ${gameViewModel.getFriendlyAILevel()}")
         }) {
             Text(text = "Click Me!")
         }
