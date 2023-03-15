@@ -9,10 +9,12 @@ class GameViewModel : ViewModel() {
     val friendlyAILevel : LiveData<Int> get() = mutableFriendlyAILevel
 
     fun setFriendlyAILevel(value: Int) { mutableFriendlyAILevel.value = value }
+    fun getFriendlyAILevel() : Int { return friendlyAILevel.value!! }
 
     val mutableGridAILevel = MutableLiveData<Int>()
     val gridAILevel : LiveData<Int> get() = mutableGridAILevel
 
     fun setGridAILevel(value: Int) { mutableGridAILevel.value = value }
+    fun getGridAILevel() : Int { return gridAILevel.value!! }
 
 }
