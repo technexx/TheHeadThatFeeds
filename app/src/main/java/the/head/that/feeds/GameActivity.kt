@@ -41,6 +41,7 @@ class GameActivity : ComponentActivity() {
 
         gameViewModel.setFriendlyAILevel(0)
         gameViewModel.setGridAILevel(0)
+        gameViewModel.setCurrentDay(0)
 
         setContent {//private var gridAILevel = 0
 
@@ -122,15 +123,14 @@ fun StatusBarLeftRow(width: Int) {
 @Composable
 fun StatusBarLeftRowColumn() {
     val friendlyAILevel : Int by gameViewModel.friendlyAILevel.observeAsState(0)
-    Log.i("testClick", "Status Bar Left Row Column recomposed!")
 
     Column(modifier = Modifier
         .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Resistance AI", color = Color.White, fontSize = 20.sp)
+        Text(text = "Resistance AI", color = Color.White, fontSize = 18.sp)
         Spacer(modifier = Modifier.height(40.dp))
-        Text(text = statusBarViews.friendlyAILevelString(friendlyAILevel), color = colorResource(id = statusBarViews.friendlyAILevelColor(friendlyAILevel)), fontSize = 20.sp)
+        Text(text = statusBarViews.friendlyAILevelString(friendlyAILevel), color = colorResource(id = statusBarViews.friendlyAILevelColor(friendlyAILevel)), fontSize = 18.sp)
     }
 }
 
@@ -147,10 +147,15 @@ fun StatusBarMiddleRow(width: Int) {
 
 @Composable
 fun StatusBarMiddleRowColumn() {
-    Column(modifier = Modifier
-        .fillMaxWidth()
-    ) {
+    val currentDay : Int by gameViewModel.currentDay.observeAsState(0)
 
+    Column(modifier = Modifier
+        .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Day", color = Color.White, fontSize = 20.sp)
+        Spacer(modifier = Modifier.height(40.dp))
+        Text(text = currentDay.toString(), color = Color.White, fontSize = 20.sp)
     }
 }
 
@@ -173,9 +178,9 @@ fun StatusBarRightRowColumn() {
         .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Grid AI", color = Color.White, fontSize = 20.sp)
+        Text(text = "Grid AI", color = Color.White, fontSize = 18.sp)
         Spacer(modifier = Modifier.height(40.dp))
-        Text(text = statusBarViews.gridAILevelString(gridAILevel), color = colorResource(id = statusBarViews.gridAILevelColor(gridAILevel)), fontSize = 20.sp)
+        Text(text = statusBarViews.gridAILevelString(gridAILevel), color = colorResource(id = statusBarViews.gridAILevelColor(gridAILevel)), fontSize = 18.sp)
     }
 }
 
