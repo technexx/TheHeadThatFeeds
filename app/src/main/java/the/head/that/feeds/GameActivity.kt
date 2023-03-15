@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -24,13 +23,13 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 
 private lateinit var gameViewModel : GameViewModel
 @SuppressLint("StaticFieldLeak")
-private lateinit var valuesToStrings : ValuesToStrings
+private lateinit var statusBarViews : StatusBarViews
 
 class GameActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        valuesToStrings = ValuesToStrings(this)
+        statusBarViews = StatusBarViews(this)
         val gameViewModelInit : GameViewModel by viewModels()
         gameViewModel = gameViewModelInit
 
@@ -118,7 +117,7 @@ fun StatusBarLeftRowColumn() {
     ) {
         Text(text = "Resistance AI", color = Color.White, fontSize = 20.sp)
         Spacer(modifier = Modifier.height(40.dp))
-        Text(text = valuesToStrings.friendlyAILevelString(0), color = Color.White, fontSize = 20.sp)
+        Text(text = statusBarViews.friendlyAILevelString(0), color = Color.White, fontSize = 20.sp)
     }
 }
 
@@ -161,7 +160,7 @@ fun StatusBarRightRowColumn() {
     ) {
         Text(text = "Grid AI", color = Color.White, fontSize = 20.sp)
         Spacer(modifier = Modifier.height(40.dp))
-        Text(text = valuesToStrings.enemyAILevelString(0), color = Color.White, fontSize = 20.sp)
+        Text(text = statusBarViews.enemyAILevelString(0), color = Color.White, fontSize = 20.sp)
     }
 }
 
@@ -183,7 +182,7 @@ fun StatusBarRightRowColumn() {
 //    ) {
 //        Text(text = "Grid AI", color = Color.White, fontSize = 20.sp)
 //        Spacer(modifier = Modifier.height(40.dp))
-//        Text(text = valuesToStrings.enemyAILevelString(0), color = Color.White, fontSize = 20.sp)
+//        Text(text = statusBarViews.enemyAILevelString(0), color = Color.White, fontSize = 20.sp)
 //    }
 //}
 
