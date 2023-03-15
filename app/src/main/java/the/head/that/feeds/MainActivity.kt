@@ -22,14 +22,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 
-//Todo: All humanity is under control of AI. It controls all media access. Progress is made by poking holes/sapping power/exploiting blind spots.
-//Todo: Can locate other "off the grid" humans to help.
-
-//Todo: As player AI evolves, it gains new abilities.
-    //Todo: Requires more power as it grows.
-//Todo: As enemy AI gets closer to locating player, it gains new abilities. Maybe relate to its animal.
-    //Todo: Can be in "Hunting" mode, where it gets closer to finding you. Events can disrupt this.
-
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -20,16 +20,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 
+//Todo: Progress is made by poking holes/sapping power/exploiting blind spots.
+//Todo: Can locate other "off the grid" humans to help.
+
+//Todo: As player AI evolves, it gains new abilities.
+//Todo: Requires more power as it grows.
+//Todo: As enemy AI gets closer to locating player, it gains new abilities. Maybe relate to its animal.
+//Todo: Can be in "Hunting" mode, where it gets closer to finding you. Events can disrupt this.
+
+//Todo: Scientist numbers determine Resistance AI progress.
+//Todo: Hacker numbers defend against Grid AI attacks.
+//Todo: Hunter numbers defend against patrols + elements.
+
+//Todo: Space below AIs can have status effects, etc.
+
 private lateinit var gameViewModel : GameViewModel
 @SuppressLint("StaticFieldLeak")
 private lateinit var statusBarViews : StatusBarViews
-
-//private var friendlyAILevel = 0
 
 class GameActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +55,9 @@ class GameActivity : ComponentActivity() {
         gameViewModel.setFriendlyAILevel(0)
         gameViewModel.setGridAILevel(0)
         gameViewModel.setCurrentDay(0)
+        gameViewModel.setWeather(0)
 
-        setContent {//private var gridAILevel = 0
-
+        setContent {
             TheHeadThatFeedsTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(modifier = Modifier.fillMaxSize(),
@@ -66,7 +79,7 @@ fun FullGameScreen() {
     Column() {
         GameStatusBarColumn(screenHeight / 4)
         Divider(thickness = 2.dp, color = Color.Black)
-        GameBody  (screenHeight / 2)
+        GameBodyColumn  (screenHeight / 2)
         Divider(thickness = 2.dp, color = Color.Black)
         GameInteraction(screenHeight / 4)
     }
@@ -147,15 +160,21 @@ fun StatusBarMiddleRow(width: Int) {
 
 @Composable
 fun StatusBarMiddleRowColumn() {
-    val currentDay : Int by gameViewModel.currentDay.observeAsState(0)
+    val scientists
+
+    val weather : Int by gameViewModel.weather.observeAsState(0)
 
     Column(modifier = Modifier
         .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Day", color = Color.White, fontSize = 20.sp)
-        Spacer(modifier = Modifier.height(40.dp))
-        Text(text = currentDay.toString(), color = Color.White, fontSize = 20.sp)
+        Text(text = "Scientists:" + , color = Color.White, fontSize = 18.sp)
+        Text(text = "Hackers:", color = Color.White, fontSize = 18.sp)
+        Text(text = "Hunters:", color = Color.White, fontSize = 18.sp)
+
+        Text(text = "Weather", color = Color.White, fontSize = 20.sp)
+        Spacer(modifier = Modifier.height(12.dp))
+        Text(text = weather.toString(), color = Color.White, fontSize = 20.sp)
     }
 }
 
@@ -185,12 +204,28 @@ fun StatusBarRightRowColumn() {
 }
 
 @Composable
-fun GameBody(height: Int) {
+fun GameBodyColumn(height: Int) {
     Column(modifier = Modifier
         .fillMaxWidth()
         .height(height.dp)
         .background(colorResource(id = R.color.onyx))
     ) {
+        GameBodyTopColumn()
+    }
+}
+
+@Composable
+fun GameBodyTopColumn() {
+    val currentDay : Int by gameViewModel.currentDay.observeAsState(0)
+
+    Column(modifier = Modifier
+        .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(text = "Day", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = currentDay.toString(), color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)
     }
 }
 
