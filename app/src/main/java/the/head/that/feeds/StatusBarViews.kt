@@ -53,6 +53,8 @@ class StatusBarViews (context: Context) {
         return levelArray[level]
     }
 
+    fun enemyAILevelProgress(points: Float, multiplier: Int) : Float { return points * multiplier }
+
     fun enemyActivityLevelColor(level: Int) : Int {
         when (level) {
             0 -> return R.color.white

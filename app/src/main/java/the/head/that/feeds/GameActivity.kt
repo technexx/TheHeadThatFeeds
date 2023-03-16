@@ -207,6 +207,8 @@ fun StatusBarRightRowColumn() {
         Text(text = "Grid AI", color = Color.White, fontSize = 18.sp)
         Spacer(modifier = Modifier.height(40.dp))
         Text(text = statusBarViews.gridAILevelString(gridAILevel), color = colorResource(id = statusBarViews.gridAILevelColor(gridAILevel)), fontSize = 18.sp)
+        Spacer(modifier = Modifier.height(10.dp))
+        LinearProgressIndicator(progress = statusBarViews.enemyAILevelProgress(0.5f, 1), color = Color.White)
     }
 }
 
@@ -230,9 +232,7 @@ fun GameBodyTopColumn() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Day", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)
-        Spacer(modifier = Modifier.height(20.dp))
-        Text(text = currentDay.toString(), color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)
+        Text(text = "Day:   $currentDay", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)
     }
 }
 
@@ -246,9 +246,7 @@ fun GameInteraction(height: Int) {
         verticalArrangement = Arrangement.Center
     ) {
         Button(onClick = {
-            var newLevel = gameViewModel.getFriendlyAILevel() + 1
-            if (newLevel == 12) newLevel = 0
-            gameViewModel.setFriendlyAILevel(newLevel)
+
         }) {
             Text(text = "Cycle Friendly AI")
         }
@@ -256,13 +254,23 @@ fun GameInteraction(height: Int) {
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(onClick = {
-            var newLevel = gameViewModel.getGridAILevel() + 1
-            if (newLevel == 5) newLevel = 0
-            gameViewModel.setGridAILevel(newLevel)
+
         }) {
             Text(text = "Cycle Grid AI")
         }
     }
+}
+
+private fun cycleFriendlyAI() {
+    var newLevel = gameViewModel.getFriendlyAILevel() + 1
+    if (newLevel == 12) newLevel = 0
+    gameViewModel.setFriendlyAILevel(newLevel)
+}
+
+private fun cycleGridAI() {
+    var newLevel = gameViewModel.getGridAILevel() + 1
+    if (newLevel == 5) newLevel = 0
+    gameViewModel.setGridAILevel(newLevel)
 }
 
 @Preview(showBackground = true)
