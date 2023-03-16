@@ -8,10 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Divider
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -147,6 +144,8 @@ fun StatusBarLeftRowColumn() {
         Text(text = "Resistance AI", color = Color.White, fontSize = 18.sp)
         Spacer(modifier = Modifier.height(40.dp))
         Text(text = statusBarViews.friendlyAILevelString(friendlyAILevel), color = colorResource(id = statusBarViews.friendlyAILevelColor(friendlyAILevel)), fontSize = 18.sp)
+        Spacer(modifier = Modifier.height(10.dp))
+        LinearProgressIndicator(progress = statusBarViews.friendlyAILevelProgress(0.5f, 1), color = Color.White)
     }
 }
 
@@ -172,15 +171,17 @@ fun StatusBarMiddleRowColumn() {
         .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+
         Text(text = "Scientists: $scientists", color = Color.White, fontSize = 18.sp)
         Text(text = "Hackers: $hackers", color = Color.White, fontSize = 18.sp)
         Text(text = "Hunters: $hunters", color = Color.White, fontSize = 18.sp)
 
-        Spacer(modifier = Modifier.height(30.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
-        Text(text = "Weather", color = Color.White, fontSize = 20.sp)
+        Text(text = "Enemy Activity:", color = Color.White, fontSize = 18.sp)
         Spacer(modifier = Modifier.height(12.dp))
-        Text(text = enemyActivity.toString(), color = Color.White, fontSize = 20.sp)
+        Text(text = statusBarViews.enemyLevelString(enemyActivity), color = colorResource(
+        id = statusBarViews.enemyActivityLevelColor(enemyActivity)), fontSize = 18.sp)
     }
 }
 

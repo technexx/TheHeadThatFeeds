@@ -5,6 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
+    var friendlyAILevelProgress = 0
+    var enemyAILevelProgress = 0
+    var enemyActivityMultiplier = 0
+
     val mutableFriendlyAILevel = MutableLiveData<Int>()
     val friendlyAILevel : LiveData<Int> get() = mutableFriendlyAILevel
     fun setFriendlyAILevel(value: Int) { mutableFriendlyAILevel.value = value }
