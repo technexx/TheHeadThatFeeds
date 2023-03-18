@@ -38,33 +38,16 @@ class StatusBarViews (context: Context) {
 
     fun gridAILevelColor(level: Int) : Int {
         when (level) {
-            0 -> return R.color.android_green
-            1 -> return R.color.light_yellow
-            2 -> return R.color.mid_yellow
-            3 -> return R.color.orange
-            4 -> return R.color.android_red
-        }
-
-        return R.color.android_green
-    }
-
-    fun enemyLevelString(level: Int) : String {
-        val levelArray = mContext.resources.getStringArray(R.array.enemy_activity_levels)
-        return levelArray[level]
-    }
-
-    fun enemyAILevelProgress(points: Float, multiplier: Int) : Float { return points * multiplier }
-
-    fun enemyActivityLevelColor(level: Int) : Int {
-        when (level) {
             0 -> return R.color.white
             1 -> return R.color.light_yellow
             2 -> return R.color.mid_yellow
             3 -> return R.color.orange
-            4 -> return R.color.android_red
+            4 -> return R.color.darker_red
         }
 
         return R.color.android_green
     }
+
+    fun gridAIHealthLevelAsFloat(health: Double) : Float { return ((health / 100).toFloat())}
 
 }

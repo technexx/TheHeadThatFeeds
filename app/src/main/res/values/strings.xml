@@ -34,7 +34,7 @@
 
     <string-array name="enemy_ai_levels">
         <item>Indifferent</item>
-        <item>Observant</item>
+        <item>Wary</item>
         <item>Watchful</item>
         <item>Fixated</item>
         <item>Hunting</item>

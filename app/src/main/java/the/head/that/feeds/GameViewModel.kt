@@ -14,10 +14,15 @@ class GameViewModel : ViewModel() {
     fun setFriendlyAILevel(value: Int) { mutableFriendlyAILevel.value = value }
     fun getFriendlyAILevel() : Int { return friendlyAILevel.value!! }
 
-    val mutableGridAILevel = MutableLiveData<Int>()
-    val gridAILevel : LiveData<Int> get() = mutableGridAILevel
-    fun setGridAILevel(value: Int) { mutableGridAILevel.value = value }
-    fun getGridAILevel() : Int { return gridAILevel.value!! }
+    val mutableGridAIActionLevel = MutableLiveData<Int>()
+    val gridAIActionLevel : LiveData<Int> get() = mutableGridAIActionLevel
+    fun setGridAILevel(value: Int) { mutableGridAIActionLevel.value = value }
+    fun getGridAILevel() : Int { return gridAIActionLevel.value!! }
+
+    val mutableGridAIHealthLevel = MutableLiveData<Double>()
+    val gridAIHealthLevel : LiveData<Double> get() = mutableGridAIHealthLevel
+    fun setGridAIHealth(value: Double) { mutableGridAIHealthLevel.value = value }
+    fun getGridAIHealth() : Double { return gridAIHealthLevel.value!! }
 
     val mutableAggression = MutableLiveData<Int>()
     val aggression : LiveData<Int> get() = mutableAggression
