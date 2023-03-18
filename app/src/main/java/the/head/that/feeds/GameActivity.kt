@@ -2,7 +2,6 @@ package the.head.that.feeds
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -31,11 +30,12 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 //Todo: As enemy AI gets closer to locating player, it gains new abilities. Maybe relate to its animal.
 //Todo: Can be in "Hunting" mode, where it gets closer to finding you. Events can disrupt this.
 
-//Todo: Scientist numbers determine Resistance AI progress.
-//Todo: Hacker numbers defend against Grid AI attacks.
-//Todo: Hunter numbers defend against patrols + elements.
+//Todo: Friendly AI will become more autonomous as it evolves.
+//Todo: Levels of Aggression, Empathy, Pragmatism (and its evolved intelligence) effect behavior/intelligence.
 
-//Todo: Space below AIs can have status effects, etc.
+//Todo: Grid AI has Integrity value.
+//Todo: Civilian and/or survivors can be casualties that affect end score.
+    //Todo: Civilians are general score. Survivors also used for missions.
 
 private lateinit var gameViewModel : GameViewModel
 @SuppressLint("StaticFieldLeak")
@@ -51,11 +51,11 @@ class GameActivity : ComponentActivity() {
 
         gameViewModel.setFriendlyAILevel(0)
         gameViewModel.setGridAILevel(0)
-        gameViewModel.setScientists(2)
-        gameViewModel.setHackers(2)
-        gameViewModel.setHunters(2)
+        gameViewModel.setAggression(2)
+        gameViewModel.setEmpathy(2)
+        gameViewModel.setResistanceMembers(2)
         gameViewModel.setCurrentDay(0)
-        gameViewModel.setEnemyActivity(0)
+        gameViewModel.setCivilians(42.0)
 
         setContent {
             TheHeadThatFeedsTheme {
@@ -111,15 +111,11 @@ fun GameStatusBarSubRows() {
     val configuration = LocalConfiguration.current
     val screenWidth = configuration.screenWidthDp
 
-    StatusBarLeftRow(width = screenWidth/3)
+    StatusBarLeftRow(width = screenWidth/2)
     Divider(color = Color.White, modifier = Modifier
         .fillMaxHeight()
         .width(1.dp))
-    StatusBarMiddleRow(width = screenWidth/3)
-    Divider(color = Color.White, modifier = Modifier
-        .fillMaxHeight()
-        .width(1.dp))
-    StatusBarRightRow(width = screenWidth/3)
+    StatusBarRightRow(width = screenWidth/2)
 }
 
 @Composable
@@ -136,16 +132,32 @@ fun StatusBarLeftRow(width: Int) {
 @Composable
 fun StatusBarLeftRowColumn() {
     val friendlyAILevel : Int by gameViewModel.friendlyAILevel.observeAsState(0)
+    val aggression : Int by gameViewModel.aggression.observeAsState(0)
+    val empathy : Int by gameViewModel.empathy.observeAsState(0)
+    val resistanceMembers : Int by gameViewModel.resistanceMembers.observeAsState(0)
 
     Column(modifier = Modifier
         .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Resistance AI", color = Color.White, fontSize = 18.sp)
-        Spacer(modifier = Modifier.height(40.dp))
-        Text(text = statusBarViews.friendlyAILevelString(friendlyAILevel), color = colorResource(id = statusBarViews.friendlyAILevelColor(friendlyAILevel)), fontSize = 18.sp)
+        Text(text = "Resistance AI", color = Color.White, fontSize = 16.sp)
+
         Spacer(modifier = Modifier.height(10.dp))
+
+        Text(text = statusBarViews.friendlyAILevelString(friendlyAILevel), color = colorResource(id = statusBarViews.friendlyAILevelColor(friendlyAILevel)), fontSize = 16.sp)
+
+        Spacer(modifier = Modifier.height(10.dp))
+
         LinearProgressIndicator(progress = statusBarViews.friendlyAILevelProgress(0.5f, 1), color = Color.White)
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Text(text = "Aggression: $aggression", color = Color.White, fontSize = 16.sp)
+        Text(text = "Empathy: $empathy", color = Color.White, fontSize = 16.sp)
+
+        Spacer(modifier = Modifier.weight(1.0f))
+
+        Text(text = "Resistance Members: $resistanceMembers", color = Color.White, fontSize = 16.sp)
     }
 }
 
@@ -162,9 +174,9 @@ fun StatusBarMiddleRow(width: Int) {
 
 @Composable
 fun StatusBarMiddleRowColumn() {
-    val scientists : Int by gameViewModel.scientists.observeAsState(0)
-    val hackers : Int by gameViewModel.hackers.observeAsState(0)
-    val hunters : Int by gameViewModel.hunters.observeAsState(0)
+    val aggression : Int by gameViewModel.aggression.observeAsState(0)
+    val empathy : Int by gameViewModel.empathy.observeAsState(0)
+    val resistanceMembers : Int by gameViewModel.resistanceMembers.observeAsState(0)
     val enemyActivity : Int by gameViewModel.enemyActivity.observeAsState(0)
 
     Column(modifier = Modifier
@@ -172,16 +184,16 @@ fun StatusBarMiddleRowColumn() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Text(text = "Scientists: $scientists", color = Color.White, fontSize = 18.sp)
-        Text(text = "Hackers: $hackers", color = Color.White, fontSize = 18.sp)
-        Text(text = "Hunters: $hunters", color = Color.White, fontSize = 18.sp)
+        Text(text = "Aggression: $aggression", color = Color.White, fontSize = 16.sp)
+        Text(text = "Empathy: $empathy", color = Color.White, fontSize = 16.sp)
+        Text(text = "ResistanceMembers: $resistanceMembers", color = Color.White, fontSize = 16.sp)
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Text(text = "Enemy Activity:", color = Color.White, fontSize = 18.sp)
+        Text(text = "Enemy Activity:", color = Color.White, fontSize = 16.sp)
         Spacer(modifier = Modifier.height(12.dp))
         Text(text = statusBarViews.enemyLevelString(enemyActivity), color = colorResource(
-        id = statusBarViews.enemyActivityLevelColor(enemyActivity)), fontSize = 18.sp)
+        id = statusBarViews.enemyActivityLevelColor(enemyActivity)), fontSize = 16.sp)
     }
 }
 
@@ -199,16 +211,23 @@ fun StatusBarRightRow(width: Int) {
 @Composable
 fun StatusBarRightRowColumn() {
     val gridAILevel : Int by gameViewModel.gridAILevel.observeAsState(0)
+    val civilians : Double by gameViewModel.civilians.observeAsState(42.0)
 
     Column(modifier = Modifier
         .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Grid AI", color = Color.White, fontSize = 18.sp)
-        Spacer(modifier = Modifier.height(40.dp))
-        Text(text = statusBarViews.gridAILevelString(gridAILevel), color = colorResource(id = statusBarViews.gridAILevelColor(gridAILevel)), fontSize = 18.sp)
+        Text(text = "Grid AI", color = Color.White, fontSize = 16.sp)
+
         Spacer(modifier = Modifier.height(10.dp))
-        LinearProgressIndicator(progress = statusBarViews.enemyAILevelProgress(0.5f, 1), color = Color.White)
+
+        Text(text = statusBarViews.gridAILevelString(gridAILevel), color = colorResource(id = statusBarViews.gridAILevelColor(gridAILevel)), fontSize = 16.sp)
+
+        Spacer(modifier = Modifier.weight(1.0f))
+
+        Text(text = "Civilians (billions): $civilians", color = Color.White, fontSize = 16.sp)
+
+//        LinearProgressIndicator(progress = statusBarViews.friendlyAILevelProgress(0.5f, 1), color = Color.White)
     }
 }
 

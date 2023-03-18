@@ -19,20 +19,25 @@ class GameViewModel : ViewModel() {
     fun setGridAILevel(value: Int) { mutableGridAILevel.value = value }
     fun getGridAILevel() : Int { return gridAILevel.value!! }
 
-    val mutableScientists = MutableLiveData<Int>()
-    val scientists : LiveData<Int> get() = mutableScientists
-    fun setScientists(value: Int) { mutableScientists.value = value }
-    fun getScientists() : Int { return scientists.value!! }
+    val mutableAggression = MutableLiveData<Int>()
+    val aggression : LiveData<Int> get() = mutableAggression
+    fun setAggression(value: Int) { mutableAggression.value = value }
+    fun getAggression() : Int { return aggression.value!! }
 
-    val mutableHackers = MutableLiveData<Int>()
-    val hackers : LiveData<Int> get() = mutableHackers
-    fun setHackers(value: Int) { mutableHackers.value = value }
-    fun getHackers() : Int { return hackers.value!! }
+    val mutableEmpathy = MutableLiveData<Int>()
+    val empathy : LiveData<Int> get() = mutableEmpathy
+    fun setEmpathy(value: Int) { mutableEmpathy.value = value }
+    fun getEmpathy() : Int { return empathy.value!! }
 
-    val mutableHunters = MutableLiveData<Int>()
-    val hunters : LiveData<Int> get() = mutableHunters
-    fun setHunters(value: Int) { mutableHunters.value = value }
-    fun getHunters() : Int { return hunters.value!! }
+    val mutableResistanceMembers = MutableLiveData<Int>()
+    val resistanceMembers : LiveData<Int> get() = mutableResistanceMembers
+    fun setResistanceMembers(value: Int) { mutableResistanceMembers.value = value }
+    fun getResistanceMembers() : Int { return resistanceMembers.value!! }
+
+    val mutableCivilians = MutableLiveData<Double>()
+    val civilians : LiveData<Double> get() = mutableCivilians
+    fun setCivilians (value: Double) { mutableCivilians.value = value }
+    fun getCivilians () : Double { return civilians.value!! }
 
     val mutableCurrentDay = MutableLiveData<Int>()
     val currentDay : LiveData<Int> get() = mutableCurrentDay
