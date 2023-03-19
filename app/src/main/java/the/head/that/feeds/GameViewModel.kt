@@ -9,10 +9,15 @@ class GameViewModel : ViewModel() {
     var enemyAILevelProgress = 0
     var enemyActivityMultiplier = 0
 
-    val mutableFriendlyAILevel = MutableLiveData<Int>()
-    val friendlyAILevel : LiveData<Int> get() = mutableFriendlyAILevel
-    fun setFriendlyAILevel(value: Int) { mutableFriendlyAILevel.value = value }
-    fun getFriendlyAILevel() : Int { return friendlyAILevel.value!! }
+    val mutableFriendlyAIEvolutionLevel = MutableLiveData<Int>()
+    val friendlyAIEvolutionLevel : LiveData<Int> get() = mutableFriendlyAIEvolutionLevel
+    fun setFriendlyAIEvolutionLevel(value: Int) { mutableFriendlyAIEvolutionLevel.value = value }
+    fun getFriendlyAIEvolutionLevel() : Int { return friendlyAIEvolutionLevel.value!! }
+
+    val mutableFriendlyAIHealthLevel = MutableLiveData<Double>()
+    val friendlyHealthLevel : LiveData<Double> get() = mutableFriendlyAIHealthLevel
+    fun setFriendlyAIHealth(value: Double) { mutableFriendlyAIHealthLevel.value = value }
+    fun getFriendlyAIHealth() : Double { return friendlyHealthLevel.value!! }
 
     val mutableGridAIActionLevel = MutableLiveData<Int>()
     val gridAIActionLevel : LiveData<Int> get() = mutableGridAIActionLevel

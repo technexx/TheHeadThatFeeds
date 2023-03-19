@@ -50,7 +50,8 @@ class GameActivity : ComponentActivity() {
         val gameViewModelInit : GameViewModel by viewModels()
         gameViewModel = gameViewModelInit
 
-        gameViewModel.setFriendlyAILevel(0)
+        gameViewModel.setFriendlyAIEvolutionLevel(0)
+        gameViewModel.setFriendlyAIHealth(100.0)
         gameViewModel.setGridAILevel(0)
         gameViewModel.setAggression(0)
         gameViewModel.setEmpathy(0)
@@ -133,7 +134,7 @@ fun StatusBarLeftRow(width: Int) {
 
 @Composable
 fun StatusBarLeftRowColumn() {
-    val friendlyAILevel : Int by gameViewModel.friendlyAILevel.observeAsState(0)
+    val friendlyAILevel : Int by gameViewModel.friendlyAIEvolutionLevel.observeAsState(0)
     val aggression : Int by gameViewModel.aggression.observeAsState(0)
     val empathy : Int by gameViewModel.empathy.observeAsState(0)
     val resistanceMembers : Int by gameViewModel.resistanceMembers.observeAsState(0)
@@ -146,16 +147,20 @@ fun StatusBarLeftRowColumn() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Text(text = statusBarViews.friendlyAILevelString(friendlyAILevel), color = colorResource(id = statusBarViews.friendlyAILevelColor(friendlyAILevel)), fontSize = 16.sp)
+        Text(text = "Integrity", color = Color.White, fontSize = 16.sp)
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        LinearProgressIndicator(progress = statusBarViews.friendlyAILevelProgress(0.5f, 1), color = Color.White)
+        LinearProgressIndicator(progress = statusBarViews.healthLevelAsFloat(gameViewModel.getFriendlyAIHealth()), color = Color.White)
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         Text(text = "Aggression: $aggression%", color = Color.White, fontSize = 16.sp)
         Text(text = "Empathy: $empathy%", color = Color.White, fontSize = 16.sp)
+
+        Spacer(modifier = Modifier.height(5.dp))
+
+        Text(text = " Intelligence: " + statusBarViews.friendlyAILevelString(friendlyAILevel), color = colorResource(id = statusBarViews.friendlyAILevelColor(friendlyAILevel)), fontSize = 16.sp)
 
         Spacer(modifier = Modifier.weight(1.0f))
 
@@ -187,11 +192,15 @@ fun StatusBarRightRowColumn() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Text(text = statusBarViews.gridAILevelString(gridAILevel), color = colorResource(id = statusBarViews.gridAILevelColor(gridAILevel)), fontSize = 16.sp)
-//
-//        LinearProgressIndicator(progress = statusBarViews.gridAIHealthLevelAsFloat(gameViewModel.getGridAIHealth()), color = Color.White)
+        Text(text = "Integrity", color = Color.White, fontSize = 16.sp)
 
-        LinearProgressIndicator(progress = statusBarViews.gridAIHealthLevelAsFloat(50.0), color = Color.White)
+        Spacer(modifier = Modifier.height(10.dp))
+
+        LinearProgressIndicator(progress = statusBarViews.healthLevelAsFloat(gameViewModel.getGridAIHealth()), color = Color.White)
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        Text(text = statusBarViews.gridAIActionLevelString(gridAILevel), color = colorResource(id = statusBarViews.gridAIActionLevelColor(gridAILevel)), fontSize = 18.sp)
 
         Spacer(modifier = Modifier.weight(1.0f))
 
@@ -219,7 +228,7 @@ fun GameBodyTopColumn() {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Day:   $currentDay", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)
+        Text(text = "Day:  $currentDay", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)
     }
 }
 
@@ -241,7 +250,7 @@ fun GameInteraction(height: Int) {
         Spacer(modifier = Modifier.height(24.dp))
 
         Button(onClick = {
-
+            cycleGridAI()
         }) {
             Text(text = "Cycle Grid AI")
         }
@@ -249,9 +258,9 @@ fun GameInteraction(height: Int) {
 }
 
 private fun cycleFriendlyAI() {
-    var newLevel = gameViewModel.getFriendlyAILevel() + 1
+    var newLevel = gameViewModel.getFriendlyAIEvolutionLevel() + 1
     if (newLevel == 12) newLevel = 0
-    gameViewModel.setFriendlyAILevel(newLevel)
+    gameViewModel.setFriendlyAIEvolutionLevel(newLevel)
 }
 
 private fun cycleGridAI() {

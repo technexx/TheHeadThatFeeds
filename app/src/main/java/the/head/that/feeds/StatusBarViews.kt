@@ -31,14 +31,14 @@ class StatusBarViews (context: Context) {
         return R.color.white
     }
 
-    fun gridAILevelString(level: Int) : String {
+    fun gridAIActionLevelString(level: Int) : String {
         val levelArray = mContext.resources.getStringArray(R.array.enemy_ai_levels)
         return levelArray[level]
     }
 
-    fun gridAILevelColor(level: Int) : Int {
+    fun gridAIActionLevelColor(level: Int) : Int {
         when (level) {
-            0 -> return R.color.white
+            0 -> return R.color.yellow_2
             1 -> return R.color.light_yellow
             2 -> return R.color.mid_yellow
             3 -> return R.color.orange
@@ -48,6 +48,6 @@ class StatusBarViews (context: Context) {
         return R.color.android_green
     }
 
-    fun gridAIHealthLevelAsFloat(health: Double) : Float { return ((health / 100).toFloat())}
+    fun healthLevelAsFloat(health: Double) : Float { return ((health / 100).toFloat())}
 
 }
