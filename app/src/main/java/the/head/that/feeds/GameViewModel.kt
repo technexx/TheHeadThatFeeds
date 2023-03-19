@@ -29,6 +29,11 @@ class GameViewModel : ViewModel() {
     fun setGridAIHealth(value: Double) { mutableGridAIHealthLevel.value = value }
     fun getGridAIHealth() : Double { return gridAIHealthLevel.value!! }
 
+    val mutableGridAITrackingProgress= MutableLiveData<Int>()
+    val gridAITrackingProgress : LiveData<Int> get() = mutableGridAITrackingProgress
+    fun setGridAITrackingProgress(value: Int) { mutableGridAITrackingProgress.value = value}
+    fun getGridAITrackingProgress() : Int { return gridAITrackingProgress.value!!}
+
     val mutableAggression = MutableLiveData<Int>()
     val aggression : LiveData<Int> get() = mutableAggression
     fun setAggression(value: Int) { mutableAggression.value = value }
@@ -47,15 +52,10 @@ class GameViewModel : ViewModel() {
     val mutableCivilians = MutableLiveData<Double>()
     val civilians : LiveData<Double> get() = mutableCivilians
     fun setCivilians (value: Double) { mutableCivilians.value = value }
-    fun getCivilians () : Double { return civilians.value!! }
+    fun getCivilians() : Double { return civilians.value!! }
 
     val mutableCurrentDay = MutableLiveData<Int>()
     val currentDay : LiveData<Int> get() = mutableCurrentDay
     fun setCurrentDay(value: Int) { mutableCurrentDay.value = value }
     fun getCurrentDay() : Int { return currentDay.value!! }
-
-    val mutableEnemyActivity = MutableLiveData<Int>()
-    val enemyActivity : LiveData<Int> get() = mutableEnemyActivity
-    fun setEnemyActivity(value: Int) { mutableEnemyActivity.value = value }
-    fun getEnemyActivity() : Int { return enemyActivity.value!! }
 }

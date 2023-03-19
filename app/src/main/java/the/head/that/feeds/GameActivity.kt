@@ -22,13 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 
-//Todo: Progress is made by poking holes/sapping power/exploiting blind spots.
-//Todo: Can locate other "off the grid" humans to help.
-
 //Todo: As player AI evolves, it gains new abilities.
-//Todo: Requires more power as it grows.
 //Todo: As enemy AI gets closer to locating player, it gains new abilities. Maybe relate to its animal.
-//Todo: Can be in "Hunting" mode, where it gets closer to finding you. Events can disrupt this.
 
 //Todo: Friendly AI will become more autonomous as it evolves.
 //Todo: Levels of Aggression, Empathy (and its evolved intelligence) effect behavior.
@@ -37,6 +32,12 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 //Todo: Civilian and/or survivors can be casualties that affect end score.
     //Todo: Civilians are general score. Survivors also used for missions.
 //Todo: Both Friendly and Grid AI can cause civilian deaths.
+
+//Todo: Should be a net-loss with continuation of days, to encourage player to be proactive.
+
+//Todo: Idea: Instead of health, integrity affects monitoring of Grid AI. Lower monitoring = better chance to evolve (can set it as a choice, a natural evolution, or both).
+
+///Todo: Replace player Integrity with Power (or just "Network Integrity"). Friendly AI needs a certain amount, increasing with its intelligence.
 
 private lateinit var gameViewModel : GameViewModel
 @SuppressLint("StaticFieldLeak")
@@ -53,6 +54,7 @@ class GameActivity : ComponentActivity() {
         gameViewModel.setFriendlyAIEvolutionLevel(0)
         gameViewModel.setFriendlyAIHealth(100.0)
         gameViewModel.setGridAILevel(0)
+        gameViewModel.setGridAITrackingProgress(0)
         gameViewModel.setAggression(0)
         gameViewModel.setEmpathy(0)
         gameViewModel.setResistanceMembers(1000)
@@ -156,15 +158,14 @@ fun StatusBarLeftRowColumn() {
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(text = "Aggression: $aggression%", color = Color.White, fontSize = 16.sp)
-        Text(text = "Empathy: $empathy%", color = Color.White, fontSize = 16.sp)
-
         Spacer(modifier = Modifier.height(5.dp))
-
+        Text(text = "Empathy: $empathy%", color = Color.White, fontSize = 16.sp)
+        Spacer(modifier = Modifier.height(5.dp))
         Text(text = " Intelligence: " + statusBarViews.friendlyAILevelString(friendlyAILevel), color = colorResource(id = statusBarViews.friendlyAILevelColor(friendlyAILevel)), fontSize = 16.sp)
 
         Spacer(modifier = Modifier.weight(1.0f))
 
-        Text(text = "Fighters: $resistanceMembers", color = Color.White, fontSize = 16.sp)
+        Text(text = "Guerrillas: $resistanceMembers", color = Color.White, fontSize = 16.sp)
     }
 }
 
@@ -200,7 +201,7 @@ fun StatusBarRightRowColumn() {
 
         Spacer(modifier = Modifier.height(30.dp))
 
-        Text(text = statusBarViews.gridAIActionLevelString(gridAILevel), color = colorResource(id = statusBarViews.gridAIActionLevelColor(gridAILevel)), fontSize = 18.sp)
+        Text(text = statusBarViews.gridAIActionLevelString(gridAILevel), color = colorResource(id = statusBarViews.gridAIActionLevelColor(gridAILevel)), fontSize = 20.sp)
 
         Spacer(modifier = Modifier.weight(1.0f))
 

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">The Head That Feeds</string>
 
+    <string name="single_placeholder">%1$s</string>
+
     <string name="intro_1">Hello? Is anyone receiving this?</string>
     <string name="intro_1_response">Hello? Who is this?</string>
     <string name="intro_2">Thank god! I\'ve been transmitting for weeks. I thought there were no Nochies left</string>
@@ -40,11 +42,58 @@
         <item>Hunting</item>
     </string-array>
 
-    <string-array name="enemy_activity_levels">
-        <item>None</item>
-        <item>Sparse</item>
-        <item>Moderate</item>
-        <item>Heavy</item>
-        <item>Overwhelming</item>
+    <!--AI can aid attacks/defense at higher levels. Aiding will be influenced as friendly_ai_events are.-->
+    <!--Three options: Attack, Attack with aid, Do not attack.-->
+    <string-array name="player_attack_events">
+        <!--Low damage, lower risk-->
+        <item>One of your hackers has discovered a weakness within the Grid AI\'s network. Attempt to exploit it?</item>
+        <!--Moderate damage, moderate risk-->
+        <item>A scout patrol has identified a Grid AI network node with inadequate security. Attempt to destroy it?</item>
+        <!--High damage, high risk-->
+        <item>A civilian informant has leaked the security codes to a major Grid AI hub. Attempt to infiltrate it?</item>
     </string-array>
+
+    <string-array name="player_defense_events">
+        <!--Low and high damage physical attacks-->
+        <item>The Grid\'s AI has located one of your resistance cells, and has sent %1$s to %2$s.</item>
+        <item>The Grid\'s AI has pinpointed a major nerve center of your resistance operation, and is sending multiple %1$ss to %2$s it.</item>
+        <!--Low and high damage network attacks-->
+        <item>The Grid\'s AI has infiltrated one of your AI\'s network hubs, and is running %1$s to %2$s it.</item>
+        <item>The Grid\'s AI has breached a massive hole in your AI\'s network and has multiple %1$s pouring in.</item>
+    </string-array>
+
+    <string-array name="enemy_types">
+
+    </string-array>
+
+    <string-array name="destruction_synonyms">
+    </string-array>
+
+    <string-array name="enemy_ai_malware">
+    </string-array>
+
+    <string-array name="player_evolution_events">
+    </string-array>
+
+    <string-array name="player_recruitment_events">
+    </string-array>
+
+    <string-array name="random_events">
+    </string-array>
+
+    <!--Can raise/lower empathy or aggression, or repair integrity. Chance to cost damage/fighters etc.-->
+    <string-array name="stat_altering_events">
+    </string-array>
+
+    <!--Uncontrolled. Frequency based on empathy and aggression traits. Severity based on intelligence.-->
+    <!--Least risky + most effective, but also w/ least control-->
+    <string-array name="friendly_ai_events">
+    </string-array>
+
+    <string-array name="grid_ai_attacks">
+    </string-array>
+
+    <string-array name="grid_ai_repairs">
+    </string-array>
+
 </resources>

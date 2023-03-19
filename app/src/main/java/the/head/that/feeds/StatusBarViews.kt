@@ -14,7 +14,7 @@ class StatusBarViews (context: Context) {
 
     fun friendlyAILevelColor(level: Int) : Int {
         when (level) {
-            0 -> return R.color.white
+            0 -> return R.color.yellow_2
             1 -> return R.color.very_light_green
             2 -> return R.color.very_light_blue
             3 -> return R.color.very_light_purple
