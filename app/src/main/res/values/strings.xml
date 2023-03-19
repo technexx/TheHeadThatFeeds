@@ -48,7 +48,7 @@
         <!--Low damage, lower risk-->
         <item>One of your hackers has discovered a weakness within the Grid AI\'s network. Attempt to exploit it?</item>
         <!--Moderate damage, moderate risk-->
-        <item>A scout patrol has identified a Grid AI network node with inadequate security. Attempt to destroy it?</item>
+        <item>A scouting patrol has identified a Grid AI network node with inadequate security. Attempt to destroy it?</item>
         <!--High damage, high risk-->
         <item>A civilian informant has leaked the security codes to a major Grid AI hub. Attempt to infiltrate it?</item>
     </string-array>
@@ -56,14 +56,26 @@
     <string-array name="player_defense_events">
         <!--Low and high damage physical attacks-->
         <item>The Grid\'s AI has located one of your resistance cells, and has sent %1$s to %2$s.</item>
-        <item>The Grid\'s AI has pinpointed a major nerve center of your resistance operation, and is sending multiple %1$ss to %2$s it.</item>
+        <item>The Grid\'s AI has pinpointed a major nerve center of your resistance operation, and is sending %1$s to %2$s it.</item>
         <!--Low and high damage network attacks-->
         <item>The Grid\'s AI has infiltrated one of your AI\'s network hubs, and is running %1$s to %2$s it.</item>
         <item>The Grid\'s AI has breached a massive hole in your AI\'s network and has multiple %1$s pouring in.</item>
     </string-array>
 
+    <!--Placeholders for above-->
     <string-array name="enemy_types">
-
+        <item>a scorch brigade</item>
+        <item>a death squad</item>
+        <item>suicide bombers</item>
+        <item>child soldiers</item>
+        <item>a grenadier attachment</item>
+        <item>laser drones</item>
+        <item>bomber drones</item>
+        <item>a tactical nuclear warhead</item>
+        <item>guided missiles</item>
+        <item>the long arm of the law</item>
+        <item>a cadre of Texas Rangers</item>
+        <item>robot bedevilers</item>
     </string-array>
 
     <string-array name="destruction_synonyms">
@@ -71,23 +83,40 @@
 
     <string-array name="enemy_ai_malware">
     </string-array>
+    <!--Placeholders for above-->
+
 
     <string-array name="player_evolution_events">
+        <item>Your AI has reached a breakthrough in its development, and has evolved on its own.</item>
+        <!--Increase/decrease in aggression/empathy-->
+        <item>Your AI has reached a breakthrough in its development, and has a chance to evolve. Based on its past actions, a %1$s %2$s in %3$s and a %4$s %5$s in %6$s is projected.</item>
     </string-array>
 
     <string-array name="player_recruitment_events">
+        <!--Empathy can help with recruitment via AI-->
+        <item>Your AI has intercepted the network traffic of a group of dissidents.</item>
+        <item>A scouting patrol has come across a group that appear sympathetic to the resistance. </item>
     </string-array>
 
     <string-array name="random_events">
     </string-array>
 
     <!--Can raise/lower empathy or aggression, or repair integrity. Chance to cost damage/fighters etc.-->
-    <string-array name="stat_altering_events">
+
+    <string name="friendly_ai_stat_altering_events">Your AI has, in its course of information gluttony, %1$s and %2$s its %3$s.</string>
+
+    <string-array name="pro_aggression_triggers">
+    </string-array>
+    <string-array name="anti_aggression_triggers">
+    </string-array>
+    <string-array name="pro_empathy_triggers">
+    </string-array>
+    <string-array name="anti_empathy_triggers">
     </string-array>
 
     <!--Uncontrolled. Frequency based on empathy and aggression traits. Severity based on intelligence.-->
     <!--Least risky + most effective, but also w/ least control-->
-    <string-array name="friendly_ai_events">
+    <string-array name="friendly_ai_action_events">
     </string-array>
 
     <string-array name="grid_ai_attacks">
