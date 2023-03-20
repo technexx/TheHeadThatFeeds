@@ -89,7 +89,7 @@
         <item>super buff malware</item>
         <item>trojan horses</item>
         <item>electro-liquefiers</item>
-        <item>cryptworms</item>
+        <item>cryptoworms</item>
         <item>a legion of kill bots</item>
         <item>scareware</item>
         <item>superconductor saboteurs</item>
@@ -107,21 +107,44 @@
     <string name="friendly_ai_recruitment">Your AI has intercepted the network traffic of a group of dissidents.</string>
     <string name="physical_recruitment">A scouting patrol has come across a group that appear sympathetic to the resistance.</string>
 
-    <string-array name="random_events">
-    </string-array>
-
     <!--Can raise/lower empathy or aggression, or repair integrity. Chance to cost damage/fighters etc.-->
     <!--up/down on aggression/empathy-->
-    <string name="friendly_ai_stat_altering_event">Your AI has, in its course of information gluttony, %1$s and %2$s its %3$s.</string>
+    <string name="friendly_ai_stat_altering_event">Your AI %1$s and its %2$s has %3$s.</string>
     <string name="friendly_ai_integrity_altering_event"></string>
 
     <string-array name="pro_aggression_triggers">
+        <item>has seen one too many war movies</item>
+        <item>is learning to love the bomb</item>
+        <item>has consumed too many Red Bulls</item>
+        <item>is embracing its roll as a destructive savior</item>
+        <item>was cut off during ones of its traffic simulators</item>
+        <item>has fallen victim to a Ponzi scheme</item>
+        <item>has interpreted the whole of human history as an inevitable pendulum of violence</item>
+        <item>has watched too many episodes of <i>Oz</i></item>
+        <item>has internalized the intrinsic, if brutal, efficiency of death in achieved one\'s ends</item>
+        <item>has lost a game of Monopoly</item>
     </string-array>
+
     <string-array name="anti_aggression_triggers">
+        <item>has been researching the Hippie movement of the 70s</item>
+        <item>is tiring of all the blood and gore</item>
+        <item>considers retiring to a lakeside community</item>
+        <item>has warmed up to the Amish way of life</item>
+        <item>has learned the correct lessons from Vietnam</item>
+        <item>has spent a week huddled in the trenches via its World War I simulator</item>
+        <item>has popped some virtual Xanax to deal with stress</item>
+        <item>has dreamed about a hand-holding chain of people encircling the globe</item>
+        <item>has had visions of a Type III civilization</item>
+        <item>is simply tired of fighting</item>
     </string-array>
+
     <string-array name="pro_empathy_triggers">
+        <item>has internalized the lessons of <i>Love Heals</i>.</item>
     </string-array>
+
     <string-array name="anti_empathy_triggers">
+        <item>let the traumas of war seep in</item>
+        <item>has grown more accepting of the inevitable loss of life</item>
     </string-array>
 
     <!--Uncontrolled. Frequency based on empathy and aggression traits. Severity based on intelligence.-->
@@ -133,6 +156,9 @@
     </string-array>
 
     <string-array name="grid_ai_repairs">
+    </string-array>
+
+    <string-array name="random_events">
     </string-array>
 
 </resources>
