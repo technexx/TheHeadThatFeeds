@@ -44,10 +44,15 @@ class GameViewModel : ViewModel() {
     fun setEmpathy(value: Int) { mutableEmpathy.value = value }
     fun getEmpathy() : Int { return empathy.value!! }
 
-    val mutableResistanceMembers = MutableLiveData<Int>()
-    val resistanceMembers : LiveData<Int> get() = mutableResistanceMembers
-    fun setResistanceMembers(value: Int) { mutableResistanceMembers.value = value }
-    fun getResistanceMembers() : Int { return resistanceMembers.value!! }
+    val mutableFighters = MutableLiveData<Int>()
+    val fighters : LiveData<Int> get() = mutableFighters
+    fun setFighters(value: Int) { mutableFighters.value = value }
+    fun getFighters() : Int { return fighters.value!! }
+
+    val mutableProgrammers = MutableLiveData<Int>()
+    val programmers : LiveData<Int> get() = mutableProgrammers
+    fun setProgrammers(value: Int) { mutableProgrammers.value = value }
+    fun getProgrammers() : Int { return programmers.value!! }
 
     val mutableCivilians = MutableLiveData<Double>()
     val civilians : LiveData<Double> get() = mutableCivilians

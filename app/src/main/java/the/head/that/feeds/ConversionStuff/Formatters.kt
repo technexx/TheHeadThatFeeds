@@ -1,4 +1,4 @@
-package the.head.that.feeds
+package the.head.that.feeds.ConversionStuff
 
 class Formatters {
 

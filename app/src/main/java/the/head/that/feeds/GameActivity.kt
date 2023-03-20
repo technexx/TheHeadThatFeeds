@@ -22,22 +22,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 
-//Todo: As player AI evolves, it gains new abilities.
-//Todo: As enemy AI gets closer to locating player, it gains new abilities. Maybe relate to its animal.
-
-//Todo: Friendly AI will become more autonomous as it evolves.
-//Todo: Levels of Aggression, Empathy (and its evolved intelligence) effect behavior.
-
-//Todo: Grid AI has Integrity value.
-//Todo: Civilian and/or survivors can be casualties that affect end score.
-    //Todo: Civilians are general score. Survivors also used for missions.
-//Todo: Both Friendly and Grid AI can cause civilian deaths.
-
+//Todo: As friendly AI evolves, it gains new abilities and becomes more autonomous.
 //Todo: Should be a net-loss with continuation of days, to encourage player to be proactive.
+//Todo: Attacks are more frequent and severe the higher Grid AI's awareness is.
 
 //Todo: Idea: Instead of health, integrity affects monitoring of Grid AI. Lower monitoring = better chance to evolve (can set it as a choice, a natural evolution, or both).
 
-///Todo: Replace player Integrity with Power (or just "Network Integrity"). Friendly AI needs a certain amount, increasing with its intelligence.
 
 private lateinit var gameViewModel : GameViewModel
 @SuppressLint("StaticFieldLeak")
@@ -55,9 +45,10 @@ class GameActivity : ComponentActivity() {
         gameViewModel.setFriendlyAIHealth(100.0)
         gameViewModel.setGridAILevel(0)
         gameViewModel.setGridAITrackingProgress(0)
-        gameViewModel.setAggression(0)
-        gameViewModel.setEmpathy(0)
-        gameViewModel.setResistanceMembers(1000)
+        gameViewModel.setAggression(50)
+        gameViewModel.setEmpathy(50)
+        gameViewModel.setProgrammers(100)
+        gameViewModel.setFighters(1000)
         gameViewModel.setCivilians(42.0)
         gameViewModel.setCurrentDay(1)
         gameViewModel.setGridAIHealth(100.0)
@@ -139,7 +130,8 @@ fun StatusBarLeftRowColumn() {
     val friendlyAILevel : Int by gameViewModel.friendlyAIEvolutionLevel.observeAsState(0)
     val aggression : Int by gameViewModel.aggression.observeAsState(0)
     val empathy : Int by gameViewModel.empathy.observeAsState(0)
-    val resistanceMembers : Int by gameViewModel.resistanceMembers.observeAsState(0)
+    val programmers: Int by gameViewModel.programmers.observeAsState(0)
+    val fighters : Int by gameViewModel.fighters.observeAsState(0)
 
     Column(modifier = Modifier
         .fillMaxWidth(),
@@ -148,10 +140,10 @@ fun StatusBarLeftRowColumn() {
         Text(text = "Resistance AI", color = colorResource(id = R.color.android_green), fontSize = 17.sp)
 
         Spacer(modifier = Modifier.height(10.dp))
-
-        Text(text = "Integrity", color = Color.White, fontSize = 16.sp)
-
-        Spacer(modifier = Modifier.height(10.dp))
+//
+//        Text(text = "Integrity", color = Color.White, fontSize = 16.sp)
+//
+//        Spacer(modifier = Modifier.height(10.dp))
 
         LinearProgressIndicator(progress = statusBarViews.healthLevelAsFloat(gameViewModel.getFriendlyAIHealth()), color = Color.White)
 
@@ -165,7 +157,8 @@ fun StatusBarLeftRowColumn() {
 
         Spacer(modifier = Modifier.weight(1.0f))
 
-        Text(text = "Guerrillas: $resistanceMembers", color = Color.White, fontSize = 16.sp)
+        Text(text = "Programmers: $programmers", color = Color.White, fontSize = 16.sp)
+        Text(text = "Fighters: $fighters", color = Color.White, fontSize = 16.sp)
     }
 }
 
@@ -190,10 +183,10 @@ fun StatusBarRightRowColumn() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Grid AI", color = colorResource(id = R.color.android_red), fontSize = 17.sp)
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        Text(text = "Integrity", color = Color.White, fontSize = 16.sp)
+//
+//        Spacer(modifier = Modifier.height(10.dp))
+//
+//        Text(text = "Integrity", color = Color.White, fontSize = 16.sp)
 
         Spacer(modifier = Modifier.height(10.dp))
 
