@@ -32,6 +32,21 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 private lateinit var gameViewModel : GameViewModel
 @SuppressLint("StaticFieldLeak")
 private lateinit var statusBarViews : StatusBarViews
+private var stats : Stats = Stats()
+
+fun setViewModelValuesFromStatsClass() {
+    gameViewModel.setFriendlyAIEvolutionLevel(stats.friendlyAIIntelligenceLevel)
+    gameViewModel.setFriendlyAIIntegrity(stats.friendlyAIIntegrity)
+    gameViewModel.setGridAILevel(stats.friendlyAIIntelligenceLevel)
+    gameViewModel.setGridAITrackingProgress(stats.enemyAITrackingLevel)
+    gameViewModel.setAggression(stats.aggression)
+    gameViewModel.setEmpathy(stats.empathy)
+    gameViewModel.setProgrammers(stats.programmers)
+    gameViewModel.setFighters(stats.fighters)
+    gameViewModel.setCivilians(stats.civilians)
+    gameViewModel.setCurrentDay(stats.currentDay)
+    gameViewModel.setGridAIIntegrity(stats.enemyAIIntegrity)
+}
 
 class GameActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +57,7 @@ class GameActivity : ComponentActivity() {
         gameViewModel = gameViewModelInit
 
         gameViewModel.setFriendlyAIEvolutionLevel(0)
-        gameViewModel.setFriendlyAIHealth(100.0)
+        gameViewModel.setFriendlyAIIntegrity(100.0)
         gameViewModel.setGridAILevel(0)
         gameViewModel.setGridAITrackingProgress(0)
         gameViewModel.setAggression(50)
@@ -51,7 +66,7 @@ class GameActivity : ComponentActivity() {
         gameViewModel.setFighters(1000)
         gameViewModel.setCivilians(42.0)
         gameViewModel.setCurrentDay(1)
-        gameViewModel.setGridAIHealth(100.0)
+        gameViewModel.setGridAIIntegrity(100.0)
 
         setContent {
             TheHeadThatFeedsTheme {
@@ -140,12 +155,8 @@ fun StatusBarLeftRowColumn() {
         Text(text = "Resistance AI", color = colorResource(id = R.color.android_green), fontSize = 17.sp)
 
         Spacer(modifier = Modifier.height(10.dp))
-//
-//        Text(text = "Integrity", color = Color.White, fontSize = 16.sp)
-//
-//        Spacer(modifier = Modifier.height(10.dp))
 
-        LinearProgressIndicator(progress = statusBarViews.healthLevelAsFloat(gameViewModel.getFriendlyAIHealth()), color = Color.White)
+        LinearProgressIndicator(progress = statusBarViews.healthLevelAsFloat(gameViewModel.getFriendlyAIIntegrity()), color = Color.White)
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -183,14 +194,10 @@ fun StatusBarRightRowColumn() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(text = "Grid AI", color = colorResource(id = R.color.android_red), fontSize = 17.sp)
-//
-//        Spacer(modifier = Modifier.height(10.dp))
-//
-//        Text(text = "Integrity", color = Color.White, fontSize = 16.sp)
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        LinearProgressIndicator(progress = statusBarViews.healthLevelAsFloat(gameViewModel.getGridAIHealth()), color = Color.White)
+        LinearProgressIndicator(progress = statusBarViews.healthLevelAsFloat(gameViewModel.getGridAIIntegrity()), color = Color.White)
 
         Spacer(modifier = Modifier.height(30.dp))
 

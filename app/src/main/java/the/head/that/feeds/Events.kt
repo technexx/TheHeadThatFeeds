@@ -13,8 +13,8 @@ class Events(context : Context) {
 
     }
 
-    fun dailyFriendlyAIProgress() : Int{
-
-    }
+//    fun dailyFriendlyAIProgress() : Int {
+//
+//    }
 
 }

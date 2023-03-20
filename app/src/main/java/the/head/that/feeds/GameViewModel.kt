@@ -14,20 +14,20 @@ class GameViewModel : ViewModel() {
     fun setFriendlyAIEvolutionLevel(value: Int) { mutableFriendlyAIEvolutionLevel.value = value }
     fun getFriendlyAIEvolutionLevel() : Int { return friendlyAIEvolutionLevel.value!! }
 
-    val mutableFriendlyAIHealthLevel = MutableLiveData<Double>()
-    val friendlyHealthLevel : LiveData<Double> get() = mutableFriendlyAIHealthLevel
-    fun setFriendlyAIHealth(value: Double) { mutableFriendlyAIHealthLevel.value = value }
-    fun getFriendlyAIHealth() : Double { return friendlyHealthLevel.value!! }
+    val mutableFriendlyAIIntegrityLevel = MutableLiveData<Double>()
+    val friendlyAIIntegrityLevel : LiveData<Double> get() = mutableFriendlyAIIntegrityLevel
+    fun setFriendlyAIIntegrity(value: Double) { mutableFriendlyAIIntegrityLevel.value = value }
+    fun getFriendlyAIIntegrity() : Double { return friendlyAIIntegrityLevel.value!! }
 
     val mutableGridAIActionLevel = MutableLiveData<Int>()
     val gridAIActionLevel : LiveData<Int> get() = mutableGridAIActionLevel
     fun setGridAILevel(value: Int) { mutableGridAIActionLevel.value = value }
     fun getGridAILevel() : Int { return gridAIActionLevel.value!! }
 
-    val mutableGridAIHealthLevel = MutableLiveData<Double>()
-    val gridAIHealthLevel : LiveData<Double> get() = mutableGridAIHealthLevel
-    fun setGridAIHealth(value: Double) { mutableGridAIHealthLevel.value = value }
-    fun getGridAIHealth() : Double { return gridAIHealthLevel.value!! }
+    val mutableGridAIIntegrityLevel = MutableLiveData<Double>()
+    val gridAIIntegrityLevel : LiveData<Double> get() = mutableGridAIIntegrityLevel
+    fun setGridAIIntegrity(value: Double) { mutableGridAIIntegrityLevel.value = value }
+    fun getGridAIIntegrity() : Double { return gridAIIntegrityLevel.value!! }
 
     val mutableGridAITrackingProgress= MutableLiveData<Int>()
     val gridAITrackingProgress : LiveData<Int> get() = mutableGridAITrackingProgress
