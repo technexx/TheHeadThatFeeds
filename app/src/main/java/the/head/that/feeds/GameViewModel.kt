@@ -14,20 +14,20 @@ class GameViewModel : ViewModel() {
     fun setFriendlyAIEvolutionLevel(value: Int) { mutableFriendlyAIEvolutionLevel.value = value }
     fun getFriendlyAIEvolutionLevel() : Int { return friendlyAIEvolutionLevel.value!! }
 
-    val mutableFriendlyAIIntegrityLevel = MutableLiveData<Double>()
-    val friendlyAIIntegrityLevel : LiveData<Double> get() = mutableFriendlyAIIntegrityLevel
-    fun setFriendlyAIIntegrity(value: Double) { mutableFriendlyAIIntegrityLevel.value = value }
-    fun getFriendlyAIIntegrity() : Double { return friendlyAIIntegrityLevel.value!! }
+    val mutableFriendlyAIIntegrityLevel = MutableLiveData<Int>()
+    val friendlyAIIntegrityLevel : LiveData<Int> get() = mutableFriendlyAIIntegrityLevel
+    fun setFriendlyAIIntegrity(value: Int) { mutableFriendlyAIIntegrityLevel.value = value }
+    fun getFriendlyAIIntegrity() : Int { return friendlyAIIntegrityLevel.value!! }
 
     val mutableGridAITrackingLevel = MutableLiveData<Int>()
     val gridAITrackingLevel : LiveData<Int> get() = mutableGridAITrackingLevel
     fun setGridAITrackingLevel(value: Int) { mutableGridAITrackingLevel.value = value }
     fun getGridAITrackingLevel() : Int { return gridAITrackingLevel.value!! }
 
-    val mutableGridAIIntegrityLevel = MutableLiveData<Double>()
-    val gridAIIntegrityLevel : LiveData<Double> get() = mutableGridAIIntegrityLevel
-    fun setGridAIIntegrity(value: Double) { mutableGridAIIntegrityLevel.value = value }
-    fun getGridAIIntegrity() : Double { return gridAIIntegrityLevel.value!! }
+    val mutableGridAIIntegrityLevel = MutableLiveData<Int>()
+    val gridAIIntegrityLevel : LiveData<Int> get() = mutableGridAIIntegrityLevel
+    fun setGridAIIntegrity(value: Int) { mutableGridAIIntegrityLevel.value = value }
+    fun getGridAIIntegrity() : Int { return gridAIIntegrityLevel.value!! }
 
     val mutableAggression = MutableLiveData<Int>()
     val aggression : LiveData<Int> get() = mutableAggression

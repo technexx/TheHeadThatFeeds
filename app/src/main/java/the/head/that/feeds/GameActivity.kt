@@ -1,7 +1,7 @@
 package the.head.that.feeds
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -33,11 +33,13 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 
 
 private lateinit var gameViewModel : GameViewModel
+private lateinit var sharedPreferences: SharedPreferences
+private lateinit var sharedPrefEditor : SharedPreferences.Editor
 @SuppressLint("StaticFieldLeak")
 private lateinit var statusBarViews : StatusBarViews
 private lateinit var stats : Stats
 
-fun setViewModelValuesFromStatsClass() {
+private fun setViewModelValuesFromStatsClass() {
     gameViewModel.setFriendlyAIEvolutionLevel(stats.friendlyAIEvolutionLevel)
     gameViewModel.setFriendlyAIIntegrity(stats.friendlyAIIntegrity)
     gameViewModel.setGridAIIntegrity(stats.gridAIIntegrity)
@@ -52,7 +54,7 @@ fun setViewModelValuesFromStatsClass() {
     gameViewModel.setCurrentDay(stats.currentDay)
 }
 
-fun setViewModelObservers(lifeCycleOwner: LifecycleOwner) {
+private fun setViewModelObservers(lifeCycleOwner: LifecycleOwner) {
     gameViewModel.friendlyAIEvolutionLevel.observe(lifeCycleOwner) {
         stats.friendlyAIEvolutionLevel = gameViewModel.getFriendlyAIEvolutionLevel()
     }
@@ -87,6 +89,22 @@ fun setViewModelObservers(lifeCycleOwner: LifecycleOwner) {
     }
 }
 
+private fun saveStatsToSharedPreferences() {
+    sharedPrefEditor.putInt("friendlyAIEvolutionLevel", stats.friendlyAIEvolutionLevel)
+    sharedPrefEditor.putInt("friendlyAIIntegrity", stats.friendlyAIIntegrity)
+    sharedPrefEditor.putInt("gridAIIntegrity", stats.gridAIIntegrity)
+    sharedPrefEditor.putInt("aggression", stats.aggression)
+    sharedPrefEditor.putInt("empathy", stats.empathy)
+    sharedPrefEditor.putInt("programmers", stats.programmers)
+    sharedPrefEditor.putInt("fighters", stats.fighters)
+    sharedPrefEditor.putString("civilians", stats.civilians.toString())
+    sharedPrefEditor.putInt("currentDay", stats.currentDay)
+}
+
+private fun retrieveStatsFromSharedPreferences() {
+
+}
+
 class GameActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -94,8 +112,9 @@ class GameActivity : ComponentActivity() {
         val gameViewModelInit : GameViewModel by viewModels()
         gameViewModel = gameViewModelInit
 
+        sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE)
+        sharedPrefEditor = sharedPreferences.edit()
         statusBarViews = StatusBarViews(this)
-
         stats = Stats()
         stats.setDefaultStatValues()
 
@@ -115,8 +134,6 @@ class GameActivity : ComponentActivity() {
     }
 }
 
-//Todo: Livedata changes should update both UI and Stats class.
-    //Todo: Either (A)set observers on each value or (b)update directly from composable
 //Default height/width within a column/row is determined by largest element, unless specified.
 @Composable
 fun FullGameScreen() {
@@ -167,10 +184,11 @@ fun GameStatusBarSubRows() {
 
 @Composable
 fun StatusBarLeftRow(width: Int) {
-    Row (modifier = Modifier
-        .fillMaxHeight()
-        .background(colorResource(id = R.color.black))
-        .width(width.dp),
+    Row(
+        modifier = Modifier
+            .fillMaxHeight()
+            .background(colorResource(id = R.color.black))
+            .width(width.dp),
     ) {
         StatusBarLeftRowColumn()
     }
@@ -211,10 +229,11 @@ fun StatusBarLeftRowColumn() {
 
 @Composable
 fun StatusBarRightRow(width: Int) {
-    Row (modifier = Modifier
-        .fillMaxHeight()
-        .background(colorResource(id = R.color.black))
-        .width(width.dp),
+    Row(
+        modifier = Modifier
+            .fillMaxHeight()
+            .background(colorResource(id = R.color.black))
+            .width(width.dp),
     ) {
         StatusBarRightRowColumn()
     }

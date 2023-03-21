@@ -63,6 +63,8 @@ class StatusBarViews (context: Context) {
         }
     }
 
-    fun healthLevelAsFloat(health: Double) : Float { return ((health / 100).toFloat())}
-
+    fun healthLevelAsFloat(value: Int) : Float {
+        val doubleValue = value.toDouble()
+        return (doubleValue / 100).toFloat()
+    }
 }
