@@ -39,21 +39,6 @@ private lateinit var sharedPrefEditor : SharedPreferences.Editor
 private lateinit var statusBarViews : StatusBarViews
 private lateinit var stats : Stats
 
-private fun setViewModelValuesFromStatsClass() {
-    gameViewModel.setFriendlyAIEvolutionLevel(stats.friendlyAIEvolutionLevel)
-    gameViewModel.setFriendlyAIIntegrity(stats.friendlyAIIntegrity)
-    gameViewModel.setGridAIIntegrity(stats.gridAIIntegrity)
-    gameViewModel.setGridAITrackingLevel(stats.gridAITrackingLevel)
-
-    gameViewModel.setAggression(stats.aggression)
-    gameViewModel.setEmpathy(stats.empathy)
-    gameViewModel.setProgrammers(stats.programmers)
-    gameViewModel.setFighters(stats.fighters)
-    gameViewModel.setCivilians(stats.civilians)
-
-    gameViewModel.setCurrentDay(stats.currentDay)
-}
-
 private fun setViewModelObservers(lifeCycleOwner: LifecycleOwner, statsClass: Stats) {
     gameViewModel.friendlyAIEvolutionLevel.observe(lifeCycleOwner) {
         statsClass.friendlyAIEvolutionLevel = gameViewModel.getFriendlyAIEvolutionLevel()
@@ -62,7 +47,7 @@ private fun setViewModelObservers(lifeCycleOwner: LifecycleOwner, statsClass: St
     }
     gameViewModel.friendlyAIIntegrityLevel.observe(lifeCycleOwner) {
         statsClass.friendlyAIIntegrity = gameViewModel.getFriendlyAIIntegrity()
-        saveIntToSharedPref(sharedPrefEditor,"friendlyAIEvolutionLevel", statsClass.friendlyAIEvolutionLevel)
+        saveIntToSharedPref(sharedPrefEditor,"friendlyAIEvolutionLevel", statsClass.friendlyAIIntegrity)
 
     }
     gameViewModel.gridAIIntegrityLevel.observe(lifeCycleOwner) {
@@ -72,13 +57,13 @@ private fun setViewModelObservers(lifeCycleOwner: LifecycleOwner, statsClass: St
     }
     gameViewModel.gridAITrackingLevel.observe(lifeCycleOwner) {
         statsClass.gridAITrackingLevel = gameViewModel.getGridAITrackingLevel()
-        saveIntToSharedPref(sharedPrefEditor,"friendlyAIEvolutionLevel", statsClass.friendlyAIEvolutionLevel)
-
+        saveIntToSharedPref(sharedPrefEditor,"gridAITrackingLevel", statsClass.gridAITrackingLevel)
+        Log.i("testShared", "grid AI tracking in Shared is ${sharedPreferences.getInt("gridAITrackingLevel", 0)}")
     }
+
     gameViewModel.aggression.observe(lifeCycleOwner) {
         statsClass.aggression = gameViewModel.getAggression()
         saveIntToSharedPref(sharedPrefEditor,"aggression", statsClass.aggression)
-
     }
     gameViewModel.empathy.observe(lifeCycleOwner) {
         statsClass.empathy = gameViewModel.getEmpathy()
@@ -96,6 +81,7 @@ private fun setViewModelObservers(lifeCycleOwner: LifecycleOwner, statsClass: St
         statsClass.civilians = gameViewModel.getCivilians()
         saveStringToSharedPref(sharedPrefEditor,"civilians", statsClass.civilians.toString())
     }
+
     gameViewModel.currentDay.observe(lifeCycleOwner) {
         statsClass.currentDay = gameViewModel.getCurrentDay()
         saveIntToSharedPref(sharedPrefEditor,"currentDay", statsClass.currentDay)
@@ -112,30 +98,32 @@ private fun saveStringToSharedPref(editor: SharedPreferences.Editor, key: String
     editor.apply()
 }
 
-//private fun saveStatsToSharedPreferences(statsClass: Stats) {
-//    sharedPrefEditor.putInt("friendlyAIEvolutionLevel", statsClass.friendlyAIEvolutionLevel)
-//    sharedPrefEditor.putInt("friendlyAIIntegrity", statsClass.friendlyAIIntegrity)
-//    sharedPrefEditor.putInt("gridAIIntegrity", statsClass.gridAIIntegrity)
-//    sharedPrefEditor.putInt("aggression", statsClass.aggression)
-//    sharedPrefEditor.putInt("empathy", statsClass.empathy)
-//    sharedPrefEditor.putInt("programmers", statsClass.programmers)
-//    sharedPrefEditor.putInt("fighters", statsClass.fighters)
-//    sharedPrefEditor.putString("civilians", statsClass.civilians.toString())
-//    sharedPrefEditor.putInt("currentDay", statsClass.currentDay)
-//
-//    sharedPrefEditor.apply()
-//}
-
-private fun setStatsFromSharedPreferences(statsClass: Stats) {
+private fun setStatsClassValuesFromSharedPreferences(statsClass: Stats) {
     statsClass.friendlyAIEvolutionLevel = sharedPreferences.getInt("friendlyAIEvolutionLevel", 0)
-    statsClass.friendlyAIIntegrity = sharedPreferences.getInt("friendlyAIIntegrity", 0)
-    statsClass.gridAIIntegrity = sharedPreferences.getInt("gridAIIntegrity", 0)
-    statsClass.aggression = sharedPreferences.getInt("aggression", 0)
-    statsClass.empathy = sharedPreferences.getInt("empathy", 0)
-    statsClass.programmers = sharedPreferences.getInt("programmers", 0)
-    statsClass.fighters = sharedPreferences.getInt("fighters", 0)
-    statsClass.civilians = sharedPreferences.getString("civilians", "")!!.toDouble()
-    statsClass.currentDay = sharedPreferences.getInt("currentDay", 0)
+    statsClass.friendlyAIIntegrity = sharedPreferences.getInt("friendlyAIIntegrity", 100)
+    statsClass.gridAIIntegrity = sharedPreferences.getInt("gridAIIntegrity", 100)
+    statsClass.gridAITrackingLevel = sharedPreferences.getInt("gridAITrackingLevel", 0)
+    statsClass.aggression = sharedPreferences.getInt("aggression", 20)
+    statsClass.empathy = sharedPreferences.getInt("empathy", 20)
+    statsClass.programmers = sharedPreferences.getInt("programmers", 1000)
+    statsClass.fighters = sharedPreferences.getInt("fighters", 1000)
+    statsClass.civilians = sharedPreferences.getString("civilians", "42.0")!!.toDouble()
+    statsClass.currentDay = sharedPreferences.getInt("currentDay", 1)
+}
+
+private fun setViewModelValuesFromStatsClass() {
+    gameViewModel.setFriendlyAIEvolutionLevel(stats.friendlyAIEvolutionLevel)
+    gameViewModel.setFriendlyAIIntegrity(stats.friendlyAIIntegrity)
+    gameViewModel.setGridAIIntegrity(stats.gridAIIntegrity)
+    gameViewModel.setGridAITrackingLevel(stats.gridAITrackingLevel)
+
+    gameViewModel.setAggression(stats.aggression)
+    gameViewModel.setEmpathy(stats.empathy)
+    gameViewModel.setProgrammers(stats.programmers)
+    gameViewModel.setFighters(stats.fighters)
+    gameViewModel.setCivilians(stats.civilians)
+
+    gameViewModel.setCurrentDay(stats.currentDay)
 }
 
 class GameActivity : ComponentActivity() {
@@ -151,6 +139,7 @@ class GameActivity : ComponentActivity() {
         stats = Stats()
         stats.setDefaultStatValues()
 
+        setStatsClassValuesFromSharedPreferences(stats)
         setViewModelValuesFromStatsClass()
         setViewModelObservers(this, stats)
 
