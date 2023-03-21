@@ -1,7 +1,9 @@
 package the.head.that.feeds
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -20,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.LifecycleOwner
 import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 
 //Todo: As friendly AI evolves, it gains new abilities and becomes more autonomous.
@@ -32,41 +35,72 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 private lateinit var gameViewModel : GameViewModel
 @SuppressLint("StaticFieldLeak")
 private lateinit var statusBarViews : StatusBarViews
-private var stats : Stats = Stats()
+private lateinit var stats : Stats
 
 fun setViewModelValuesFromStatsClass() {
-    gameViewModel.setFriendlyAIEvolutionLevel(stats.friendlyAIIntelligenceLevel)
+    gameViewModel.setFriendlyAIEvolutionLevel(stats.friendlyAIEvolutionLevel)
     gameViewModel.setFriendlyAIIntegrity(stats.friendlyAIIntegrity)
-    gameViewModel.setGridAILevel(stats.friendlyAIIntelligenceLevel)
-    gameViewModel.setGridAITrackingProgress(stats.enemyAITrackingLevel)
+    gameViewModel.setGridAIIntegrity(stats.gridAIIntegrity)
+    gameViewModel.setGridAITrackingLevel(stats.gridAITrackingLevel)
+
     gameViewModel.setAggression(stats.aggression)
     gameViewModel.setEmpathy(stats.empathy)
     gameViewModel.setProgrammers(stats.programmers)
     gameViewModel.setFighters(stats.fighters)
     gameViewModel.setCivilians(stats.civilians)
+
     gameViewModel.setCurrentDay(stats.currentDay)
-    gameViewModel.setGridAIIntegrity(stats.enemyAIIntegrity)
+}
+
+fun setViewModelObservers(lifeCycleOwner: LifecycleOwner) {
+    gameViewModel.friendlyAIEvolutionLevel.observe(lifeCycleOwner) {
+        stats.friendlyAIEvolutionLevel = gameViewModel.getFriendlyAIEvolutionLevel()
+    }
+    gameViewModel.friendlyAIIntegrityLevel.observe(lifeCycleOwner) {
+        stats.friendlyAIIntegrity = gameViewModel.getFriendlyAIIntegrity()
+    }
+    gameViewModel.gridAIIntegrityLevel.observe(lifeCycleOwner) {
+        stats.gridAIIntegrity = gameViewModel.getGridAIIntegrity()
+    }
+    gameViewModel.gridAITrackingLevel.observe(lifeCycleOwner) {
+        stats.gridAITrackingLevel = gameViewModel.getGridAITrackingLevel()
+    }
+
+    gameViewModel.aggression.observe(lifeCycleOwner) {
+        stats.aggression = gameViewModel.getAggression()
+    }
+    gameViewModel.empathy.observe(lifeCycleOwner) {
+        stats.empathy = gameViewModel.getEmpathy()
+    }
+    gameViewModel.programmers.observe(lifeCycleOwner) {
+        stats.programmers = gameViewModel.getProgrammers()
+    }
+    gameViewModel.fighters.observe(lifeCycleOwner) {
+        stats.fighters = gameViewModel.getFighters()
+    }
+    gameViewModel.civilians.observe(lifeCycleOwner) {
+        stats.civilians = gameViewModel.getCivilians()
+    }
+
+    gameViewModel.currentDay.observe(lifeCycleOwner) {
+        stats.currentDay = gameViewModel.getCurrentDay()
+    }
 }
 
 class GameActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        statusBarViews = StatusBarViews(this)
         val gameViewModelInit : GameViewModel by viewModels()
         gameViewModel = gameViewModelInit
 
-        gameViewModel.setFriendlyAIEvolutionLevel(0)
-        gameViewModel.setFriendlyAIIntegrity(100.0)
-        gameViewModel.setGridAILevel(0)
-        gameViewModel.setGridAITrackingProgress(0)
-        gameViewModel.setAggression(50)
-        gameViewModel.setEmpathy(50)
-        gameViewModel.setProgrammers(100)
-        gameViewModel.setFighters(1000)
-        gameViewModel.setCivilians(42.0)
-        gameViewModel.setCurrentDay(1)
-        gameViewModel.setGridAIIntegrity(100.0)
+        statusBarViews = StatusBarViews(this)
+
+        stats = Stats()
+        stats.setDefaultStatValues()
+
+        setViewModelValuesFromStatsClass()
+        setViewModelObservers(this)
 
         setContent {
             TheHeadThatFeedsTheme {
@@ -81,6 +115,8 @@ class GameActivity : ComponentActivity() {
     }
 }
 
+//Todo: Livedata changes should update both UI and Stats class.
+    //Todo: Either (A)set observers on each value or (b)update directly from composable
 //Default height/width within a column/row is determined by largest element, unless specified.
 @Composable
 fun FullGameScreen() {
@@ -186,7 +222,7 @@ fun StatusBarRightRow(width: Int) {
 
 @Composable
 fun StatusBarRightRowColumn() {
-    val gridAILevel : Int by gameViewModel.gridAIActionLevel.observeAsState(0)
+    val gridAILevel : Int by gameViewModel.gridAITrackingLevel.observeAsState(0)
     val civilians : Double by gameViewModel.civilians.observeAsState(42.0)
 
     Column(modifier = Modifier
@@ -259,15 +295,17 @@ fun GameInteraction(height: Int) {
 }
 
 private fun cycleFriendlyAI() {
-    var newLevel = gameViewModel.getFriendlyAIEvolutionLevel() + 1
+    var newLevel = gameViewModel.getFriendlyAIEvolutionLevel() + 10
     if (newLevel == 12) newLevel = 0
     gameViewModel.setFriendlyAIEvolutionLevel(newLevel)
 }
 
 private fun cycleGridAI() {
-    var newLevel = gameViewModel.getGridAILevel() + 1
-    if (newLevel == 5) newLevel = 0
-    gameViewModel.setGridAILevel(newLevel)
+    var newLevel = gameViewModel.getGridAITrackingLevel() + 10
+    if (newLevel >= 41) newLevel = 0
+    gameViewModel.setGridAITrackingLevel(newLevel)
+
+    Log.i("testStats", "grid ai level in Stats is ${stats.gridAITrackingLevel}")
 }
 
 @Preview(showBackground = true)
