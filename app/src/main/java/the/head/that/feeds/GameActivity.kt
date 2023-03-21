@@ -322,7 +322,7 @@ fun GameInteraction(height: Int) {
         Button(onClick = {
 
         }) {
-            Text(text = "Cycle Friendly AI")
+            Text(text = "Advance evolution")
         }
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -333,12 +333,6 @@ fun GameInteraction(height: Int) {
             Text(text = "Cycle Grid AI")
         }
     }
-}
-
-private fun cycleFriendlyAI() {
-    var newLevel = gameViewModel.getFriendlyAIEvolutionLevel() + 10
-    if (newLevel == 12) newLevel = 0
-    gameViewModel.setFriendlyAIEvolutionLevel(newLevel)
 }
 
 private fun cycleGridAI() {

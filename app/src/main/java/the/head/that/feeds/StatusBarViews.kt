@@ -23,8 +23,6 @@ class StatusBarViews (context: Context) {
         }
     }
 
-    fun friendlyAILevelProgress(points: Float, multiplier: Int) : Float { return points * multiplier }
-
     fun friendlyAILevelColor(level: Int) : Int {
         when (level) {
             in 0..9 -> return R.color.yellow_2
