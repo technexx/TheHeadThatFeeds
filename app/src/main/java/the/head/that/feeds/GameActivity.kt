@@ -89,20 +89,28 @@ private fun setViewModelObservers(lifeCycleOwner: LifecycleOwner) {
     }
 }
 
-private fun saveStatsToSharedPreferences() {
-    sharedPrefEditor.putInt("friendlyAIEvolutionLevel", stats.friendlyAIEvolutionLevel)
-    sharedPrefEditor.putInt("friendlyAIIntegrity", stats.friendlyAIIntegrity)
-    sharedPrefEditor.putInt("gridAIIntegrity", stats.gridAIIntegrity)
-    sharedPrefEditor.putInt("aggression", stats.aggression)
-    sharedPrefEditor.putInt("empathy", stats.empathy)
-    sharedPrefEditor.putInt("programmers", stats.programmers)
-    sharedPrefEditor.putInt("fighters", stats.fighters)
-    sharedPrefEditor.putString("civilians", stats.civilians.toString())
-    sharedPrefEditor.putInt("currentDay", stats.currentDay)
+private fun saveStatsToSharedPreferences(statsClass: Stats) {
+    sharedPrefEditor.putInt("friendlyAIEvolutionLevel", statsClass.friendlyAIEvolutionLevel)
+    sharedPrefEditor.putInt("friendlyAIIntegrity", statsClass.friendlyAIIntegrity)
+    sharedPrefEditor.putInt("gridAIIntegrity", statsClass.gridAIIntegrity)
+    sharedPrefEditor.putInt("aggression", statsClass.aggression)
+    sharedPrefEditor.putInt("empathy", statsClass.empathy)
+    sharedPrefEditor.putInt("programmers", statsClass.programmers)
+    sharedPrefEditor.putInt("fighters", statsClass.fighters)
+    sharedPrefEditor.putString("civilians", statsClass.civilians.toString())
+    sharedPrefEditor.putInt("currentDay", statsClass.currentDay)
 }
 
-private fun retrieveStatsFromSharedPreferences() {
-
+private fun setStatsFromSharedPreferences(statsClass: Stats) {
+    statsClass.friendlyAIEvolutionLevel = sharedPreferences.getInt("friendlyAIEvolutionLevel", 0)
+    statsClass.friendlyAIIntegrity = sharedPreferences.getInt("friendlyAIIntegrity", 0)
+    statsClass.gridAIIntegrity = sharedPreferences.getInt("gridAIIntegrity", 0)
+    statsClass.aggression = sharedPreferences.getInt("aggression", 0)
+    statsClass.empathy = sharedPreferences.getInt("empathy", 0)
+    statsClass.programmers = sharedPreferences.getInt("programmers", 0)
+    statsClass.fighters = sharedPreferences.getInt("fighters", 0)
+    statsClass.civilians = sharedPreferences.getString("civilians", "")!!.toDouble()
+    statsClass.currentDay = sharedPreferences.getInt("currentDay", 0)
 }
 
 class GameActivity : ComponentActivity() {
