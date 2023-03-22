@@ -235,7 +235,7 @@ fun StatusBarLeftRowColumn() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        LinearProgressIndicator(progress = statusBarViews.healthLevelAsFloat(gameViewModel.getFriendlyAIIntegrity()), color = Color.White)
+        LinearProgressIndicator(progress = statusBarViews.integrityLevelAsFloat(gameViewModel.getFriendlyAIIntegrity()), color = Color.White)
 
         Spacer(modifier = Modifier.height(10.dp))
 
@@ -277,7 +277,7 @@ fun StatusBarRightRowColumn() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        LinearProgressIndicator(progress = statusBarViews.healthLevelAsFloat(gameViewModel.getGridAIIntegrity()), color = Color.White)
+        LinearProgressIndicator(progress = statusBarViews.integrityLevelAsFloat(gameViewModel.getGridAIIntegrity()), color = Color.White)
 
         Spacer(modifier = Modifier.height(30.dp))
 

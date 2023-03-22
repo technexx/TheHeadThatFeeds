@@ -1,6 +1,7 @@
 package the.head.that.feeds
 
 import android.content.Context
+import kotlin.math.roundToInt
 
 class StatusBarViews (context: Context) {
     private val mContext = context
@@ -61,7 +62,7 @@ class StatusBarViews (context: Context) {
         }
     }
 
-    fun healthLevelAsFloat(value: Int) : Float {
+    fun integrityLevelAsFloat(value: Int) : Float {
         val doubleValue = value.toDouble()
         return (doubleValue / 100).toFloat()
     }
