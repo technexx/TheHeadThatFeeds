@@ -7,6 +7,7 @@ import kotlin.math.roundToInt
 class Events(context : Context) {
     private val mContext = context
 
+    val blah = GameActivity.
     var TYPE_OF_EVENT = 0
     var pastEventsArray = ArrayList<Int>()
 
@@ -94,12 +95,12 @@ class Events(context : Context) {
     private fun setAllEventWeights() {
         setRandomEventWeight()
         setPlayerAttackWeight()
-        setGridAIAttackWeight()
-        setResistanceRecruitmentWeight()
+        setGridAIAttackWeight(Stats.gridAITrackingLevel)
+        setResistanceRecruitmentWeight(Stats.fighters, Stats.programmers)
         setFriendlyAIRecruitmentWeight()
         setFriendlyAIStatChangeWeight()
-        setFriendlyAIIntegrityRepair()
-        setGridAIIntegrityRepair()
+        setFriendlyAIIntegrityRepair(Stats.friendlyAIIntegrity)
+        setGridAIIntegrityRepair(Stats.gridAIIntegrity)
     }
 
     fun setRandomEventWeight() { randomEventWeight = 50 }
