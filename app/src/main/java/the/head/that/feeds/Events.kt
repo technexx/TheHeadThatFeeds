@@ -8,7 +8,6 @@ class Events(context : Context) {
     private val mContext = context
 
     var TYPE_OF_EVENT = 0
-    var totalEventWeight = 0
     var pastEventsArray = ArrayList<Int>()
 
     val RANDOM_GOOD = 11
@@ -37,6 +36,17 @@ class Events(context : Context) {
     val FRIENDLY_AI_EVOLUTION_CHOICE = 62
     val FRIENDLY_AI_EVOLUTION_NO_CHOICE = 63
 
+    var totalEventsWeight = 0
+
+    var randomEventWeight = 0
+    var playerAttackWeight = 0
+    var gridAttackWeight = 0
+    var resistanceRecruitmentWeight = 0
+    var friendlyAIRecruitmentWeight = 0
+    var friendlyAIStatChangeWeight = 0
+    var friendlyAIIntegrityRepairWeight = 0
+    var gridAIIntegrityRepairWeight = 0
+
     fun randomEvent() : Int { return (RANDOM_GOOD..RANDOM_MIXED).random() }
 
     fun playerAttack() : Int { return (RESISTANCE_LOW_ATTACK..FRIENDLY_AI_HIGH_ATTACK).random() }
@@ -53,28 +63,63 @@ class Events(context : Context) {
     fun friendlyAIEvolutionChoice() : Int { return FRIENDLY_AI_EVOLUTION_CHOICE }
     fun friendlyAIEvolutionNoChoice() : Int { return FRIENDLY_AI_EVOLUTION_NO_CHOICE }
 
-    //Todo: Assign weights, add weights, then roll from total.
-    fun rollTypeOfEvent(percent: Int) : Int {
 
+    private fun percentageChanceBasedOnWeight(weight: Int) : Int {
+        val weightAsDouble = weight.toDouble()
+        val totalWeightAsDouble = totalEventsWeight.toDouble()
+        return (weightAsDouble/totalWeightAsDouble).roundToInt()
     }
 
-    private fun setRandomEventWeight() : Int { return 50 }
-
-    private fun setPlayerAttackWeight() : Int { return 20 }
-
-    private fun setGridAIAttackWeight(trackingLevel: Int) : Int { return (trackingLevel * 1.2).roundToInt() }
-
-    private fun resistanceRecruitmentWeight(fighters: Int, programmers: Int) : Double {
-        return ((fighters + programmers) / 100).toDouble()
+    //Todo: Can just use total weight as a roll base.
+    fun rollTypeOfEvent() : Int {
+        val roll = (0..totalEventsWeight).random()
+        when (roll) {
+            in (0..(totalEventsWeight - (totalEventsWeight - randomEventWeight))) -> return randomEvent()
+            in (0..(totalEventsWeight - (totalEventsWeight - playerAttackWeight))) -> return randomEvent()
+            in (0..(totalEventsWeight - (totalEventsWeight - gridAttackWeight))) -> return randomEvent()
+            in (0..(totalEventsWeight - (totalEventsWeight - resistanceRecruitmentWeight))) -> return randomEvent()
+            in (0..(totalEventsWeight - (totalEventsWeight - friendlyAIRecruitmentWeight))) -> return randomEvent()
+            in (0..(totalEventsWeight - (totalEventsWeight - friendlyAIStatChangeWeight))) -> return randomEvent()
+            in (0..(totalEventsWeight - (totalEventsWeight - friendlyAIIntegrityRepairWeight))) -> return randomEvent()
+            in (0..(totalEventsWeight - (totalEventsWeight - gridAIIntegrityRepairWeight))) -> return randomEvent()
+            else -> return 0
+        }
     }
 
-    private fun friendlyAIRecruitmentWeight() : Int { return 5 }
+    private fun addWeightOfAllEvents() {
+        totalEventsWeight = randomEventWeight + playerAttackWeight + gridAttackWeight + resistanceRecruitmentWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIIntegrityRepairWeight + gridAIIntegrityRepairWeight
+    }
 
-    private fun friendlyAIStatChangeWeight() : Int { return 5 }
+    //Todo: Move to GameActivity.
+    private fun setAllEventWeights() {
+        setRandomEventWeight()
+        setPlayerAttackWeight()
+        setGridAIAttackWeight()
+        setResistanceRecruitmentWeight()
+        setFriendlyAIRecruitmentWeight()
+        setFriendlyAIStatChangeWeight()
+        setFriendlyAIIntegrityRepair()
+        setGridAIIntegrityRepair()
+    }
 
-    private fun friendlyAIIntegrityRepair(currentIntegrity: Int) : Int { return ((100 - currentIntegrity) * 0.25).roundToInt() }
+    fun setRandomEventWeight() { randomEventWeight = 50 }
 
-    private fun gridAIIntegrityRepair(currentIntegrity: Int) : Int { return ((100 - currentIntegrity) * 0.5).roundToInt() }
+    fun setPlayerAttackWeight() { playerAttackWeight = 20 }
+
+    fun setGridAIAttackWeight(trackingLevel: Int) { gridAttackWeight = (trackingLevel * 1.2).roundToInt() }
+
+    fun setResistanceRecruitmentWeight(fighters: Int, programmers: Int) {
+        resistanceRecruitmentWeight = ((fighters + programmers) / 100) }
+
+    fun setFriendlyAIRecruitmentWeight() { friendlyAIRecruitmentWeight = 5 }
+
+    fun setFriendlyAIStatChangeWeight() { friendlyAIStatChangeWeight = 5 }
+
+    fun setFriendlyAIIntegrityRepair(currentIntegrity: Int) {
+        friendlyAIIntegrityRepairWeight = ((100 - currentIntegrity) * 0.25).roundToInt() }
+
+    fun setGridAIIntegrityRepair(currentIntegrity: Int) {
+        gridAIIntegrityRepairWeight= ((100 - currentIntegrity) * 0.5).roundToInt() }
 
     private fun addEventToPastEventsList(event: Int) { pastEventsArray.add(event) }
 
