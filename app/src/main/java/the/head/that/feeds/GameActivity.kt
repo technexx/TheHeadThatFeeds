@@ -38,6 +38,8 @@ private lateinit var sharedPrefEditor : SharedPreferences.Editor
 @SuppressLint("StaticFieldLeak")
 private lateinit var statusBarViews : StatusBarViews
 private lateinit var stats : Stats
+@SuppressLint("StaticFieldLeak")
+private lateinit var events : Events
 
 private fun setViewModelObservers(lifeCycleOwner: LifecycleOwner, statsClass: Stats) {
     gameViewModel.friendlyAIEvolutionLevel.observe(lifeCycleOwner) {
@@ -138,6 +140,7 @@ class GameActivity : ComponentActivity() {
         statusBarViews = StatusBarViews(this)
         stats = Stats()
         stats.setDefaultStatValues()
+        events = Events(this)
 
         setStatsClassValuesFromSharedPreferences(stats)
         setViewModelValuesFromStatsClass()
@@ -320,7 +323,8 @@ fun GameInteraction(height: Int) {
         verticalArrangement = Arrangement.Center
     ) {
         Button(onClick = {
-
+            gameViewModel.setFriendlyAIEvolutionLevel(stats.friendlyAIEvolutionLevel + events.dailyFriendlyAIProgress(stats.programmers))
+            Log.i("testEvo", "friendly AI level from click is ${stats.friendlyAIEvolutionLevel}")
         }) {
             Text(text = "Advance evolution")
         }

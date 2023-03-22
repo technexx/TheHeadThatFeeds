@@ -1,6 +1,7 @@
 package the.head.that.feeds
 
 import android.content.Context
+import kotlin.math.roundToInt
 
 //Choice Events: Player attacks, grid AI attack, recruitment, friendly AI action, friendly AI evolution
 class Events(context : Context) {
@@ -32,8 +33,9 @@ class Events(context : Context) {
 
     }
 
-    fun dailyFriendlyAIProgress() : Int {
-        return 5
+    fun dailyFriendlyAIProgress(programmers : Int) : Int {
+        val doubleValue : Double = (programmers/50).toDouble()
+        return doubleValue.roundToInt()
     }
 
 }
