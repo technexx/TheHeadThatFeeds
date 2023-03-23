@@ -2,6 +2,8 @@ package the.head.that.feeds
 
 import android.content.Context
 import android.util.Log
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 //Choice Events: Player attacks, grid AI attack, recruitment, friendly AI action, friendly AI evolution
@@ -48,54 +50,70 @@ class Events(context : Context) {
     var friendlyAIIntegrityRepairWeight = 0
     var gridAIIntegrityRepairWeight = 0
 
-    fun randomEvent() : Int { return (RANDOM_GOOD..RANDOM_MIXED).random() }
-
-    fun playerAttack() : Int { return (RESISTANCE_LOW_ATTACK..FRIENDLY_AI_HIGH_ATTACK).random() }
-    fun gridAIAttack() : Int { return (GRID_AI_LOW_NETWORK_ATTACK..GRID_AI_HIGH_PHYSICAL_ATTACK).random() }
-
-    fun playerRecruitment() : Int { return PLAYER_RECRUITMENT }
-    fun friendlyAIRecruitment() : Int { return FRIENDLY_AI_RECRUITMENT }
-
-    fun friendlyAIStatChange() : Int { return FRIENDLY_AI_STAT_CHANGE }
-
-    fun playerIntegrityRepair() : Int { return FRIENDLY_AI_INTEGRITY_REPAIR }
-    fun gridAIIntegrityRepair() : Int { return GRID_AI_INTEGRITY_REPAIR }
-
-    fun friendlyAIEvolutionChoice() : Int { return FRIENDLY_AI_EVOLUTION_CHOICE }
-    fun friendlyAIEvolutionNoChoice() : Int { return FRIENDLY_AI_EVOLUTION_NO_CHOICE }
-
-    private fun percentageChanceBasedOnWeight(weight: Int) : Int {
-        val weightAsDouble = weight.toDouble()
-        val totalWeightAsDouble = totalEventsWeight.toDouble()
-        return (weightAsDouble/totalWeightAsDouble).roundToInt()
-    }
-
     fun rollTypeOfEvent() : Int {
         setAllEventWeights()
         setTotalEventWeightVariable()
 
         val roll = (0..totalEventsWeight).random()
+        var valueToReturn = 0
 
+        //Todo: totalEventsWeight needs to decrease.
         when (roll) {
-            in (0..(totalEventsWeight - (totalEventsWeight - randomEventWeight))) -> return randomEvent()
-            in (0..(totalEventsWeight - (totalEventsWeight - playerAttackWeight))) -> return playerAttack()
-            in (0..(totalEventsWeight - (totalEventsWeight - gridAttackWeight))) -> return gridAIAttack()
-            in (0..(totalEventsWeight - (totalEventsWeight - resistanceRecruitmentWeight))) -> return playerRecruitment()
-            in (0..(totalEventsWeight - (totalEventsWeight - friendlyAIRecruitmentWeight))) -> return friendlyAIRecruitment()
-            in (0..(totalEventsWeight - (totalEventsWeight - friendlyAIStatChangeWeight))) -> return friendlyAIStatChange()
-            in (0..(totalEventsWeight - (totalEventsWeight - friendlyAIIntegrityRepairWeight))) -> return playerIntegrityRepair()
-            in (0..(totalEventsWeight - (totalEventsWeight - gridAIIntegrityRepairWeight))) -> return gridAIIntegrityRepair()
-            else -> return 0
+            in (0..(totalEventsWeight - (totalEventsWeight - randomEventWeight))) -> valueToReturn =  randomEvent()
+            in (0..(totalEventsWeight - (totalEventsWeight - playerAttackWeight))) -> valueToReturn =  playerAttack()
+            in (0..(totalEventsWeight - (totalEventsWeight - gridAttackWeight))) -> valueToReturn =  gridAIAttack()
+            in (0..(totalEventsWeight - (totalEventsWeight - resistanceRecruitmentWeight))) -> valueToReturn =  playerRecruitment()
+            in (0..(totalEventsWeight - (totalEventsWeight - friendlyAIRecruitmentWeight))) -> valueToReturn = friendlyAIRecruitment()
+            in (0..(totalEventsWeight - (totalEventsWeight - friendlyAIStatChangeWeight))) -> valueToReturn =  friendlyAIStatChange()
+            in (0..(totalEventsWeight - (totalEventsWeight - friendlyAIIntegrityRepairWeight))) -> valueToReturn =  playerIntegrityRepair()
+            in (0..(totalEventsWeight - (totalEventsWeight - gridAIIntegrityRepairWeight))) -> valueToReturn =  gridAIIntegrityRepair()
         }
+
+        Log.i("testRoll", "roll var is $roll")
+        Log.i("testRoll", "event return is $valueToReturn")
+        return valueToReturn
+    }
+
+    fun rolledEvent() : Int {
+        setAllEventWeights()
+        setTotalEventWeightVariable()
+
+        val eventsWeightArray = eventsWeightArray()
+        val eventsAsIntArray = eventsAsIntArray()
+        var eventsWeight = totalEventsWeight
+        val roll = (0..eventsWeight).random()
+        Log.i("testRoll", "roll var is $roll")
+
+        var valueToReturn = 0
+
+        for (i in eventsWeightArray.indices) {
+            val singleEventWeight = (eventsWeight - (eventsWeight - eventsWeightArray[i]))
+
+            if (roll >= (singleEventWeight)) valueToReturn = eventsAsIntArray[i]
+            Log.i("testRoll", "eventsWeight is $eventsWeight")
+            Log.i("testRoll", "single event weight is $singleEventWeight")
+            eventsWeight -= singleEventWeight
+        }
+
+        Log.i("testRoll", "event return is $valueToReturn")
+
+        return valueToReturn
     }
 
     private fun setTotalEventWeightVariable() {
         totalEventsWeight = randomEventWeight + playerAttackWeight + gridAttackWeight + resistanceRecruitmentWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIIntegrityRepairWeight + gridAIIntegrityRepairWeight
 
+//        Log.i("testRoll", "randomEvent is $randomEventWeight, playerAttack is $playerAttackWeight, gridAttack is $gridAttackWeight, resistanceRecruitment is $resistanceRecruitmentWeight, friendlyAiRecruitment is $friendlyAIRecruitmentWeight, friendlyStatChange is $friendlyAIStatChangeWeight, friendlyIntegrityRepair is $friendlyAIIntegrityRepairWeight, gridAiIntegrityRepair is $gridAIIntegrityRepairWeight")
 
-        Log.i("testRoll", "randomEvent is $randomEventWeight, playerAttack is $playerAttackWeight, gridAttack is $gridAttackWeight, resistanceRecruitment is $resistanceRecruitmentWeight, friendlyAiRecruitment is $friendlyAIRecruitmentWeight, friendlyStatChange is $friendlyAIStatChangeWeight, friendlyIntegrityRepair is $friendlyAIIntegrityRepairWeight, gridAiIntegrityRepair is $gridAIIntegrityRepairWeight")
+//        Log.i("testRoll", "event roll is $totalEventsWeight")
+    }
 
-        Log.i("testRoll", "event roll is $totalEventsWeight")
+    private fun eventsAsIntArray() : ArrayList<Int> {
+        return ArrayList(listOf(randomEvent(), playerAttack(), gridAIAttack(), playerRecruitment(), friendlyAIRecruitment(), friendlyAIStatChange(), playerIntegrityRepair(), gridAIIntegrityRepair()))
+    }
+
+    private fun eventsWeightArray() : ArrayList<Int> {
+        return ArrayList(listOf(randomEventWeight, playerAttackWeight, gridAttackWeight, resistanceRecruitmentWeight, friendlyAIRecruitmentWeight, friendlyAIStatChangeWeight, friendlyAIIntegrityRepairWeight, gridAIIntegrityRepairWeight))
     }
 
     private fun setAllEventWeights() {
@@ -129,6 +147,22 @@ class Events(context : Context) {
         gridAIIntegrityRepairWeight= ((100 - currentIntegrity) * 0.5).roundToInt() }
 
     private fun addEventToPastEventsList(event: Int) { pastEventsArray.add(event) }
+
+    fun randomEvent() : Int { return (RANDOM_GOOD..RANDOM_MIXED).random() }
+
+    fun playerAttack() : Int { return (RESISTANCE_LOW_ATTACK..FRIENDLY_AI_HIGH_ATTACK).random() }
+    fun gridAIAttack() : Int { return (GRID_AI_LOW_NETWORK_ATTACK..GRID_AI_HIGH_PHYSICAL_ATTACK).random() }
+
+    fun playerRecruitment() : Int { return PLAYER_RECRUITMENT }
+    fun friendlyAIRecruitment() : Int { return FRIENDLY_AI_RECRUITMENT }
+
+    fun friendlyAIStatChange() : Int { return FRIENDLY_AI_STAT_CHANGE }
+
+    fun playerIntegrityRepair() : Int { return FRIENDLY_AI_INTEGRITY_REPAIR }
+    fun gridAIIntegrityRepair() : Int { return GRID_AI_INTEGRITY_REPAIR }
+
+    fun friendlyAIEvolutionChoice() : Int { return FRIENDLY_AI_EVOLUTION_CHOICE }
+    fun friendlyAIEvolutionNoChoice() : Int { return FRIENDLY_AI_EVOLUTION_NO_CHOICE }
 
     fun dailyFriendlyAIProgress(programmers : Int) : Int {
         val doubleValue : Double = (programmers/50).toDouble()

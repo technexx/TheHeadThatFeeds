@@ -321,7 +321,7 @@ fun GameInteraction(height: Int) {
         verticalArrangement = Arrangement.Center
     ) {
         Button(onClick = {
-            events.rollTypeOfEvent()
+            events.rolledEvent()
         }) {
             Text(text = "Advance evolution")
         }
