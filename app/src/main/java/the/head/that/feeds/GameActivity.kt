@@ -321,8 +321,7 @@ fun GameInteraction(height: Int) {
         verticalArrangement = Arrangement.Center
     ) {
         Button(onClick = {
-            gameViewModel.setFriendlyAIEvolutionLevel(Stats.friendlyAIEvolutionLevel + events.dailyFriendlyAIProgress(Stats.programmers))
-            Log.i("testEvo", "friendly AI level from click is ${Stats.friendlyAIEvolutionLevel}")
+            events.rollTypeOfEvent()
         }) {
             Text(text = "Advance evolution")
         }
