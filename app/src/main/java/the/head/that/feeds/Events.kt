@@ -57,7 +57,6 @@ class Events(context : Context) {
         val roll = (0..totalEventsWeight).random()
         var valueToReturn = 0
 
-        //Todo: totalEventsWeight needs to decrease.
         when (roll) {
             in (0..(totalEventsWeight - (totalEventsWeight - randomEventWeight))) -> valueToReturn =  randomEvent()
             in (0..(totalEventsWeight - (totalEventsWeight - playerAttackWeight))) -> valueToReturn =  playerAttack()
@@ -80,32 +79,33 @@ class Events(context : Context) {
 
         val eventsWeightArray = eventsWeightArray()
         val eventsAsIntArray = eventsAsIntArray()
+
+//        Log.i("testRoll", "weight array is $eventsWeightArray")
+//        Log.i("testRoll", "as int array is $eventsAsIntArray")
+
         var eventsWeight = totalEventsWeight
         val roll = (0..eventsWeight).random()
+
         Log.i("testRoll", "roll var is $roll")
 
-        var valueToReturn = 0
-
         for (i in eventsWeightArray.indices) {
-            val singleEventWeight = (eventsWeight - (eventsWeight - eventsWeightArray[i]))
-
-            if (roll >= (singleEventWeight)) valueToReturn = eventsAsIntArray[i]
+            val valueToCheckAgainst = (eventsWeight - (roll - eventsWeightArray[i]))
             Log.i("testRoll", "eventsWeight is $eventsWeight")
-            Log.i("testRoll", "single event weight is $singleEventWeight")
-            eventsWeight -= singleEventWeight
+            Log.i("testRoll", "value to check against is $valueToCheckAgainst")
+
+            if (eventsWeightArray[i] >= valueToCheckAgainst) {
+                Log.i("testRoll", "event return is ${eventsAsIntArray[i]}")
+                return eventsAsIntArray[i]
+            }
+            eventsWeight -= eventsWeightArray[i]
         }
 
-        Log.i("testRoll", "event return is $valueToReturn")
-
-        return valueToReturn
+        //Todo: May return this instead of last event in array. Or rather, return one level down (e.g. a roll of 20 with our last element being 15 will still return last element).
+        return 0
     }
 
     private fun setTotalEventWeightVariable() {
         totalEventsWeight = randomEventWeight + playerAttackWeight + gridAttackWeight + resistanceRecruitmentWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIIntegrityRepairWeight + gridAIIntegrityRepairWeight
-
-//        Log.i("testRoll", "randomEvent is $randomEventWeight, playerAttack is $playerAttackWeight, gridAttack is $gridAttackWeight, resistanceRecruitment is $resistanceRecruitmentWeight, friendlyAiRecruitment is $friendlyAIRecruitmentWeight, friendlyStatChange is $friendlyAIStatChangeWeight, friendlyIntegrityRepair is $friendlyAIIntegrityRepairWeight, gridAiIntegrityRepair is $gridAIIntegrityRepairWeight")
-
-//        Log.i("testRoll", "event roll is $totalEventsWeight")
     }
 
     private fun eventsAsIntArray() : ArrayList<Int> {
@@ -141,10 +141,14 @@ class Events(context : Context) {
     fun setFriendlyAIStatChangeWeight() { friendlyAIStatChangeWeight = 5 }
 
     fun setFriendlyAIIntegrityRepair(currentIntegrity: Int) {
-        friendlyAIIntegrityRepairWeight = ((100 - currentIntegrity) * 0.25).roundToInt() }
+        friendlyAIIntegrityRepairWeight = 10
+//        friendlyAIIntegrityRepairWeight = ((100 - currentIntegrity) * 0.25).roundToInt()
+        }
 
     fun setGridAIIntegrityRepair(currentIntegrity: Int) {
-        gridAIIntegrityRepairWeight= ((100 - currentIntegrity) * 0.5).roundToInt() }
+        gridAIIntegrityRepairWeight = 15
+//        gridAIIntegrityRepairWeight= ((100 - currentIntegrity) * 0.5).roundToInt()
+        }
 
     private fun addEventToPastEventsList(event: Int) { pastEventsArray.add(event) }
 
