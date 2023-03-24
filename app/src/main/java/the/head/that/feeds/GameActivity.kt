@@ -312,7 +312,7 @@ fun GameBodyTopColumn() {
 
         Spacer(modifier = Modifier.height(30.dp))
 
-        Text(text = eventText, fontSize = 20.sp)
+        Text(text = eventText, color = Color.White, fontSize = 20.sp)
     }
 }
 
@@ -326,8 +326,7 @@ fun GameInteraction(height: Int) {
         verticalArrangement = Arrangement.Center
     ) {
         Button(onClick = {
-            //Todo: Assign String to rolled event in Events class, set within viewModel here, which will call it in our composable via observer.
-            events.rolledEvent()
+            gameViewModel.setEventText(events.eventString(events.rolledEvent()))
         }) {
             Text(text = "Advance evolution")
         }

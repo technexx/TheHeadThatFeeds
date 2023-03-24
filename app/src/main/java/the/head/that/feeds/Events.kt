@@ -17,7 +17,6 @@ class Events(context : Context) {
     val proEmpathyArray = mContext.resources.getStringArray(R.array.pro_empathy_triggers)
     val antiEmpathyArray = mContext.resources.getStringArray(R.array.anti_empathy_triggers)
 
-    var TYPE_OF_EVENT = 0
     var pastEventsArray = ArrayList<Int>()
 
     val RANDOM_GOOD = 11
@@ -56,6 +55,8 @@ class Events(context : Context) {
     var friendlyAIIntegrityRepairWeight = 0
     var gridAIIntegrityRepairWeight = 0
 
+
+    //Todo: Set placeholders within Strings that require them.
     fun eventString(eventType: Int) : String {
         when (eventType) {
             11 -> return mContext.getString(R.string.random_good_event)
@@ -83,7 +84,9 @@ class Events(context : Context) {
             61 -> return mContext.getString(R.string.friendly_ai_stat_altering_event)
 
             71 -> return mContext.getString(R.string.friendly_ai_evolution_with_choice)
-            62 -> return mContext.getString(R.string.friendly_ai_evolution_no_choice)
+            72 -> return mContext.getString(R.string.friendly_ai_evolution_no_choice)
+
+            else -> return ""
         }
     }
 
