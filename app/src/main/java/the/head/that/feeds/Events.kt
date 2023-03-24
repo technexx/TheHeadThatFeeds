@@ -6,9 +6,16 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
-//Choice Events: Player attacks, grid AI attack, recruitment, friendly AI action, friendly AI evolution
 class Events(context : Context) {
     private val mContext = context
+
+    val enemyTypesArray = mContext.resources.getStringArray(R.array.enemy_types)
+    val destructionVerbsArray = mContext.resources.getStringArray(R.array.destruction_synonyms)
+    val gridAIMalwareArray = mContext.resources.getStringArray(R.array.enemy_ai_malware)
+    val proAggressionArray = mContext.resources.getStringArray(R.array.pro_aggression_triggers)
+    val antiAggressionArray = mContext.resources.getStringArray(R.array.anti_aggression_triggers)
+    val proEmpathyArray = mContext.resources.getStringArray(R.array.pro_empathy_triggers)
+    val antiEmpathyArray = mContext.resources.getStringArray(R.array.anti_empathy_triggers)
 
     var TYPE_OF_EVENT = 0
     var pastEventsArray = ArrayList<Int>()
@@ -17,9 +24,9 @@ class Events(context : Context) {
     val RANDOM_BAD = 12
     val RANDOM_MIXED = 13
 
-    val RESISTANCE_LOW_ATTACK = 21
-    val RESISTANCE_MEDIUM_ATTACK = 22
-    val RESISTANCE_HIGH_ATTACK = 23
+    val PLAYER_LOW_ATTACK = 21
+    val PLAYER_MEDIUM_ATTACK = 22
+    val PLAYER_HIGH_ATTACK = 23
     val FRIENDLY_AI_LOW_ATTACK = 24
     val FRIENDLY_AI_MEDIUM_ATTACK = 25
     val FRIENDLY_AI_HIGH_ATTACK = 26
@@ -48,14 +55,37 @@ class Events(context : Context) {
     var friendlyAIIntegrityRepairWeight = 0
     var gridAIIntegrityRepairWeight = 0
 
+    fun eventString(eventType: Int) : String {
+        when (eventType) {
+            11 -> return mContext.getString(R.string.random_good_event)
+            12 -> return mContext.getString(R.string.random_bad_event)
+            13 -> return mContext.getString(R.string.random_mixed_event)
+
+            21 -> return mContext.getString(R.string.player_attack_low_risk)
+            22 -> return mContext.getString(R.string.player_attack_medium_risk)
+            23 -> return mContext.getString(R.string.player_attack_high_risk)
+            24 -> return mContext.getString(R.string.)
+            25 -> return mContext.getString(R.string.random_bad_event)
+            26 -> return mContext.getString(R.string.random_mixed_event)
+
+            11 -> return mContext.getString(R.string.random_good_event)
+            12 -> return mContext.getString(R.string.random_bad_event)
+            13 -> return mContext.getString(R.string.random_mixed_event)
+
+            11 -> return mContext.getString(R.string.random_good_event)
+            12 -> return mContext.getString(R.string.random_bad_event)
+            13 -> return mContext.getString(R.string.random_mixed_event)
+        }
+    }
+
     fun rolledEvent() : Int {
         setAllEventWeights()
 
+        val totalEventsWeight = totalEventsWeight()
+        val roll = (0..totalEventsWeight).random()
+
         val eventsWeightArray = eventsWeightArray()
         val eventsAsIntArray = eventsAsIntArray()
-
-        val totalEventsWeight = totalEventWeight()
-        val roll = (0..totalEventsWeight).random()
 
         var valueToRollAgainst = 0
 
@@ -82,7 +112,7 @@ class Events(context : Context) {
         setGridAIIntegrityRepair(Stats.gridAIIntegrity)
     }
 
-    private fun totalEventWeight() : Int {
+    private fun totalEventsWeight() : Int {
         return randomEventWeight + playerAttackWeight + gridAttackWeight + playerRecruitmentWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIIntegrityRepairWeight + gridAIIntegrityRepairWeight
     }
 
@@ -114,7 +144,7 @@ class Events(context : Context) {
 
     fun randomEvent() : Int { return (RANDOM_GOOD..RANDOM_MIXED).random() }
 
-    fun playerAttack() : Int { return (RESISTANCE_LOW_ATTACK..FRIENDLY_AI_HIGH_ATTACK).random() }
+    fun playerAttack() : Int { return (PLAYER_LOW_ATTACK..PLAYER_HIGH_ATTACK).random() }
     fun gridAIAttack() : Int { return (GRID_AI_LOW_NETWORK_ATTACK..GRID_AI_HIGH_PHYSICAL_ATTACK).random() }
 
     fun playerRecruitment() : Int { return PLAYER_RECRUITMENT }

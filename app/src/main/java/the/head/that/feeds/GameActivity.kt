@@ -301,6 +301,7 @@ fun GameBodyColumn(height: Int) {
 @Composable
 fun GameBodyTopColumn() {
     val currentDay : Int by gameViewModel.currentDay.observeAsState(0)
+    val eventText : String by gameViewModel.eventText.observeAsState("")
 
     Column(modifier = Modifier
         .fillMaxWidth(),
@@ -308,6 +309,10 @@ fun GameBodyTopColumn() {
         verticalArrangement = Arrangement.Center
     ) {
         Text(text = "Day:  $currentDay", color = Color.White, fontSize = 22.sp, fontWeight = FontWeight.Bold)
+
+        Spacer(modifier = Modifier.height(30.dp))
+
+        Text(text = eventText, fontSize = 20.sp)
     }
 }
 
@@ -321,6 +326,7 @@ fun GameInteraction(height: Int) {
         verticalArrangement = Arrangement.Center
     ) {
         Button(onClick = {
+            //Todo: Assign String to rolled event in Events class, set within viewModel here, which will call it in our composable via observer.
             events.rolledEvent()
         }) {
             Text(text = "Advance evolution")

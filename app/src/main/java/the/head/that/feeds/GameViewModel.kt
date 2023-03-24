@@ -58,4 +58,9 @@ class GameViewModel : ViewModel() {
     val currentDay : LiveData<Int> get() = mutableCurrentDay
     fun setCurrentDay(value: Int) { mutableCurrentDay.value = value }
     fun getCurrentDay() : Int { return currentDay.value!! }
+
+    val mutableEventText = MutableLiveData<String>()
+    val eventText : LiveData<String> get() = mutableEventText
+    fun setEventText(value: String) { mutableEventText.value = value }
+    fun getEventText() : String { return eventText.value!! }
 }
