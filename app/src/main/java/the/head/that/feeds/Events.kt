@@ -32,8 +32,8 @@ class Events(context : Context) {
     val FRIENDLY_AI_HIGH_ATTACK = 26
 
     val GRID_AI_LOW_NETWORK_ATTACK = 31
-    val GRID_AI_HIGH_NETWORK_ATTACK = 32
-    val GRID_AI_LOW_PHYSICAL_ATTACK = 33
+    val GRID_AI_LOW_PHYSICAL_ATTACK = 32
+    val GRID_AI_HIGH_NETWORK_ATTACK = 33
     val GRID_AI_HIGH_PHYSICAL_ATTACK = 34
 
     val PLAYER_RECRUITMENT = 41
@@ -43,8 +43,9 @@ class Events(context : Context) {
     val GRID_AI_INTEGRITY_REPAIR = 52
 
     val FRIENDLY_AI_STAT_CHANGE = 61
-    val FRIENDLY_AI_EVOLUTION_CHOICE = 62
-    val FRIENDLY_AI_EVOLUTION_NO_CHOICE = 63
+
+    val FRIENDLY_AI_EVOLUTION_CHOICE = 71
+    val FRIENDLY_AI_EVOLUTION_NO_CHOICE = 72
 
     var randomEventWeight = 0
     var playerAttackWeight = 0
@@ -64,17 +65,25 @@ class Events(context : Context) {
             21 -> return mContext.getString(R.string.player_attack_low_risk)
             22 -> return mContext.getString(R.string.player_attack_medium_risk)
             23 -> return mContext.getString(R.string.player_attack_high_risk)
-            24 -> return mContext.getString(R.string.)
-            25 -> return mContext.getString(R.string.random_bad_event)
-            26 -> return mContext.getString(R.string.random_mixed_event)
+            24 -> return mContext.getString(R.string.friendly_ai_attack_low_risk)
+            25 -> return mContext.getString(R.string.friendly_ai_attack_medium_risk)
+            26 -> return mContext.getString(R.string.friendly_ai_attack_high_risk)
 
-            11 -> return mContext.getString(R.string.random_good_event)
-            12 -> return mContext.getString(R.string.random_bad_event)
-            13 -> return mContext.getString(R.string.random_mixed_event)
+            31 -> return mContext.getString(R.string.grid_ai_network_attack_low_threat)
+            32 -> return mContext.getString(R.string.grid_ai_physical_attack_low_threat)
+            33 -> return mContext.getString(R.string.grid_ai_network_attack_high_threat)
+            34 -> return mContext.getString(R.string.grid_ai_physical_attack_high_threat)
 
-            11 -> return mContext.getString(R.string.random_good_event)
-            12 -> return mContext.getString(R.string.random_bad_event)
-            13 -> return mContext.getString(R.string.random_mixed_event)
+            41 -> return mContext.getString(R.string.physical_recruitment)
+            42 -> return mContext.getString(R.string.friendly_ai_recruitment)
+
+            51 -> return mContext.getString(R.string.friendly_ai_integrity_repair)
+            52 -> return mContext.getString(R.string.grid_ai_integrity_repair)
+
+            61 -> return mContext.getString(R.string.friendly_ai_stat_altering_event)
+
+            71 -> return mContext.getString(R.string.friendly_ai_evolution_with_choice)
+            62 -> return mContext.getString(R.string.friendly_ai_evolution_no_choice)
         }
     }
 
