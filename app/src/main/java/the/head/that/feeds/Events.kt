@@ -9,16 +9,6 @@ import kotlin.math.roundToInt
 class Events(context : Context) {
     private val mContext = context
 
-    val enemyTypesArray = mContext.resources.getStringArray(R.array.enemy_types)
-    val destructionVerbsArray = mContext.resources.getStringArray(R.array.destruction_synonyms)
-    val gridAIMalwareArray = mContext.resources.getStringArray(R.array.enemy_ai_malware)
-    val proAggressionArray = mContext.resources.getStringArray(R.array.pro_aggression_triggers)
-    val antiAggressionArray = mContext.resources.getStringArray(R.array.anti_aggression_triggers)
-    val proEmpathyArray = mContext.resources.getStringArray(R.array.pro_empathy_triggers)
-    val antiEmpathyArray = mContext.resources.getStringArray(R.array.anti_empathy_triggers)
-
-    var pastEventsArray = ArrayList<Int>()
-
     val RANDOM_GOOD = 11
     val RANDOM_BAD = 12
     val RANDOM_MIXED = 13
@@ -55,36 +45,46 @@ class Events(context : Context) {
     var friendlyAIIntegrityRepairWeight = 0
     var gridAIIntegrityRepairWeight = 0
 
+    val enemyTypesArray = mContext.resources.getStringArray(R.array.enemy_types)
+    val destructionVerbsArray = mContext.resources.getStringArray(R.array.destruction_synonyms)
+    val gridAIMalwareArray = mContext.resources.getStringArray(R.array.enemy_ai_malware)
+    val proAggressionArray = mContext.resources.getStringArray(R.array.pro_aggression_triggers)
+    val antiAggressionArray = mContext.resources.getStringArray(R.array.anti_aggression_triggers)
+    val proEmpathyArray = mContext.resources.getStringArray(R.array.pro_empathy_triggers)
+    val antiEmpathyArray = mContext.resources.getStringArray(R.array.anti_empathy_triggers)
+
+    var pastEventsArray = ArrayList<Int>()
+
 
     //Todo: Set placeholders within Strings that require them.
     fun eventString(eventType: Int) : String {
         when (eventType) {
-            11 -> return mContext.getString(R.string.random_good_event)
-            12 -> return mContext.getString(R.string.random_bad_event)
-            13 -> return mContext.getString(R.string.random_mixed_event)
+            RANDOM_GOOD -> return mContext.getString(R.string.random_good_event)
+            RANDOM_BAD -> return mContext.getString(R.string.random_bad_event)
+            RANDOM_MIXED -> return mContext.getString(R.string.random_mixed_event)
 
-            21 -> return mContext.getString(R.string.player_attack_low_risk)
-            22 -> return mContext.getString(R.string.player_attack_medium_risk)
-            23 -> return mContext.getString(R.string.player_attack_high_risk)
-            24 -> return mContext.getString(R.string.friendly_ai_attack_low_risk)
-            25 -> return mContext.getString(R.string.friendly_ai_attack_medium_risk)
-            26 -> return mContext.getString(R.string.friendly_ai_attack_high_risk)
+            PLAYER_LOW_ATTACK -> return mContext.getString(R.string.player_attack_low_risk)
+            PLAYER_MEDIUM_ATTACK -> return mContext.getString(R.string.player_attack_medium_risk)
+            PLAYER_HIGH_ATTACK -> return mContext.getString(R.string.player_attack_high_risk)
+            FRIENDLY_AI_LOW_ATTACK -> return mContext.getString(R.string.friendly_ai_attack_low_risk)
+            FRIENDLY_AI_MEDIUM_ATTACK -> return mContext.getString(R.string.friendly_ai_attack_medium_risk)
+            FRIENDLY_AI_HIGH_ATTACK -> return mContext.getString(R.string.friendly_ai_attack_high_risk)
 
-            31 -> return mContext.getString(R.string.grid_ai_network_attack_low_threat)
-            32 -> return mContext.getString(R.string.grid_ai_physical_attack_low_threat)
-            33 -> return mContext.getString(R.string.grid_ai_network_attack_high_threat)
-            34 -> return mContext.getString(R.string.grid_ai_physical_attack_high_threat)
+            GRID_AI_LOW_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack_low_threat,  enemyTypesArray[(enemyTypesArray.indices).random()], gridAIMalwareArray[(gridAIMalwareArray.indices).random()])
+            GRID_AI_LOW_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack_low_threat, enemyTypesArray[(enemyTypesArray.indices).random()], destructionVerbsArray[(destructionVerbsArray.indices).random()])
+            GRID_AI_HIGH_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack_high_threat,  enemyTypesArray[(enemyTypesArray.indices).random()])
+            GRID_AI_HIGH_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack_high_threat, enemyTypesArray[(enemyTypesArray.indices).random()], destructionVerbsArray[(destructionVerbsArray.indices).random()])
 
-            41 -> return mContext.getString(R.string.physical_recruitment)
-            42 -> return mContext.getString(R.string.friendly_ai_recruitment)
+            PLAYER_RECRUITMENT -> return mContext.getString(R.string.physical_recruitment)
+            FRIENDLY_AI_RECRUITMENT -> return mContext.getString(R.string.friendly_ai_recruitment)
 
-            51 -> return mContext.getString(R.string.friendly_ai_integrity_repair)
-            52 -> return mContext.getString(R.string.grid_ai_integrity_repair)
+            FRIENDLY_AI_INTEGRITY_REPAIR -> return mContext.getString(R.string.friendly_ai_integrity_repair)
+            GRID_AI_INTEGRITY_REPAIR -> return mContext.getString(R.string.grid_ai_integrity_repair)
 
-            61 -> return mContext.getString(R.string.friendly_ai_stat_altering_event)
+            FRIENDLY_AI_STAT_CHANGE -> return mContext.getString(R.string.friendly_ai_stat_altering_event)
 
-            71 -> return mContext.getString(R.string.friendly_ai_evolution_with_choice)
-            72 -> return mContext.getString(R.string.friendly_ai_evolution_no_choice)
+            FRIENDLY_AI_EVOLUTION_CHOICE -> return mContext.getString(R.string.friendly_ai_evolution_with_choice)
+            FRIENDLY_AI_EVOLUTION_NO_CHOICE -> return mContext.getString(R.string.friendly_ai_evolution_no_choice)
 
             else -> return ""
         }

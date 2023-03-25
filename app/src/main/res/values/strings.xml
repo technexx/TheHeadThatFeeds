@@ -53,7 +53,6 @@
     <string name="friendly_ai_attack_medium_risk">Medium Risk Friendly AI Attack!</string>
     <string name="friendly_ai_attack_high_risk">High Risk Friendly AI Attack!</string>
 
-
     <string name="grid_ai_physical_attack_low_threat">The Grid\'s AI has located one of your resistance cells, and has sent %1$s to %2$s it.</string>
     <string name="grid_ai_physical_attack_high_threat">The Grid\'s AI has pinpointed a major nerve center of your resistance operation, and is sending %1$s to %2$s it.</string>
     <string name="grid_ai_network_attack_low_threat">The Grid\'s AI has infiltrated one of your AI\'s network hubs, and is running %1$s to %2$s it.</string>
