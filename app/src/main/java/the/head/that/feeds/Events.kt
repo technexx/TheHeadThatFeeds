@@ -48,15 +48,14 @@ class Events(context : Context) {
     val enemyTypesArray = mContext.resources.getStringArray(R.array.enemy_types)
     val destructionVerbsArray = mContext.resources.getStringArray(R.array.destruction_synonyms)
     val gridAIMalwareArray = mContext.resources.getStringArray(R.array.enemy_ai_malware)
-    val proAggressionArray = mContext.resources.getStringArray(R.array.pro_aggression_triggers)
-    val antiAggressionArray = mContext.resources.getStringArray(R.array.anti_aggression_triggers)
-    val proEmpathyArray = mContext.resources.getStringArray(R.array.pro_empathy_triggers)
-    val antiEmpathyArray = mContext.resources.getStringArray(R.array.anti_empathy_triggers)
+    val proAggressionArray = mContext.resources.getStringArray(R.array.pro_friendlyAIAggression_triggers)
+    val antiAggressionArray = mContext.resources.getStringArray(R.array.anti_friendlyAIAggression_triggers)
+    val proEmpathyArray = mContext.resources.getStringArray(R.array.pro_friendlyAIEmpathy_triggers)
+    val antiEmpathyArray = mContext.resources.getStringArray(R.array.anti_friendlyAIEmpathy_triggers)
 
     var pastEventsArray = ArrayList<Int>()
 
 
-    //Todo: Set placeholders within Strings that require them.
     fun eventString(eventType: Int) : String {
         when (eventType) {
             RANDOM_GOOD -> return mContext.getString(R.string.random_good_event)

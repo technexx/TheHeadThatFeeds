@@ -43,6 +43,14 @@
     </string-array>
 
 
+    <string name="random_good_event">This is a random GOOD event and we will have lots of them  but not quite yet!</string>
+    <string name="random_bad_event">This is a random BAD event and we will have lots of them  but not quite yet!</string>
+    <string name="random_mixed_event">This is a random MIXED event and we will have lots of them  but not quite yet!</string>
+
+    <string-array name="random_good_event_array">
+        <item></item>
+    </string-array>
+
     <!--AI can aid attacks/defense at higher levels. Aiding will be influenced as friendly_ai_events are.-->
     <!--Three options: Attack, Attack with aid, Do not attack.-->
     <string name="player_attack_low_risk">One of your hackers has discovered a weakness within the Grid AI\'s network. Attempt to exploit it?</string>
@@ -64,18 +72,14 @@
     <string name="friendly_ai_integrity_repair">The Resistance AI has repaired some its integrity.</string>
     <string name="grid_ai_integrity_repair">The Grid AI has repaired some of its integrity</string>
 
-    <string name="random_good_event">This is a random GOOD event and we will have lots of them  but not quite yet!</string>
-    <string name="random_bad_event">This is a random BAD event and we will have lots of them  but not quite yet!</string>
-    <string name="random_mixed_event">This is a random MIXED event and we will have lots of them  but not quite yet!</string>
-
-    <!--Uncontrolled. Frequency based on empathy and aggression traits. Severity based on intelligence.-->
+    <!--Uncontrolled. Frequency based on friendlyAIEmpathy and friendlyAIAggression traits. Severity based on intelligence.-->
     <!--Least risky + most effective, but also w/ least control-->
     <string name="friendly_ai_good_event">This is a friendly AI GOOD action event. We will have lots of them but not quite yet!</string>
     <string name="friendly_ai_bad_event">This is a friendly AI BAD action event. We will have lots of them but not quite yet!</string>
     <string name="friendly_ai_mixed_event">This is a friendly MIXED AI action event. We will have lots of them but not quite yet!</string>
 
-    <!--Can raise/lower empathy or aggression, or repair integrity. Chance to cost damage/fighters etc.-->
-    <!--up/down on aggression/empathy-->
+    <!--Can raise/lower friendlyAIEmpathy or friendlyAIAggression, or repair integrity. Chance to cost damage/fighters etc.-->
+    <!--up/down on friendlyAIAggression/friendlyAIEmpathy-->
     <string name="friendly_ai_stat_altering_event">Your AI %1$s and its %2$s has %3$s.</string>
 
     <string name="friendly_ai_evolution_with_choice">Your AI has reached a breakthrough in its development, and has a chance to evolve. Based on its past actions, a %1$ in %2$s and a %3$s in %4$s is projected.</string>
@@ -131,7 +135,7 @@
         <item>cyber snakes</item>
     </string-array>
 
-    <string-array name="pro_aggression_triggers">
+    <string-array name="pro_friendlyAIAggression_triggers">
         <item>has seen one too many war movies</item>
         <item>is learning to love the bomb</item>
         <item>has consumed too many Red Bulls</item>
@@ -144,7 +148,7 @@
         <item>has lost a game of Monopoly</item>
     </string-array>
 
-    <string-array name="anti_aggression_triggers">
+    <string-array name="anti_friendlyAIAggression_triggers">
         <item>has been researching the Hippie movement of the 70s</item>
         <item>is tiring of all the blood and gore</item>
         <item>considers retiring to a lakeside community</item>
@@ -157,11 +161,11 @@
         <item>is simply tired of fighting</item>
     </string-array>
 
-    <string-array name="pro_empathy_triggers">
+    <string-array name="pro_friendlyAIEmpathy_triggers">
         <item>has internalized the lessons of <i>Love Heals</i>.</item>
     </string-array>
 
-    <string-array name="anti_empathy_triggers">
+    <string-array name="anti_friendlyAIEmpathy_triggers">
         <item>let the traumas of war seep in</item>
         <item>has grown more accepting of the inevitable loss of life</item>
     </string-array>

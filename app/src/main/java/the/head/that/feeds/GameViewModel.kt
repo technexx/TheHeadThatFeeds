@@ -29,15 +29,25 @@ class GameViewModel : ViewModel() {
     fun setGridAIIntegrity(value: Int) { mutableGridAIIntegrityLevel.value = value }
     fun getGridAIIntegrity() : Int { return gridAIIntegrityLevel.value!! }
 
-    val mutableAggression = MutableLiveData<Int>()
-    val aggression : LiveData<Int> get() = mutableAggression
-    fun setAggression(value: Int) { mutableAggression.value = value }
-    fun getAggression() : Int { return aggression.value!! }
+    val mutableFriendlyAIAggression = MutableLiveData<Int>()
+    val friendlyAIAggression : LiveData<Int> get() = mutableFriendlyAIAggression
+    fun setFriendlyAIAggression(value: Int) { mutableFriendlyAIAggression.value = value }
+    fun getFriendlyAIAggression() : Int { return friendlyAIAggression.value!! }
 
-    val mutableEmpathy = MutableLiveData<Int>()
-    val empathy : LiveData<Int> get() = mutableEmpathy
-    fun setEmpathy(value: Int) { mutableEmpathy.value = value }
-    fun getEmpathy() : Int { return empathy.value!! }
+    val friendlyAIMutableEmpathy = MutableLiveData<Int>()
+    val friendlyAIEmpathy : LiveData<Int> get() = friendlyAIMutableEmpathy
+    fun setFriendlyAIEmpathy(value: Int) { friendlyAIMutableEmpathy.value = value }
+    fun getFriendlyAIEmpathy() : Int { return friendlyAIEmpathy.value!! }
+
+    val mutableGridAIAggression = MutableLiveData<Int>()
+    val gridAIAggression : LiveData<Int> get() = mutableGridAIAggression
+    fun setGridAIAggression(value: Int) { mutableGridAIAggression.value = value }
+    fun getGridAIAggression() : Int { return gridAIAggression.value!! }
+
+    val gridAIMutableEmpathy = MutableLiveData<Int>()
+    val gridAIEmpathy : LiveData<Int> get() = gridAIMutableEmpathy
+    fun setGridAIEmpathy(value: Int) { gridAIMutableEmpathy.value = value }
+    fun getGridAIEmpathy() : Int { return gridAIEmpathy.value!! }
 
     val mutableFighters = MutableLiveData<Int>()
     val fighters : LiveData<Int> get() = mutableFighters

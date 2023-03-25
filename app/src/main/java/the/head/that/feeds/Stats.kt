@@ -6,8 +6,8 @@ class Stats {
     companion object testComp {
         var friendlyAIIntegrity : Int = 0
         var friendlyAIEvolutionLevel : Int = 0
-        var aggression : Int = 0
-        var empathy : Int = 0
+        var friendlyAIAggression : Int = 0
+        var friendlyAIEmpathy : Int = 0
         var programmers : Int = 0
         var fighters : Int = 0
         var civilians : Double = 0.0
@@ -20,8 +20,8 @@ class Stats {
         fun setDefaultStatValues() {
             friendlyAIIntegrity = 100
             friendlyAIEvolutionLevel = 0
-            aggression = 20
-            empathy = 20
+            friendlyAIAggression = 20
+            friendlyAIEmpathy = 20
             programmers = 100
             fighters = 100
             civilians = 42.0
