@@ -123,24 +123,35 @@ private fun saveStringToSharedPref(editor: SharedPreferences.Editor, key: String
 private fun setStatsClassValuesFromSharedPreferences() {
     Stats.friendlyAIEvolutionLevel = sharedPreferences.getInt("friendlyAIEvolutionLevel", 0)
     Stats.friendlyAIIntegrity = sharedPreferences.getInt("friendlyAIIntegrity", 100)
-    Stats.gridAIIntegrity = sharedPreferences.getInt("gridAIIntegrity", 100)
-    Stats.gridAITrackingLevel = sharedPreferences.getInt("gridAITrackingLevel", 0)
     Stats.friendlyAIAggression = sharedPreferences.getInt("friendlyAIAggression", 20)
     Stats.friendlyAIEmpathy = sharedPreferences.getInt("friendlyAIEmpathy", 20)
+
+    Stats.gridAIEvolutionLevel = sharedPreferences.getInt("gridAIEvolution", 900)
+    Stats.gridAIIntegrity = sharedPreferences.getInt("gridAIIntegrity", 100)
+    Stats.gridAIAggression = sharedPreferences.getInt("gridAIAggression", 100)
+    Stats.gridAIEmpathy = sharedPreferences.getInt("gridAIEmpathy", 0)
+    Stats.gridAITrackingLevel = sharedPreferences.getInt("gridAITrackingLevel", 0)
+
     Stats.programmers = sharedPreferences.getInt("programmers", 1000)
     Stats.fighters = sharedPreferences.getInt("fighters", 1000)
     Stats.civilians = sharedPreferences.getString("civilians", "42.0")!!.toDouble()
+
     Stats.currentDay = sharedPreferences.getInt("currentDay", 1)
 }
 
 private fun setViewModelValuesFromStatsClass() {
     gameViewModel.setFriendlyAIEvolutionLevel(Stats.friendlyAIEvolutionLevel)
     gameViewModel.setFriendlyAIIntegrity(Stats.friendlyAIIntegrity)
+    gameViewModel.setFriendlyAIAggression(Stats.friendlyAIAggression)
+    gameViewModel.setFriendlyAIEmpathy(Stats.friendlyAIEmpathy)
+
+    gameViewModel.setGridAIEvolutionLevel(Stats.gridAIEvolutionLevel)
+    gameViewModel.setGridAIAggression(Stats.gridAIAggression)
+    gameViewModel.setGridAIEmpathy(Stats.gridAIEmpathy)
     gameViewModel.setGridAIIntegrity(Stats.gridAIIntegrity)
     gameViewModel.setGridAITrackingLevel(Stats.gridAITrackingLevel)
 
-    gameViewModel.setFriendlyAIAggression(Stats.friendlyAIAggression)
-    gameViewModel.setFriendlyAIEmpathy(Stats.friendlyAIEmpathy)
+
     gameViewModel.setProgrammers(Stats.programmers)
     gameViewModel.setFighters(Stats.fighters)
     gameViewModel.setCivilians(Stats.civilians)
@@ -158,7 +169,6 @@ class GameActivity : ComponentActivity() {
         sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE)
         sharedPrefEditor = sharedPreferences.edit()
         statusBarViews = StatusBarViews(this)
-        Stats.setDefaultStatValues()
         events = Events(this)
 
         setStatsClassValuesFromSharedPreferences()

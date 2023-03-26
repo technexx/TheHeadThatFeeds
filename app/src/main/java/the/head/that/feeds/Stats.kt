@@ -18,23 +18,5 @@ class Stats {
         var civilians : Double = 0.0
 
         var currentDay : Int = 0
-
-        fun setDefaultStatValues() {
-            friendlyAIIntegrity = 100
-            friendlyAIEvolutionLevel = 0
-            friendlyAIAggression = 20
-            friendlyAIEmpathy = 20
-
-            gridAIIntegrity = 100
-            gridAITrackingLevel = 0
-            gridAIAggression = 100
-            gridAIEmpathy = 0
-            gridAIEvolutionLevel = 900
-
-            programmers = 100
-            fighters = 100
-            civilians = 42.0
-        }
     }
-
 }
