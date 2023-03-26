@@ -6,7 +6,7 @@ import kotlin.math.roundToInt
 class StatusBarViews (context: Context) {
     private val mContext = context
 
-    fun friendlyAILevelString(level: Int) : String {
+    fun aiLevelString(level: Int) : String {
         val levelArray = mContext.resources.getStringArray(R.array.player_ai_levels)
         when (level) {
             in 0..99 -> return levelArray[0]
@@ -24,7 +24,7 @@ class StatusBarViews (context: Context) {
         }
     }
 
-    fun friendlyAILevelColor(level: Int) : Int {
+    fun aiLevelColor(level: Int) : Int {
         when (level) {
             in 0..90 -> return R.color.yellow_2
             in 100..199 -> return R.color.very_light_green

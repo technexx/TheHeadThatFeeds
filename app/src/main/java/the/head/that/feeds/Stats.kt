@@ -8,12 +8,14 @@ class Stats {
         var friendlyAIEvolutionLevel : Int = 0
         var friendlyAIAggression : Int = 0
         var friendlyAIEmpathy : Int = 0
+        var gridAIIntegrity : Int = 0
+        var gridAIEvolutionLevel : Int = 0
+        var gridAITrackingLevel : Int = 0
+        var gridAIAggression : Int = 0
+        var gridAIEmpathy : Int = 0
         var programmers : Int = 0
         var fighters : Int = 0
         var civilians : Double = 0.0
-
-        var gridAIIntegrity : Int = 0
-        var gridAITrackingLevel : Int = 0
 
         var currentDay : Int = 0
 
@@ -22,12 +24,16 @@ class Stats {
             friendlyAIEvolutionLevel = 0
             friendlyAIAggression = 20
             friendlyAIEmpathy = 20
-            programmers = 100
-            fighters = 100
-            civilians = 42.0
 
             gridAIIntegrity = 100
             gridAITrackingLevel = 0
+            gridAIAggression = 100
+            gridAIEmpathy = 0
+            gridAIEvolutionLevel = 900
+
+            programmers = 100
+            fighters = 100
+            civilians = 42.0
         }
     }
 
