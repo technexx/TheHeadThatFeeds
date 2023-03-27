@@ -5,10 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
-    var friendlyAILevelProgress = 0
-    var enemyAILevelProgress = 0
-    var enemyActivityMultiplier = 0
-
     val mutableFriendlyAIEvolutionLevel = MutableLiveData<Int>()
     val friendlyAIEvolutionLevel : LiveData<Int> get() = mutableFriendlyAIEvolutionLevel
     fun setFriendlyAIEvolutionLevel(value: Int) { mutableFriendlyAIEvolutionLevel.value = value }
@@ -28,6 +24,17 @@ class GameViewModel : ViewModel() {
     val friendlyAIEmpathy : LiveData<Int> get() = friendlyAIMutableEmpathy
     fun setFriendlyAIEmpathy(value: Int) { friendlyAIMutableEmpathy.value = value }
     fun getFriendlyAIEmpathy() : Int { return friendlyAIEmpathy.value!! }
+
+    val mutableFighters = MutableLiveData<Int>()
+    val fighters : LiveData<Int> get() = mutableFighters
+    fun setFighters(value: Int) { mutableFighters.value = value }
+    fun getFighters() : Int { return fighters.value!! }
+
+    val mutableProgrammers = MutableLiveData<Int>()
+    val programmers : LiveData<Int> get() = mutableProgrammers
+    fun setProgrammers(value: Int) { mutableProgrammers.value = value }
+    fun getProgrammers() : Int { return programmers.value!! }
+
 
     val mutableGridAIEvolutionLevel = MutableLiveData<Int>()
     val gridAIEvolutionLevel : LiveData<Int> get() = mutableGridAIEvolutionLevel
@@ -54,20 +61,16 @@ class GameViewModel : ViewModel() {
     fun setGridAIEmpathy(value: Int) { gridAIMutableEmpathy.value = value }
     fun getGridAIEmpathy() : Int { return gridAIEmpathy.value!! }
 
-    val mutableFighters = MutableLiveData<Int>()
-    val fighters : LiveData<Int> get() = mutableFighters
-    fun setFighters(value: Int) { mutableFighters.value = value }
-    fun getFighters() : Int { return fighters.value!! }
-
-    val mutableProgrammers = MutableLiveData<Int>()
-    val programmers : LiveData<Int> get() = mutableProgrammers
-    fun setProgrammers(value: Int) { mutableProgrammers.value = value }
-    fun getProgrammers() : Int { return programmers.value!! }
+    val mutableArmy = MutableLiveData<Double>()
+    val army : LiveData<Double> get() = mutableArmy
+    fun setArmy(value: Double) { mutableArmy.value = value }
+    fun getArmy() : Double { return army.value!! }
 
     val mutableCivilians = MutableLiveData<Double>()
     val civilians : LiveData<Double> get() = mutableCivilians
-    fun setCivilians (value: Double) { mutableCivilians.value = value }
+    fun setCivilians(value: Double) { mutableCivilians.value = value }
     fun getCivilians() : Double { return civilians.value!! }
+
 
     val mutableCurrentDay = MutableLiveData<Int>()
     val currentDay : LiveData<Int> get() = mutableCurrentDay

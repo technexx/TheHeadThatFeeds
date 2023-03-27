@@ -54,7 +54,7 @@ class StatusBarViews (context: Context) {
 
     fun gridAIActionLevelColor(level: Int) : Int {
         when (level) {
-            in 0..9 -> return R.color.white
+            in 0..9 -> return R.color.lighter_green
             in 10..19 -> return R.color.light_yellow
             in 20..29 -> return R.color.mid_yellow
             in 30..39 -> return R.color.orange
