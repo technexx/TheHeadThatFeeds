@@ -5,6 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class GameViewModel : ViewModel() {
+    val mutableFriendlyAIMood = MutableLiveData<Int>()
+    val friendlyAIMood : LiveData<Int> get() = mutableFriendlyAIMood
+    fun setFriendlyAIMood(value: Int) { mutableFriendlyAIMood.value = value }
+    fun getFriendlyAIMood() : Int { return friendlyAIMood.value!! }
+
     val mutableFriendlyAIEvolutionLevel = MutableLiveData<Int>()
     val friendlyAIEvolutionLevel : LiveData<Int> get() = mutableFriendlyAIEvolutionLevel
     fun setFriendlyAIEvolutionLevel(value: Int) { mutableFriendlyAIEvolutionLevel.value = value }
@@ -36,15 +41,15 @@ class GameViewModel : ViewModel() {
     fun getProgrammers() : Int { return programmers.value!! }
 
 
-    val mutableGridAIEvolutionLevel = MutableLiveData<Int>()
-    val gridAIEvolutionLevel : LiveData<Int> get() = mutableGridAIEvolutionLevel
-    fun setGridAIEvolutionLevel(value: Int) { mutableGridAIEvolutionLevel.value = value }
-    fun getGridAIEvolutionLevel() : Int { return gridAIEvolutionLevel.value!! }
-
     val mutableGridAITrackingLevel = MutableLiveData<Int>()
     val gridAITrackingLevel : LiveData<Int> get() = mutableGridAITrackingLevel
     fun setGridAITrackingLevel(value: Int) { mutableGridAITrackingLevel.value = value }
     fun getGridAITrackingLevel() : Int { return gridAITrackingLevel.value!! }
+
+    val mutableGridAIEvolutionLevel = MutableLiveData<Int>()
+    val gridAIEvolutionLevel : LiveData<Int> get() = mutableGridAIEvolutionLevel
+    fun setGridAIEvolutionLevel(value: Int) { mutableGridAIEvolutionLevel.value = value }
+    fun getGridAIEvolutionLevel() : Int { return gridAIEvolutionLevel.value!! }
 
     val mutableGridAIIntegrityLevel = MutableLiveData<Int>()
     val gridAIIntegrityLevel : LiveData<Int> get() = mutableGridAIIntegrityLevel
@@ -61,10 +66,10 @@ class GameViewModel : ViewModel() {
     fun setGridAIEmpathy(value: Int) { gridAIMutableEmpathy.value = value }
     fun getGridAIEmpathy() : Int { return gridAIEmpathy.value!! }
 
-    val mutableArmy = MutableLiveData<Double>()
-    val army : LiveData<Double> get() = mutableArmy
-    fun setArmy(value: Double) { mutableArmy.value = value }
-    fun getArmy() : Double { return army.value!! }
+    val mutableMilitary = MutableLiveData<Double>()
+    val military : LiveData<Double> get() = mutableMilitary
+    fun setMilitary(value: Double) { mutableMilitary.value = value }
+    fun getMilitary() : Double { return military.value!! }
 
     val mutableCivilians = MutableLiveData<Double>()
     val civilians : LiveData<Double> get() = mutableCivilians

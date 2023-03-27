@@ -36,7 +36,7 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
     //Todo: Can do same stats for both AIs. Grid starts at 100% friendlyAIAggression, 0% empathy. Can try to "turn" it.
     //Todo: Friendly AI attacks, and Grid AI network attacks, should roll intelligences against each other.
     //Todo: Higher aggression means more civilian deaths (for both AIs).
-    //Todo: Higher empathy for Grid AI can reduce army size.
+    //Todo: Higher empathy for Grid AI can reduce military size.
     //Todo: Tracking max level can be reduced by aggression level.
 
 private lateinit var gameViewModel : GameViewModel
@@ -48,6 +48,11 @@ private lateinit var statusBarViews : StatusBarViews
 private lateinit var events : Events
 
 private fun setViewModelObservers(lifeCycleOwner: LifecycleOwner) {
+    gameViewModel.friendlyAIMood.observe(lifeCycleOwner) {
+        Stats.friendlyAIMood = gameViewModel.getFriendlyAIMood()
+        saveIntToSharedPref(sharedPrefEditor, "friendlyAIMood", Stats.friendlyAIMood)
+    }
+
     gameViewModel.friendlyAIEvolutionLevel.observe(lifeCycleOwner) {
         Stats.friendlyAIEvolutionLevel = gameViewModel.getFriendlyAIEvolutionLevel()
         saveIntToSharedPref(sharedPrefEditor,"friendlyAIEvolutionLevel", Stats.friendlyAIEvolutionLevel)
@@ -55,7 +60,7 @@ private fun setViewModelObservers(lifeCycleOwner: LifecycleOwner) {
     }
     gameViewModel.friendlyAIIntegrityLevel.observe(lifeCycleOwner) {
         Stats.friendlyAIIntegrity = gameViewModel.getFriendlyAIIntegrity()
-        saveIntToSharedPref(sharedPrefEditor,"friendlyAIEvolutionLevel", Stats.friendlyAIIntegrity)
+        saveIntToSharedPref(sharedPrefEditor,"friendlyAIIntegrity", Stats.friendlyAIIntegrity)
     }
 
     gameViewModel.friendlyAIAggression.observe(lifeCycleOwner) {
@@ -103,9 +108,9 @@ private fun setViewModelObservers(lifeCycleOwner: LifecycleOwner) {
         saveIntToSharedPref(sharedPrefEditor, "gridAIEmpathy", Stats.gridAIEmpathy)
     }
 
-    gameViewModel.army.observe(lifeCycleOwner) {
-        Stats.army = gameViewModel.getArmy()
-        saveStringToSharedPref(sharedPrefEditor, "army", Stats.army.toString())
+    gameViewModel.military.observe(lifeCycleOwner) {
+        Stats.military = gameViewModel.getMilitary()
+        saveStringToSharedPref(sharedPrefEditor, "military", Stats.military.toString())
     }
 
     gameViewModel.civilians.observe(lifeCycleOwner) {
@@ -130,6 +135,7 @@ private fun saveStringToSharedPref(editor: SharedPreferences.Editor, key: String
 }
 
 private fun setStatsClassValuesFromSharedPreferences() {
+    Stats.friendlyAIMood = sharedPreferences.getInt("friendlyAIMood", 0)
     Stats.friendlyAIEvolutionLevel = sharedPreferences.getInt("friendlyAIEvolutionLevel", 0)
     Stats.friendlyAIIntegrity = sharedPreferences.getInt("friendlyAIIntegrity", 100)
     Stats.friendlyAIAggression = sharedPreferences.getInt("friendlyAIAggression", 20)
@@ -142,26 +148,27 @@ private fun setStatsClassValuesFromSharedPreferences() {
     Stats.gridAIIntegrity = sharedPreferences.getInt("gridAIIntegrity", 100)
     Stats.gridAIAggression = sharedPreferences.getInt("gridAIAggression", 100)
     Stats.gridAIEmpathy = sharedPreferences.getInt("gridAIEmpathy", 0)
-    Stats.army = sharedPreferences.getString("army", "420.0")!!.toDouble()
+    Stats.military = sharedPreferences.getString("military", "840.0")!!.toDouble()
     Stats.civilians = sharedPreferences.getString("civilians", "42.0")!!.toDouble()
 
     Stats.currentDay = sharedPreferences.getInt("currentDay", 1)
 }
 
 private fun setViewModelValuesFromStatsClass() {
+    gameViewModel.setFriendlyAIMood(Stats.friendlyAIMood)
     gameViewModel.setFriendlyAIEvolutionLevel(Stats.friendlyAIEvolutionLevel)
     gameViewModel.setFriendlyAIIntegrity(Stats.friendlyAIIntegrity)
     gameViewModel.setFriendlyAIAggression(Stats.friendlyAIAggression)
     gameViewModel.setFriendlyAIEmpathy(Stats.friendlyAIEmpathy)
+    gameViewModel.setProgrammers(Stats.programmers)
+    gameViewModel.setFighters(Stats.fighters)
 
     gameViewModel.setGridAIEvolutionLevel(Stats.gridAIEvolutionLevel)
     gameViewModel.setGridAIAggression(Stats.gridAIAggression)
     gameViewModel.setGridAIEmpathy(Stats.gridAIEmpathy)
     gameViewModel.setGridAIIntegrity(Stats.gridAIIntegrity)
     gameViewModel.setGridAITrackingLevel(Stats.gridAITrackingLevel)
-
-    gameViewModel.setProgrammers(Stats.programmers)
-    gameViewModel.setFighters(Stats.fighters)
+    gameViewModel.setMilitary(Stats.military)
     gameViewModel.setCivilians(Stats.civilians)
 
     gameViewModel.setCurrentDay(Stats.currentDay)
@@ -276,16 +283,16 @@ fun StatusBarLeftRowColumn() {
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Text(text = "Aggression: $friendlyAIAggression%", color = Color.White, fontSize = 16.sp)
+        Text(text = "Aggression: $friendlyAIAggression%", color = Color.White, fontSize = 15.sp)
         Spacer(modifier = Modifier.height(5.dp))
-        Text(text = "Empathy: $friendlyAIEmpathy%", color = Color.White, fontSize = 16.sp)
+        Text(text = "Empathy: $friendlyAIEmpathy%", color = Color.White, fontSize = 15.sp)
         Spacer(modifier = Modifier.height(5.dp))
-        Text(text = " Intelligence: " + statusBarViews.aiLevelString(friendlyAILevel), color = colorResource(id = statusBarViews.aiLevelColor(friendlyAILevel)), fontSize = 16.sp)
+        Text(text = " Intelligence: " + statusBarViews.aiLevelString(friendlyAILevel), color = colorResource(id = statusBarViews.aiLevelColor(friendlyAILevel)), fontSize = 15.sp)
 
         Spacer(modifier = Modifier.weight(1.0f))
 
-        Text(text = "Hackers: $programmers", color = Color.White, fontSize = 16.sp)
-        Text(text = "Fighters: $fighters", color = Color.White, fontSize = 16.sp)
+        Text(text = "Hackers: $programmers", color = Color.White, fontSize = 15.sp)
+        Text(text = "Fighters: $fighters", color = Color.White, fontSize = 15.sp)
     }
 }
 
@@ -307,7 +314,8 @@ fun StatusBarRightRowColumn() {
     val empathy : Int by gameViewModel.gridAIEmpathy.observeAsState(0)
     val evolutionLevel : Int by gameViewModel.gridAIEvolutionLevel.observeAsState(0)
     val gridAITrackingLevel : Int by gameViewModel.gridAITrackingLevel.observeAsState(0)
-    val civilians : Double by gameViewModel.civilians.observeAsState(42.0)
+    val military : Double by gameViewModel.military.observeAsState(0.0)
+    val civilians : Double by gameViewModel.civilians.observeAsState(0.0)
 
     Column(modifier = Modifier
         .fillMaxWidth(),
@@ -315,22 +323,25 @@ fun StatusBarRightRowColumn() {
     ) {
         Text(text = "Grid AI", color = colorResource(id = R.color.android_red), fontSize = 17.sp)
 
+        Spacer(modifier = Modifier.height(0.dp))
+
+        Text(text = statusBarViews.gridAIActionLevelString(gridAITrackingLevel), color = colorResource(id = statusBarViews.actionLevelColor(gridAITrackingLevel)), fontSize = 14.sp)
+
         Spacer(modifier = Modifier.height(10.dp))
 
         LinearProgressIndicator(progress = statusBarViews.integrityLevelAsFloat(gameViewModel.getGridAIIntegrity()), color = Color.White)
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Text(text = "Aggression: $aggression%", color = Color.White, fontSize = 16.sp)
+        Text(text = "Aggression: $aggression%", color = Color.White, fontSize = 15.sp)
         Spacer(modifier = Modifier.height(5.dp))
-        Text(text = "Empathy: $empathy%", color = Color.White, fontSize = 16.sp)
+        Text(text = "Empathy: $empathy%", color = Color.White, fontSize = 15.sp)
         Spacer(modifier = Modifier.height(5.dp))
-        Text(text = " Intelligence: " + statusBarViews.aiLevelString(evolutionLevel), color = colorResource(id = statusBarViews.aiLevelColor(evolutionLevel)), fontSize = 16.sp)
+        Text(text = " Intelligence: " + statusBarViews.aiLevelString(evolutionLevel), color = colorResource(id = statusBarViews.aiLevelColor(evolutionLevel)), fontSize = 15.sp)
         Spacer(modifier = Modifier.weight(1.0f))
 
-        Text(text = statusBarViews.gridAIActionLevelString(gridAITrackingLevel), color = colorResource(id = statusBarViews.gridAIActionLevelColor(gridAITrackingLevel)), fontSize = 16.sp)
-
-        Text(text = "Civilians (billions): $civilians", color = Color.White, fontSize = 16.sp)
+        Text(text = "Military (millions): $military", color = Color.White, fontSize = 15.sp)
+        Text(text = "Civilians (billions): $civilians", color = Color.White, fontSize = 15.sp)
     }
 }
 

@@ -7,7 +7,7 @@ class StatusBarViews (context: Context) {
     private val mContext = context
 
     fun aiLevelString(level: Int) : String {
-        val levelArray = mContext.resources.getStringArray(R.array.player_ai_levels)
+        val levelArray = mContext.resources.getStringArray(R.array.ai_evolution_levels)
         when (level) {
             in 0..99 -> return levelArray[0]
             in 100..199 -> return levelArray[1]
@@ -42,7 +42,7 @@ class StatusBarViews (context: Context) {
     }
 
     fun gridAIActionLevelString(level: Int) : String {
-        val levelArray = mContext.resources.getStringArray(R.array.enemy_ai_levels)
+        val levelArray = mContext.resources.getStringArray(R.array.grid_ai_tracking_levels)
         when (level) {
             in 0..9 -> return levelArray[0]
             in 10..19 -> return levelArray[1]
@@ -52,7 +52,7 @@ class StatusBarViews (context: Context) {
         }
     }
 
-    fun gridAIActionLevelColor(level: Int) : Int {
+    fun actionLevelColor(level: Int) : Int {
         when (level) {
             in 0..9 -> return R.color.lighter_green
             in 10..19 -> return R.color.light_yellow

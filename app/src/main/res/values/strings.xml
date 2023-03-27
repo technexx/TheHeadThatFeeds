@@ -19,7 +19,7 @@
     <string name="intro_7_response">Yes! I\'ve told you. What does that even…</string>
     <string name="intro_8">We have an AI. Our <i>own</i> AI. It\'s a fraction of The Grid\'s but learning more every day. We are going to war, friend.</string>
 
-    <string-array name="player_ai_levels">
+    <string-array name="ai_evolution_levels">
         <item>Ant</item>
         <item>Pigeon</item>
         <item>Rat</item>
@@ -34,7 +34,15 @@
         <item>Meta-Human</item>
     </string-array>
 
-    <string-array name="enemy_ai_levels">
+    <string-array name="friendly_ai_mood_levels">
+        <item>Uninspired</item>
+        <item>Curious</item>
+        <item>Optimistic</item>
+        <item>Excited</item>
+        <item>Zealous</item>
+    </string-array>
+
+    <string-array name="grid_ai_tracking_levels">
         <item>Indifferent</item>
         <item>Wary</item>
         <item>Watchful</item>

@@ -4,6 +4,7 @@ package the.head.that.feeds
 
 class Stats {
     companion object testComp {
+        var friendlyAIMood : Int = 0
         var friendlyAIIntegrity : Int = 0
         var friendlyAIEvolutionLevel : Int = 0
         var friendlyAIAggression : Int = 0
@@ -16,7 +17,7 @@ class Stats {
         var gridAIEvolutionLevel : Int = 0
         var gridAIAggression : Int = 0
         var gridAIEmpathy : Int = 0
-        var army : Double = 0.0
+        var military : Double = 0.0
         var civilians : Double = 0.0
 
         var currentDay : Int = 0
