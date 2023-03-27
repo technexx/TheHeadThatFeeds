@@ -41,6 +41,17 @@ class StatusBarViews (context: Context) {
         }
     }
 
+    fun friendlyAIMoodLevelString(level: Int) : String {
+        val levelArray = mContext.resources.getStringArray(R.array.friendly_ai_mood_levels)
+        when (level) {
+            in 0..9 -> return levelArray[0]
+            in 10..19 -> return levelArray[1]
+            in 20..29 -> return levelArray[2]
+            in 30..39 -> return levelArray[3]
+            else -> return levelArray[4]
+        }
+    }
+
     fun gridAIActionLevelString(level: Int) : String {
         val levelArray = mContext.resources.getStringArray(R.array.grid_ai_tracking_levels)
         when (level) {

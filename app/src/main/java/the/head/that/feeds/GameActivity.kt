@@ -23,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.LifecycleOwner
+import the.head.that.feeds.Stats.testComp.gridAITrackingLevel
 import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 
 //Todo: For new game: Start from story you're interested in, and build up from there.
@@ -265,7 +266,8 @@ fun StatusBarLeftRow(width: Int) {
 
 @Composable
 fun StatusBarLeftRowColumn() {
-    val friendlyAILevel : Int by gameViewModel.friendlyAIEvolutionLevel.observeAsState(0)
+    val friendlyAIMoodLevel : Int by gameViewModel.friendlyAIMood.observeAsState(0)
+    val friendlyAIEvolutionLevel : Int by gameViewModel.friendlyAIEvolutionLevel.observeAsState(0)
     val friendlyAIAggression : Int by gameViewModel.friendlyAIAggression.observeAsState(0)
     val friendlyAIEmpathy : Int by gameViewModel.friendlyAIEmpathy.observeAsState(0)
     val programmers: Int by gameViewModel.programmers.observeAsState(0)
@@ -275,9 +277,10 @@ fun StatusBarLeftRowColumn() {
         .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Resistance AI", color = colorResource(id = R.color.android_green), fontSize = 17.sp)
+        Text(text = "Resistance AI", color = colorResource(id = R.color.android_green), fontSize = 16.sp)
+        Text(text = statusBarViews.friendlyAIMoodLevelString(friendlyAIMoodLevel), color = colorResource(id = statusBarViews.actionLevelColor(friendlyAIMoodLevel)), fontSize = 14.sp)
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
         LinearProgressIndicator(progress = statusBarViews.integrityLevelAsFloat(gameViewModel.getFriendlyAIIntegrity()), color = Color.White)
 
@@ -287,7 +290,7 @@ fun StatusBarLeftRowColumn() {
         Spacer(modifier = Modifier.height(5.dp))
         Text(text = "Empathy: $friendlyAIEmpathy%", color = Color.White, fontSize = 15.sp)
         Spacer(modifier = Modifier.height(5.dp))
-        Text(text = " Intelligence: " + statusBarViews.aiLevelString(friendlyAILevel), color = colorResource(id = statusBarViews.aiLevelColor(friendlyAILevel)), fontSize = 15.sp)
+        Text(text = " Intelligence: " + statusBarViews.aiLevelString(friendlyAIEvolutionLevel), color = colorResource(id = statusBarViews.aiLevelColor(friendlyAIEvolutionLevel)), fontSize = 15.sp)
 
         Spacer(modifier = Modifier.weight(1.0f))
 
@@ -321,13 +324,11 @@ fun StatusBarRightRowColumn() {
         .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Grid AI", color = colorResource(id = R.color.android_red), fontSize = 17.sp)
-
-        Spacer(modifier = Modifier.height(0.dp))
+        Text(text = "Grid AI", color = colorResource(id = R.color.android_red), fontSize = 16.sp)
 
         Text(text = statusBarViews.gridAIActionLevelString(gridAITrackingLevel), color = colorResource(id = statusBarViews.actionLevelColor(gridAITrackingLevel)), fontSize = 14.sp)
 
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(5.dp))
 
         LinearProgressIndicator(progress = statusBarViews.integrityLevelAsFloat(gameViewModel.getGridAIIntegrity()), color = Color.White)
 

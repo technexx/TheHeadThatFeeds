@@ -35,7 +35,7 @@
     </string-array>
 
     <string-array name="friendly_ai_mood_levels">
-        <item>Uninspired</item>
+        <item>Indifferent</item>
         <item>Curious</item>
         <item>Optimistic</item>
         <item>Excited</item>
