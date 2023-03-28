@@ -37,6 +37,8 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
     //Todo: Higher empathy for Grid AI can reduce military size.
     //Todo: Maximum Grid AI tracking level can be reduced by aggression level.
 
+//Todo: Player attacks roll fighters/hackers against Grid AI awareness.
+
 //Todo: Should be a net-loss with continuation of days, to encourage player to be proactive.
 //Todo: Can have modular endings like Man/Machine
 

@@ -12,28 +12,26 @@ class Events(context : Context) {
     val RANDOM_GOOD = 11
     val RANDOM_BAD = 12
 
-    val PLAYER_LOW_ATTACK = 21
-    val PLAYER_MEDIUM_ATTACK = 22
-    val PLAYER_HIGH_ATTACK = 23
-    val FRIENDLY_AI_LOW_ATTACK = 24
-    val FRIENDLY_AI_MEDIUM_ATTACK = 25
-    val FRIENDLY_AI_HIGH_ATTACK = 26
+    val FRIENDLY_AI_DIRECTED_NETWORK_ATTACK = 21
+    val FRIENDLY_AI_DIRECTED_MILITARY_ATTACK = 22
 
-    val GRID_AI_LOW_NETWORK_ATTACK = 31
-    val GRID_AI_LOW_PHYSICAL_ATTACK = 32
-    val GRID_AI_HIGH_NETWORK_ATTACK = 33
-    val GRID_AI_HIGH_PHYSICAL_ATTACK = 34
+    val FRIENDLY_AI_AUTONOMOUS_NETWORK_ATTACK = 31
+    val FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK = 32
 
-    val PLAYER_RECRUITMENT = 41
-    val FRIENDLY_AI_RECRUITMENT = 42
+    val PLAYER_NETWORK_ATTACK = 41
+    val PLAYER_MILITARY_ATTACK = 42
 
-    val FRIENDLY_AI_INTEGRITY_REPAIR = 51
-    val GRID_AI_INTEGRITY_REPAIR = 52
+    val GRID_AI_LOW_NETWORK_ATTACK = 51
+    val GRID_AI_LOW_PHYSICAL_ATTACK = 52
+    val GRID_AI_HIGH_NETWORK_ATTACK = 53
+    val GRID_AI_HIGH_PHYSICAL_ATTACK = 54
 
-    val FRIENDLY_AI_STAT_CHANGE = 61
+    val FRIENDLY_AI_RECRUITMENT = 61
 
-    val FRIENDLY_AI_EVOLUTION_CHOICE = 71
-    val FRIENDLY_AI_EVOLUTION_NO_CHOICE = 72
+    val FRIENDLY_AI_STAT_CHANGE = 71
+
+    val FRIENDLY_AI_EVOLUTION_CHOICE = 81
+    val FRIENDLY_AI_EVOLUTION_NO_CHOICE = 82
 
     var randomEventWeight = 0
     var playerAttackWeight = 0
@@ -44,17 +42,6 @@ class Events(context : Context) {
     var friendlyAIEvolutionLevelProgressRepairWeight = 0
     var gridAIIntegrityRepairWeight = 0
 
-    val randomGoodEventArray = mContext.resources.getStringArray(R.array.random_good_event_array)
-    val randomBadEventArray = mContext.resources.getStringArray(R.array.random_bad_event_array)
-
-    val enemyTypesArray = mContext.resources.getStringArray(R.array.enemy_types)
-    val destructionVerbsArray = mContext.resources.getStringArray(R.array.destruction_synonyms)
-    val gridAIMalwareArray = mContext.resources.getStringArray(R.array.enemy_ai_malware)
-    val proAggressionArray = mContext.resources.getStringArray(R.array.pro_friendlyAIAggression_triggers)
-    val antiAggressionArray = mContext.resources.getStringArray(R.array.anti_friendlyAIAggression_triggers)
-    val proEmpathyArray = mContext.resources.getStringArray(R.array.pro_friendlyAIEmpathy_triggers)
-    val antiEmpathyArray = mContext.resources.getStringArray(R.array.anti_friendlyAIEmpathy_triggers)
-
     var pastEventsArray = ArrayList<Int>()
 
     fun eventString(eventType: Int) : String {
@@ -62,23 +49,21 @@ class Events(context : Context) {
             RANDOM_GOOD -> return (randomStringFromArray(R.array.random_good_event_array))
             RANDOM_BAD -> return (randomStringFromArray(R.array.random_bad_event_array))
 
-            PLAYER_LOW_ATTACK -> return mContext.getString(R.string.player_attack_low_risk)
-            PLAYER_MEDIUM_ATTACK -> return mContext.getString(R.string.player_attack_medium_risk)
-            PLAYER_HIGH_ATTACK -> return mContext.getString(R.string.player_attack_high_risk)
-            FRIENDLY_AI_LOW_ATTACK -> return mContext.getString(R.string.friendly_ai_attack_low_risk)
-            FRIENDLY_AI_MEDIUM_ATTACK -> return mContext.getString(R.string.friendly_ai_attack_medium_risk)
-            FRIENDLY_AI_HIGH_ATTACK -> return mContext.getString(R.string.friendly_ai_attack_high_risk)
+            FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_network_attack)
+            FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_military_attack)
+
+            FRIENDLY_AI_AUTONOMOUS_NETWORK_ATTACK -> return mContext.getString(R.string.friendly_ai_autonomous_network_attack)
+            FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK -> return mContext.getString(R.string.friendly_ai_autonomous_military_attack)
+
+            PLAYER_NETWORK_ATTACK -> return mContext.getString(R.string.player_network_attack)
+            PLAYER_MILITARY_ATTACK -> return mContext.getString(R.string.player_military_attack)
 
             GRID_AI_LOW_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack_low_threat,  randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.enemy_ai_malware))
             GRID_AI_LOW_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack_low_threat, randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.destruction_synonyms))
             GRID_AI_HIGH_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack_high_threat, randomStringFromArray(R.array.enemy_types))
             GRID_AI_HIGH_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack_high_threat, randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.destruction_synonyms))
 
-            PLAYER_RECRUITMENT -> return mContext.getString(R.string.physical_recruitment)
             FRIENDLY_AI_RECRUITMENT -> return mContext.getString(R.string.friendly_ai_recruitment)
-
-            FRIENDLY_AI_INTEGRITY_REPAIR -> return mContext.getString(R.string.friendly_ai_integrity_repair)
-            GRID_AI_INTEGRITY_REPAIR -> return mContext.getString(R.string.grid_ai_integrity_repair)
 
             FRIENDLY_AI_STAT_CHANGE -> return mContext.getString(R.string.friendly_ai_stat_altering_event)
 
@@ -133,7 +118,7 @@ class Events(context : Context) {
     }
 
     private fun eventsAsIntArray() : ArrayList<Int> {
-        return ArrayList(listOf(randomEvent(), playerAttack(), gridAIAttack(), playerRecruitment(), friendlyAIRecruitment(), friendlyAIStatChange(), playerIntegrityRepair(), gridAIIntegrityRepair()))
+        return ArrayList(listOf(randomEvent(), playerAttack(), gridAIAttack(), friendlyAIRecruitment(), friendlyAIStatChange()))
     }
 
     private fun eventsWeightArray() : ArrayList<Int> {
@@ -160,16 +145,12 @@ class Events(context : Context) {
 
     fun randomEvent() : Int { return (RANDOM_GOOD..RANDOM_BAD).random() }
 
-    fun playerAttack() : Int { return (PLAYER_LOW_ATTACK..PLAYER_HIGH_ATTACK).random() }
+    fun playerAttack() : Int { return (PLAYER_NETWORK_ATTACK..PLAYER_MILITARY_ATTACK).random() }
     fun gridAIAttack() : Int { return (GRID_AI_LOW_NETWORK_ATTACK..GRID_AI_HIGH_PHYSICAL_ATTACK).random() }
 
-    fun playerRecruitment() : Int { return PLAYER_RECRUITMENT }
     fun friendlyAIRecruitment() : Int { return FRIENDLY_AI_RECRUITMENT }
 
     fun friendlyAIStatChange() : Int { return FRIENDLY_AI_STAT_CHANGE }
-
-    fun playerIntegrityRepair() : Int { return FRIENDLY_AI_INTEGRITY_REPAIR }
-    fun gridAIIntegrityRepair() : Int { return GRID_AI_INTEGRITY_REPAIR }
 
     fun friendlyAIEvolutionChoice() : Int { return FRIENDLY_AI_EVOLUTION_CHOICE }
     fun friendlyAIEvolutionNoChoice() : Int { return FRIENDLY_AI_EVOLUTION_NO_CHOICE }

@@ -50,8 +50,7 @@
         <item>Hunting</item>
     </string-array>
 
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
+    <string name="friendly_ai_recruitment">Your AI has intercepted the network traffic of a group of dissidents.</string>
 
     <string name="friendly_ai_directed_network_attack">Your AI has located a weakness within the Grid\'s neural network. Attempt to exploit it?</string>
     <string name="friendly_ai_directed_network_attack_choice_one">Leave it for now</string>
@@ -65,8 +64,26 @@
 
     <!--Restraint depends on hackers and can result in some of their deaths-->
     <string name="friendly_ai_autonomous_network_attack">Your AI has decided to attack the Grid\'s neural network. Attempt to restrain it?</string>
-
     <string name="friendly_ai_autonomous_military_attack">Your AI has decided to attack a vulnerable military installation. Attempt to restrain it?</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="player_network_attack">One of your hackers has discovered a weakness within the Grid AI\'s network. Attempt to exploit it?</string>
+    <string name="player_military_attack">A scouting patrol has identified a Grid AI network node with inadequate security. Attempt to destroy it?</string>
+
+    <string name="grid_ai_physical_attack_low_threat">The Grid\'s AI has located one of your resistance cells, and has sent %1$s to %2$s it.</string>
+    <string name="grid_ai_physical_attack_high_threat">The Grid\'s AI has pinpointed a major nerve center of your resistance operation, and is sending %1$s to %2$s it.</string>
+    <string name="grid_ai_network_attack_low_threat">The Grid\'s AI has infiltrated one of your AI\'s network hubs, and is running %1$s to %2$s it.</string>
+    <string name="grid_ai_network_attack_high_threat">The Grid\'s AI has breached a massive hole in your AI\'s network and has multiple %1$s pouring in.</string>
+
+    <!--Can raise/lower friendlyAIEmpathy or friendlyAIAggression, or repair integrity. Chance to cost damage/fighters etc.-->
+    <!--up/down on friendlyAIAggression/friendlyAIEmpathy-->
+    <string name="friendly_ai_stat_altering_event">Your AI %1$s and its %2$s has %3$s.</string>
+
+    <string name="friendly_ai_evolution_with_choice">Your AI has reached a breakthrough in its development, and has a chance to evolve. Based on its past actions, a %1$ in %2$s and a %3$s in %4$s is projected.</string>
+    <string name="friendly_ai_evolution_no_choice">Your AI has reached a breakthrough in its development, and has evolved on its own. Based on its past actions, a %1$ in %2$s and a %3$s in %4$s has occurred.</string>
+
 
     <string-array name="random_good_event_array">
         <item>A group of %1$i fighters has joined your cause.</item>
@@ -79,43 +96,6 @@
         <item>A mole has infiltrated your hacker ranks, killing %1$i.</item>
         <item>A mole has infiltrated your hacker ranks, sabotaging your AI\'s neural network.</item>
     </string-array>
-
-    <string name="random_good_event">This is a random GOOD event and we will have lots of them but not quite yet!</string>
-    <string name="random_bad_event">This is a random BAD event and we will have lots of them but not quite yet!</string>
-    <string name="random_mixed_event">This is a random MIXED event and we will have lots of them but not quite yet!</string>
-
-    <string name="player_attack_low_risk">One of your hackers has discovered a weakness within the Grid AI\'s network. Attempt to exploit it?</string>
-    <string name="player_attack_medium_risk">A scouting patrol has identified a Grid AI network node with inadequate security. Attempt to destroy it?</string>
-    <string name="player_attack_high_risk">A civilian informant has leaked the security codes to a major Grid AI hub. Attempt to infiltrate it?</string>
-
-    <string name="friendly_ai_attack_low_risk">Low Risk Friendly AI Attack!</string>
-    <string name="friendly_ai_attack_medium_risk">Medium Risk Friendly AI Attack!</string>
-    <string name="friendly_ai_attack_high_risk">High Risk Friendly AI Attack!</string>
-
-    <string name="grid_ai_physical_attack_low_threat">The Grid\'s AI has located one of your resistance cells, and has sent %1$s to %2$s it.</string>
-    <string name="grid_ai_physical_attack_high_threat">The Grid\'s AI has pinpointed a major nerve center of your resistance operation, and is sending %1$s to %2$s it.</string>
-    <string name="grid_ai_network_attack_low_threat">The Grid\'s AI has infiltrated one of your AI\'s network hubs, and is running %1$s to %2$s it.</string>
-    <string name="grid_ai_network_attack_high_threat">The Grid\'s AI has breached a massive hole in your AI\'s network and has multiple %1$s pouring in.</string>
-
-    <string name="friendly_ai_recruitment">Your AI has intercepted the network traffic of a group of dissidents.</string>
-    <string name="physical_recruitment">A scouting patrol has come across a group that appear sympathetic to the resistance.</string>
-
-    <string name="friendly_ai_integrity_repair">The Resistance AI has repaired some its integrity.</string>
-    <string name="grid_ai_integrity_repair">The Grid AI has repaired some of its integrity</string>
-
-    <!--Uncontrolled. Frequency based on friendlyAIEmpathy and friendlyAIAggression traits. Severity based on intelligence.-->
-    <!--Least risky + most effective, but also w/ least control-->
-    <string name="friendly_ai_good_event">This is a friendly AI GOOD action event. We will have lots of them but not quite yet!</string>
-    <string name="friendly_ai_bad_event">This is a friendly AI BAD action event. We will have lots of them but not quite yet!</string>
-    <string name="friendly_ai_mixed_event">This is a friendly MIXED AI action event. We will have lots of them but not quite yet!</string>
-
-    <!--Can raise/lower friendlyAIEmpathy or friendlyAIAggression, or repair integrity. Chance to cost damage/fighters etc.-->
-    <!--up/down on friendlyAIAggression/friendlyAIEmpathy-->
-    <string name="friendly_ai_stat_altering_event">Your AI %1$s and its %2$s has %3$s.</string>
-
-    <string name="friendly_ai_evolution_with_choice">Your AI has reached a breakthrough in its development, and has a chance to evolve. Based on its past actions, a %1$ in %2$s and a %3$s in %4$s is projected.</string>
-    <string name="friendly_ai_evolution_no_choice">Your AI has reached a breakthrough in its development, and has evolved on its own. Based on its past actions, a %1$ in %2$s and a %3$s in %4$s has occurred.</string>
-
 
     //////////////////////////////////////////////////////////
 
