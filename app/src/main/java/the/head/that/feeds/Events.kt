@@ -11,7 +11,6 @@ class Events(context : Context) {
 
     val RANDOM_GOOD = 11
     val RANDOM_BAD = 12
-    val RANDOM_MIXED = 13
 
     val PLAYER_LOW_ATTACK = 21
     val PLAYER_MEDIUM_ATTACK = 22
@@ -47,7 +46,6 @@ class Events(context : Context) {
 
     val randomGoodEventArray = mContext.resources.getStringArray(R.array.random_good_event_array)
     val randomBadEventArray = mContext.resources.getStringArray(R.array.random_bad_event_array)
-    val randomMixedEventArray = mContext.resources.getStringArray(R.array.random_mixed_event_array)
 
     val enemyTypesArray = mContext.resources.getStringArray(R.array.enemy_types)
     val destructionVerbsArray = mContext.resources.getStringArray(R.array.destruction_synonyms)
@@ -63,7 +61,6 @@ class Events(context : Context) {
         when (eventType) {
             RANDOM_GOOD -> return (randomStringFromArray(R.array.random_good_event_array))
             RANDOM_BAD -> return (randomStringFromArray(R.array.random_bad_event_array))
-            RANDOM_MIXED -> return (randomStringFromArray(R.array.random_mixed_event_array))
 
             PLAYER_LOW_ATTACK -> return mContext.getString(R.string.player_attack_low_risk)
             PLAYER_MEDIUM_ATTACK -> return mContext.getString(R.string.player_attack_medium_risk)
@@ -161,7 +158,7 @@ class Events(context : Context) {
 
     fun setGridAIEvolutionProgressWeight() { gridAIIntegrityRepairWeight = 10 }
 
-    fun randomEvent() : Int { return (RANDOM_GOOD..RANDOM_MIXED).random() }
+    fun randomEvent() : Int { return (RANDOM_GOOD..RANDOM_BAD).random() }
 
     fun playerAttack() : Int { return (PLAYER_LOW_ATTACK..PLAYER_HIGH_ATTACK).random() }
     fun gridAIAttack() : Int { return (GRID_AI_LOW_NETWORK_ATTACK..GRID_AI_HIGH_PHYSICAL_ATTACK).random() }

@@ -28,16 +28,17 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 //Todo: For new game: Start from story you're interested in, and build up from there.
 
 //Todo: As friendly AI evolves, it gains new abilities and becomes more autonomous.
-//Todo: Should be a net-loss with continuation of days, to encourage player to be proactive.
+    //Todo: Less capable but also more easily controlled at lower intelligences.
+    //Todo: Civilian deaths can result in any attacks by either side.
 
-//Todo: Idea: Instead of health, integrity affects monitoring of Grid AI. Lower monitoring = better chance to evolve (can set it as a choice, a natural evolution, or both).
-
-//Todo: Maybe Grid AI can evolve AND de-evolve. Starts higher (human). Player/friendly AI actions affect this.
-    //Todo: Can do same stats for both AIs. Grid starts at 100% friendlyAIAggression, 0% empathy. Can try to "turn" it.
+//Todo: Grid AI can evolve AND de-evolve. Starts higher (human). Player/friendly AI actions affect this.
     //Todo: Friendly AI attacks, and Grid AI network attacks, should roll intelligences against each other.
     //Todo: Higher aggression means more civilian deaths (for both AIs).
     //Todo: Higher empathy for Grid AI can reduce military size.
-    //Todo: Tracking max level can be reduced by aggression level.
+    //Todo: Maximum Grid AI tracking level can be reduced by aggression level.
+
+//Todo: Should be a net-loss with continuation of days, to encourage player to be proactive.
+//Todo: Can have modular endings like Man/Machine
 
 private lateinit var gameViewModel : GameViewModel
 private lateinit var sharedPreferences: SharedPreferences
@@ -137,7 +138,7 @@ private fun saveStringToSharedPref(editor: SharedPreferences.Editor, key: String
 private fun setStatsClassValuesFromSharedPreferences() {
     Log.i("testStats", "value is ${stats.friendlyAIEvolutionLevel}")
 
-    stats.friendlyAIMood = sharedPreferences.getInt("friendlyAIMood", 0)
+    stats.friendlyAIMood = sharedPreferences.getInt("friendlyAIMood", 25)
     stats.friendlyAIEvolutionLevel = sharedPreferences.getInt("friendlyAIEvolutionLevel", 0)
 
     stats.friendlyAIEvolutionProgress = sharedPreferences.getInt("friendlyAIEvolutionProgress", 50)
