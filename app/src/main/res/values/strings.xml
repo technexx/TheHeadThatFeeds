@@ -50,24 +50,12 @@
         <item>Hunting</item>
     </string-array>
 
-    <string name="friendly_ai_recruitment">Your AI has intercepted the network traffic of a group of dissidents.</string>
 
     <string name="friendly_ai_directed_network_attack">Your AI has located a weakness within the Grid\'s neural network. Attempt to exploit it?</string>
-    <string name="friendly_ai_directed_network_attack_choice_one">Leave it for now</string>
-    <string name="friendly_ai_directed_network_attack_choice_two">Proceed cautiously</string>
-    <string name="friendly_ai_directed_network_attack_choice_three">Attack with gusto</string>
-
     <string name="friendly_ai_directed_military_attack">Your AI has discovered an exposed system within one of the Grid\'s military installations. Attempt to inflict fatal damage?</string>
-    <string name="friendly_ai_directed_military_attack_choice_one">Avoid casualties</string>
-    <string name="friendly_ai_directed_military_attack_choice_two">Tactical killings</string>
-    <string name="friendly_ai_directed_military_attack_choice_three">Mass explosions</string>
-
     <!--Restraint depends on hackers and can result in some of their deaths-->
     <string name="friendly_ai_autonomous_network_attack">Your AI has decided to attack the Grid\'s neural network. Attempt to restrain it?</string>
     <string name="friendly_ai_autonomous_military_attack">Your AI has decided to attack a vulnerable military installation. Attempt to restrain it?</string>
-
-    <string name="yes">Yes</string>
-    <string name="no">No</string>
 
     <string name="player_network_attack">One of your hackers has discovered a weakness within the Grid AI\'s network. Attempt to exploit it?</string>
     <string name="player_military_attack">A scouting patrol has identified a Grid AI network node with inadequate security. Attempt to destroy it?</string>
@@ -77,7 +65,9 @@
     <string name="grid_ai_network_attack_low_threat">The Grid\'s AI has infiltrated one of your AI\'s network hubs, and is running %1$s to %2$s it.</string>
     <string name="grid_ai_network_attack_high_threat">The Grid\'s AI has breached a massive hole in your AI\'s network and has multiple %1$s pouring in.</string>
 
-    <!--Can raise/lower friendlyAIEmpathy or friendlyAIAggression, or repair integrity. Chance to cost damage/fighters etc.-->
+    <string name="friendly_ai_recruitment">Your AI has intercepted the network traffic of a group of dissidents, .</string>
+    <string name="friendly_ai_recruitment_success">and has succeeded in persuading them to join.</string>
+    <string name="friendly_ai_recruitment_failure">but has failed in persuading them to join.</string>
     <!--up/down on friendlyAIAggression/friendlyAIEmpathy-->
     <string name="friendly_ai_stat_altering_event">Your AI %1$s and its %2$s has %3$s.</string>
 
@@ -96,6 +86,18 @@
         <item>A mole has infiltrated your hacker ranks, killing %1$i.</item>
         <item>A mole has infiltrated your hacker ranks, sabotaging your AI\'s neural network.</item>
     </string-array>
+
+
+    <string name="friendly_ai_directed_network_attack_choice_one">Leave it for now</string>
+    <string name="friendly_ai_directed_network_attack_choice_two">Proceed cautiously</string>
+    <string name="friendly_ai_directed_network_attack_choice_three">Attack with gusto</string>
+
+    <string name="friendly_ai_directed_military_attack_choice_one">Avoid casualties</string>
+    <string name="friendly_ai_directed_military_attack_choice_two">Tactical killings</string>
+    <string name="friendly_ai_directed_military_attack_choice_three">Mass explosions</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     //////////////////////////////////////////////////////////
 

@@ -35,7 +35,8 @@ class Events(context : Context) {
 
     var randomEventWeight = 0
     var playerAttackWeight = 0
-    var gridAttackWeight = 0
+    var gridLowAttackWeight = 0
+    var gridHighAttackWeight = 0
     var playerRecruitmentWeight = 0
     var friendlyAIRecruitmentWeight = 0
     var friendlyAIStatChangeWeight = 0
@@ -105,7 +106,8 @@ class Events(context : Context) {
     private fun setAllEventWeights(trackingLevel: Int, fighters: Int, programmers: Int) {
         setRandomEventWeight()
         setPlayerAttackWeight()
-        setGridAIAttackWeight(trackingLevel)
+        setGridAILowAttackWeight(trackingLevel)
+        setGridAIHighAttackWeight(trackingLevel)
         setResistanceRecruitmentWeight(fighters, programmers)
         setFriendlyAIRecruitmentWeight()
         setFriendlyAIStatChangeWeight()
@@ -114,15 +116,15 @@ class Events(context : Context) {
     }
 
     private fun totalEventsWeight() : Int {
-        return randomEventWeight + playerAttackWeight + gridAttackWeight + playerRecruitmentWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIEvolutionLevelProgressRepairWeight + gridAIIntegrityRepairWeight
+        return randomEventWeight + playerAttackWeight + gridLowAttackWeight + gridHighAttackWeight + playerRecruitmentWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIEvolutionLevelProgressRepairWeight + gridAIIntegrityRepairWeight
     }
 
     private fun eventsAsIntArray() : ArrayList<Int> {
-        return ArrayList(listOf(randomEvent(), playerAttack(), gridAIAttack(), friendlyAIRecruitment(), friendlyAIStatChange()))
+        return ArrayList(listOf(randomEvent(), playerAttack(), gridAIAttackLowDamage(), gridAIAttackHighDamage(), friendlyAIRecruitment(), friendlyAIStatChange()))
     }
 
     private fun eventsWeightArray() : ArrayList<Int> {
-        return ArrayList(listOf(randomEventWeight, playerAttackWeight, gridAttackWeight, playerRecruitmentWeight, friendlyAIRecruitmentWeight, friendlyAIStatChangeWeight, friendlyAIEvolutionLevelProgressRepairWeight, gridAIIntegrityRepairWeight))
+        return ArrayList(listOf(randomEventWeight, playerAttackWeight, gridLowAttackWeight, gridHighAttackWeight, playerRecruitmentWeight, friendlyAIRecruitmentWeight, friendlyAIStatChangeWeight, friendlyAIEvolutionLevelProgressRepairWeight, gridAIIntegrityRepairWeight))
     }
 
     private fun addEventToPastEventsList(event: Int) { pastEventsArray.add(event) }
@@ -131,7 +133,14 @@ class Events(context : Context) {
 
     fun setPlayerAttackWeight() { playerAttackWeight = 20 }
 
-    fun setGridAIAttackWeight(trackingLevel: Int) { gridAttackWeight = (trackingLevel * 1.2).roundToInt() }
+    fun setGridAILowAttackWeight(trackingLevel: Int) {
+        if (trackingLevel <= 20) gridLowAttackWeight = (trackingLevel * 1.2).roundToInt()
+        else gridLowAttackWeight = (trackingLevel * 0.5).roundToInt() }
+
+    fun setGridAIHighAttackWeight(trackingLevel: Int) {
+        if (trackingLevel > 20) gridHighAttackWeight = (trackingLevel * 1.2).roundToInt()
+        else gridHighAttackWeight = (trackingLevel * 0.3).roundToInt()
+    }
 
     fun setResistanceRecruitmentWeight(fighters: Int, programmers: Int) { playerRecruitmentWeight = ((fighters + programmers) / 100) }
 
@@ -146,7 +155,10 @@ class Events(context : Context) {
     fun randomEvent() : Int { return (RANDOM_GOOD..RANDOM_BAD).random() }
 
     fun playerAttack() : Int { return (PLAYER_NETWORK_ATTACK..PLAYER_MILITARY_ATTACK).random() }
-    fun gridAIAttack() : Int { return (GRID_AI_LOW_NETWORK_ATTACK..GRID_AI_HIGH_PHYSICAL_ATTACK).random() }
+
+    fun gridAIAttackLowDamage() : Int { return (GRID_AI_LOW_NETWORK_ATTACK..GRID_AI_LOW_PHYSICAL_ATTACK).random() }
+
+    fun gridAIAttackHighDamage() : Int { return (GRID_AI_LOW_PHYSICAL_ATTACK..GRID_AI_HIGH_PHYSICAL_ATTACK).random() }
 
     fun friendlyAIRecruitment() : Int { return FRIENDLY_AI_RECRUITMENT }
 
@@ -161,6 +173,6 @@ class Events(context : Context) {
     }
 
     fun testEventWeights() {
-        randomEventWeight = 10; playerAttackWeight = 10; gridAttackWeight = 10; playerRecruitmentWeight = 10; friendlyAIRecruitmentWeight = 10; friendlyAIStatChangeWeight = 10; friendlyAIEvolutionLevelProgressRepairWeight = 10; gridAIIntegrityRepairWeight = 10
+        randomEventWeight = 10; playerAttackWeight = 10; gridLowAttackWeight = 10; gridHighAttackWeight = 10; playerRecruitmentWeight = 10; friendlyAIRecruitmentWeight = 10; friendlyAIStatChangeWeight = 10; friendlyAIEvolutionLevelProgressRepairWeight = 10; gridAIIntegrityRepairWeight = 10
     }
 }
