@@ -294,8 +294,8 @@ fun StatusBarLeftRowColumn() {
 
         Spacer(modifier = Modifier.weight(1.0f))
 
-        Text(text = "Hackers: $programmers", color = Color.White, fontSize = 15.sp)
         Text(text = "Fighters: $fighters", color = Color.White, fontSize = 15.sp)
+        Text(text = "Hackers: $programmers", color = Color.White, fontSize = 15.sp)
     }
 }
 

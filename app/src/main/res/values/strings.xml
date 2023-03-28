@@ -51,11 +51,19 @@
     </string-array>
 
 
-    <string name="random_good_event">This is a random GOOD event and we will have lots of them  but not quite yet!</string>
-    <string name="random_bad_event">This is a random BAD event and we will have lots of them  but not quite yet!</string>
-    <string name="random_mixed_event">This is a random MIXED event and we will have lots of them  but not quite yet!</string>
+    <string name="random_good_event">This is a random GOOD event and we will have lots of them but not quite yet!</string>
+    <string name="random_bad_event">This is a random BAD event and we will have lots of them but not quite yet!</string>
+    <string name="random_mixed_event">This is a random MIXED event and we will have lots of them but not quite yet!</string>
 
     <string-array name="random_good_event_array">
+        <item></item>
+    </string-array>
+
+    <string-array name="random_bad_event_array">
+        <item></item>
+    </string-array>
+
+    <string-array name="random_mixed_event_array">
         <item></item>
     </string-array>
 

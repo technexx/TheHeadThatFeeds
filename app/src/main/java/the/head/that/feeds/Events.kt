@@ -45,6 +45,10 @@ class Events(context : Context) {
     var friendlyAIIntegrityRepairWeight = 0
     var gridAIIntegrityRepairWeight = 0
 
+    val randomGoodEventArray = mContext.resources.getStringArray(R.array.random_good_event_array)
+    val randomBadEventArray = mContext.resources.getStringArray(R.array.random_bad_event_array)
+    val randomMixedEventArray = mContext.resources.getStringArray(R.array.random_mixed_event_array)
+
     val enemyTypesArray = mContext.resources.getStringArray(R.array.enemy_types)
     val destructionVerbsArray = mContext.resources.getStringArray(R.array.destruction_synonyms)
     val gridAIMalwareArray = mContext.resources.getStringArray(R.array.enemy_ai_malware)
@@ -55,12 +59,11 @@ class Events(context : Context) {
 
     var pastEventsArray = ArrayList<Int>()
 
-
     fun eventString(eventType: Int) : String {
         when (eventType) {
-            RANDOM_GOOD -> return mContext.getString(R.string.random_good_event)
-            RANDOM_BAD -> return mContext.getString(R.string.random_bad_event)
-            RANDOM_MIXED -> return mContext.getString(R.string.random_mixed_event)
+            RANDOM_GOOD -> return (randomStringFromArray(R.array.random_good_event_array))
+            RANDOM_BAD -> return (randomStringFromArray(R.array.random_bad_event_array))
+            RANDOM_MIXED -> return (randomStringFromArray(R.array.random_mixed_event_array))
 
             PLAYER_LOW_ATTACK -> return mContext.getString(R.string.player_attack_low_risk)
             PLAYER_MEDIUM_ATTACK -> return mContext.getString(R.string.player_attack_medium_risk)
@@ -69,10 +72,10 @@ class Events(context : Context) {
             FRIENDLY_AI_MEDIUM_ATTACK -> return mContext.getString(R.string.friendly_ai_attack_medium_risk)
             FRIENDLY_AI_HIGH_ATTACK -> return mContext.getString(R.string.friendly_ai_attack_high_risk)
 
-            GRID_AI_LOW_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack_low_threat,  enemyTypesArray[(enemyTypesArray.indices).random()], gridAIMalwareArray[(gridAIMalwareArray.indices).random()])
-            GRID_AI_LOW_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack_low_threat, enemyTypesArray[(enemyTypesArray.indices).random()], destructionVerbsArray[(destructionVerbsArray.indices).random()])
-            GRID_AI_HIGH_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack_high_threat,  enemyTypesArray[(enemyTypesArray.indices).random()])
-            GRID_AI_HIGH_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack_high_threat, enemyTypesArray[(enemyTypesArray.indices).random()], destructionVerbsArray[(destructionVerbsArray.indices).random()])
+            GRID_AI_LOW_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack_low_threat,  randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.enemy_ai_malware))
+            GRID_AI_LOW_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack_low_threat, randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.destruction_synonyms))
+            GRID_AI_HIGH_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack_high_threat, randomStringFromArray(R.array.enemy_types))
+            GRID_AI_HIGH_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack_high_threat, randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.destruction_synonyms))
 
             PLAYER_RECRUITMENT -> return mContext.getString(R.string.physical_recruitment)
             FRIENDLY_AI_RECRUITMENT -> return mContext.getString(R.string.friendly_ai_recruitment)
@@ -87,6 +90,11 @@ class Events(context : Context) {
 
             else -> return ""
         }
+    }
+
+    fun randomStringFromArray(array: Int) : String {
+        val fetchedArray = mContext.resources.getStringArray(array)
+        return fetchedArray[(fetchedArray.indices).random()].toString()
     }
 
     fun rolledEvent() : Int {
