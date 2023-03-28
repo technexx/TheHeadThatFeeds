@@ -15,10 +15,10 @@ class GameViewModel : ViewModel() {
     fun setFriendlyAIEvolutionLevel(value: Int) { mutableFriendlyAIEvolutionLevel.value = value }
     fun getFriendlyAIEvolutionLevel() : Int { return friendlyAIEvolutionLevel.value!! }
 
-    val mutableFriendlyAIIntegrityLevel = MutableLiveData<Int>()
-    val friendlyAIIntegrityLevel : LiveData<Int> get() = mutableFriendlyAIIntegrityLevel
-    fun setFriendlyAIIntegrity(value: Int) { mutableFriendlyAIIntegrityLevel.value = value }
-    fun getFriendlyAIIntegrity() : Int { return friendlyAIIntegrityLevel.value!! }
+    val mutableFriendlyAIEvolutionProgress = MutableLiveData<Int>()
+    val friendlyAIEvolutionProgress : LiveData<Int> get() = mutableFriendlyAIEvolutionProgress
+    fun setFriendlyAIEvolutionProgress(value: Int) { mutableFriendlyAIEvolutionProgress.value = value }
+    fun getFriendlyAIEvolutionProgress() : Int { return friendlyAIEvolutionProgress.value!! }
 
     val mutableFriendlyAIAggression = MutableLiveData<Int>()
     val friendlyAIAggression : LiveData<Int> get() = mutableFriendlyAIAggression
@@ -51,10 +51,10 @@ class GameViewModel : ViewModel() {
     fun setGridAIEvolutionLevel(value: Int) { mutableGridAIEvolutionLevel.value = value }
     fun getGridAIEvolutionLevel() : Int { return gridAIEvolutionLevel.value!! }
 
-    val mutableGridAIIntegrityLevel = MutableLiveData<Int>()
-    val gridAIIntegrityLevel : LiveData<Int> get() = mutableGridAIIntegrityLevel
-    fun setGridAIIntegrity(value: Int) { mutableGridAIIntegrityLevel.value = value }
-    fun getGridAIIntegrity() : Int { return gridAIIntegrityLevel.value!! }
+    val mutableGridAIEvolutionProgress = MutableLiveData<Int>()
+    val gridAIEvolutionProgress : LiveData<Int> get() = mutableGridAIEvolutionProgress
+    fun setGridAIEvolutionProgress(value: Int) { mutableGridAIEvolutionProgress.value = value }
+    fun getGridAIEvolutionProgress() : Int { return gridAIEvolutionProgress.value!! }
 
     val mutableGridAIAggression = MutableLiveData<Int>()
     val gridAIAggression : LiveData<Int> get() = mutableGridAIAggression
