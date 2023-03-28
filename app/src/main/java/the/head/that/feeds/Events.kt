@@ -97,8 +97,8 @@ class Events(context : Context) {
         return fetchedArray[(fetchedArray.indices).random()].toString()
     }
 
-    fun rolledEvent() : Int {
-        setAllEventWeights()
+    fun rolledEvent(trackingLevel: Int, fighters: Int, programmers: Int) : Int {
+        setAllEventWeights(trackingLevel, fighters, programmers)
 
         val totalEventsWeight = totalEventsWeight()
         val roll = (0..totalEventsWeight).random()
@@ -120,11 +120,11 @@ class Events(context : Context) {
         return 0
     }
 
-    private fun setAllEventWeights() {
+    private fun setAllEventWeights(trackingLevel: Int, fighters: Int, programmers: Int) {
         setRandomEventWeight()
         setPlayerAttackWeight()
-        setGridAIAttackWeight(Stats.gridAITrackingLevel)
-        setResistanceRecruitmentWeight(Stats.fighters, Stats.programmers)
+        setGridAIAttackWeight(trackingLevel)
+        setResistanceRecruitmentWeight(fighters, programmers)
         setFriendlyAIRecruitmentWeight()
         setFriendlyAIStatChangeWeight()
         setFriendlyAIEvolutionProgressWeight()
