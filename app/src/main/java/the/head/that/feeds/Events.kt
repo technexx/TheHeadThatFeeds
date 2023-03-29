@@ -49,6 +49,10 @@ class Events(context : Context) {
 
     var pastEventsArray = ArrayList<Int>()
 
+    var buttonOneString = ""
+    var buttonTwoString = ""
+    var buttonThreeString = ""
+
     fun eventString(eventType: Int) : String {
         if (eventType == RANDOM_GOOD || eventType == RANDOM_BAD) {
             var array = emptyArray<String>()
@@ -57,6 +61,7 @@ class Events(context : Context) {
 
             val index = array.indices.random()
             val valueChangeRoll = (20..60).random()
+
             if (index == 0 || index == 1) return mContext.getString(array[index].toInt(), valueChangeRoll.toString())
             else return array[index]
         }
@@ -72,7 +77,7 @@ class Events(context : Context) {
             }
             if (index == 1) { specifierRollString = mContext.resources.getStringArray(R.array.anti_friendly_AI_aggression_triggers)[specifierRoll]
             }
-            if (index ==20) { specifierRollString = mContext.resources.getStringArray(R.array.pro_friendly_AI_empathy_triggers)[specifierRoll]
+            if (index == 2) { specifierRollString = mContext.resources.getStringArray(R.array.pro_friendly_AI_empathy_triggers)[specifierRoll]
             }
             if (index == 3) { specifierRollString = mContext.resources.getStringArray(R.array.anti_friendly_AI_empathy_triggers)[specifierRoll]
             }
@@ -105,9 +110,32 @@ class Events(context : Context) {
         }
     }
 
-    fun randomArrayIndex(array: Int) : Int {
-        val fetchedArray = mContext.resources.getStringArray(array)
-        return fetchedArray.indices.random()
+    fun firstButtonString(eventType: Int) : String {
+        return when (eventType) {
+            FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> mContext.getString(R.string.friendly_ai_directed_network_attack_choice_one)
+            FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> mContext.getString(R.string.friendly_ai_directed_military_attack_choice_one)
+            FRIENDLY_AI_AUTONOMOUS_NETWORK_ATTACK, FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK -> mContext.getString(R.string.yes)
+            PLAYER_NETWORK_ATTACK, PLAYER_MILITARY_ATTACK -> mContext.getString(R.string.yes)
+            else -> ""
+        }
+    }
+
+    fun secondButtonString(eventType: Int) : String {
+        return when (eventType) {
+            FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> mContext.getString(R.string.friendly_ai_directed_network_attack_choice_two)
+            FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> mContext.getString(R.string.friendly_ai_directed_military_attack_choice_two)
+            FRIENDLY_AI_AUTONOMOUS_NETWORK_ATTACK, FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK -> mContext.getString(R.string.no)
+            PLAYER_NETWORK_ATTACK, PLAYER_MILITARY_ATTACK -> mContext.getString(R.string.no)
+            else -> ""
+        }
+    }
+
+    fun thirdButtonString(eventType: Int) : String {
+        return when (eventType) {
+            FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> mContext.getString(R.string.friendly_ai_directed_network_attack_choice_three)
+            FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> mContext.getString(R.string.friendly_ai_directed_military_attack_choice_three)
+            else -> ""
+        }
     }
 
     fun randomStringFromArray(array: Int) : String {

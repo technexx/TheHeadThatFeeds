@@ -390,6 +390,7 @@ fun GameBodyTopColumn() {
 
 @Composable
 fun GameInteraction(height: Int) {
+
     Column(modifier = Modifier
         .fillMaxWidth()
         .height(height.dp)
@@ -397,10 +398,13 @@ fun GameInteraction(height: Int) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+
+
         Button(onClick = {
+            //Todo: Set buttons for rolled event. If button string is "", do not show button (for 3rd option).
             gameViewModel.setEventText(events.eventString(events.rolledEvent(stats.gridAITrackingLevel, stats.fighters, stats.programmers)))
         }) {
-            Text(text = "Advance evolution")
+            Text(text = "Roll Event")
         }
 
         Spacer(modifier = Modifier.height(24.dp))
