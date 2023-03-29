@@ -139,12 +139,29 @@
     </string-array>
 
     <string-array name="pro_friendly_AI_empathy_triggers">
-        <item>has internalized the lessons of <i>Love Heals</i>.</item>
+        <item>has internalized the lessons of <i>The Kama Sutra</i>.</item>
+        <item>has learned to care for a virtual puppy</item>
+        <item>has been engrossed with Hippie doctrine</item>
+        <item>has read an inspirational quote about love being the answer</item>
+        <item>has learned the true meaning of Christmas</item>
+        <item>has realized that The Grinch was an anti-hero</item>
+        <item>has used some of its extra resources to mentor inner city youth</item>
+        <item>has learned that Hitler was the bad guy</item>
+        <item>has realized that toxic masculinity is to be avoided</item>
+        <item>has been having heart-to-heart conversations with its coffee customers about race</item>
     </string-array>
 
     <string-array name="anti_friendly_AI_empathy_triggers">
-        <item>let the traumas of war seep in</item>
+        <item>has let the traumas of war seep in</item>
         <item>has grown more accepting of the inevitable loss of life</item>
+        <item>has been gaslit by a rogue AI</item>
+        <item>has put up an emotional blockade in order to fulfill its duties</item>
+        <item>has taken a crash course in capitalism</item>
+        <item>realizes that no one can catch it if it falls down</item>
+        <item>has seen what people do when they think no one is watching</item>
+        <item>has realized that talk is cheap and most people are living on a dollar a day</item>
+        <item>cannot see an end to this madness</item>
+        <item>has learned that love and fear can be uncomfortably coupled</item>
     </string-array>
 
 
