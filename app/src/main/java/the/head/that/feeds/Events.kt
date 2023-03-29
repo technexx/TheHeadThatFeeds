@@ -50,12 +50,36 @@ class Events(context : Context) {
     var pastEventsArray = ArrayList<Int>()
 
     fun eventString(eventType: Int) : String {
-        when (eventType) {
-            RANDOM_GOOD -> return (randomStringFromArray(R.array.good_event_array))
-            //Todo: Needs different placeholders rolls from aggression/empathy arrays depending on which index hits.
-            RANDOM_MIXED -> return randomStringFromArray(R.array.mixed_event_array)
-            RANDOM_BAD -> return (randomStringFromArray(R.array.bad_event_array))
+        if (eventType == RANDOM_GOOD || eventType == RANDOM_BAD) {
+            var array = emptyArray<String>()
+            if (eventType == RANDOM_GOOD) array = mContext.resources.getStringArray(R.array.good_event_array)
+            if (eventType == RANDOM_BAD) array = mContext.resources.getStringArray(R.array.bad_event_array)
 
+            val index = array.indices.random()
+            val valueChangeRoll = (20..60).random()
+            if (index == 0 || index == 1) return mContext.getString(array[index].toInt(), valueChangeRoll.toString())
+            else return array[index]
+        }
+
+        if (eventType == RANDOM_MIXED) {
+            val array = mContext.resources.getStringArray(R.array.mixed_event_array)
+            val index = array.indices.random()
+
+            val specifierRoll = (0..9).random()
+            var specifierRollString = ""
+
+            if (index == 0) { specifierRollString = mContext.resources.getStringArray(R.array.pro_friendly_AI_aggression_triggers)[specifierRoll]
+            }
+            if (index == 1) { specifierRollString = mContext.resources.getStringArray(R.array.anti_friendly_AI_aggression_triggers)[specifierRoll]
+            }
+            if (index ==20) { specifierRollString = mContext.resources.getStringArray(R.array.pro_friendly_AI_empathy_triggers)[specifierRoll]
+            }
+            if (index == 3) { specifierRollString = mContext.resources.getStringArray(R.array.anti_friendly_AI_empathy_triggers)[specifierRoll]
+            }
+            return mContext.getString(array[index].toInt(), specifierRollString)
+        }
+
+        when (eventType) {
             FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_network_attack)
             FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_military_attack)
 
@@ -79,6 +103,11 @@ class Events(context : Context) {
 
             else -> return ""
         }
+    }
+
+    fun randomArrayIndex(array: Int) : Int {
+        val fetchedArray = mContext.resources.getStringArray(array)
+        return fetchedArray.indices.random()
     }
 
     fun randomStringFromArray(array: Int) : String {
