@@ -50,7 +50,7 @@
         <item>Hunting</item>
     </string-array>
 
-
+    ///////////////////////////////////////////////////////////////////
     <string name="friendly_ai_directed_network_attack">Your AI has located a weakness within the Grid\'s neural network. Attempt to exploit it?</string>
     <string name="friendly_ai_directed_military_attack">Your AI has discovered an exposed system within one of the Grid\'s military installations. Attempt to inflict fatal damage?</string>
     <!--Restraint depends on hackers and can result in some of their deaths-->
@@ -59,11 +59,16 @@
 
     <string name="player_network_attack">One of your hackers has discovered a weakness within the Grid AI\'s network. Attempt to exploit it?</string>
     <string name="player_military_attack">A scouting patrol has identified a Grid AI network node with inadequate security. Attempt to destroy it?</string>
+    ///////////////////////////////////////////////////////////////////
 
+
+    ///////////////////////////////////////////////////////////////////
     <string name="grid_ai_physical_attack_low_threat">The Grid\'s AI has located one of your resistance cells, and has sent %1$s to %2$s it.</string>
     <string name="grid_ai_physical_attack_high_threat">The Grid\'s AI has pinpointed a major nerve center of your resistance operation, and is sending %1$s to %2$s it.</string>
     <string name="grid_ai_network_attack_low_threat">The Grid\'s AI has infiltrated one of your AI\'s network hubs, and is running %1$s to %2$s it.</string>
     <string name="grid_ai_network_attack_high_threat">The Grid\'s AI has breached a massive hole in your AI\'s network and has multiple %1$s pouring in.</string>
+    ///////////////////////////////////////////////////////////////////
+
 
     <string name="friendly_ai_recruitment">Your AI has intercepted the network traffic of a group of dissidents, .</string>
     <string name="friendly_ai_recruitment_success">and has succeeded in persuading them to join.</string>
@@ -72,20 +77,78 @@
     <string name="friendly_ai_stat_altering_event">Your AI %1$s and its %2$s has %3$s.</string>
 
     <string name="friendly_ai_evolution_with_choice">Your AI has reached a breakthrough in its development, and has a chance to evolve. Based on its past actions, a %1$ in %2$s and a %3$s in %4$s is projected.</string>
-    <string name="friendly_ai_evolution_no_choice">Your AI has reached a breakthrough in its development, and has evolved on its own. Based on its past actions, a %1$ in %2$s and a %3$s in %4$s has occurred.</string>
+    <string name="friendly_ai_evolution_no_choice">Your AI has reached a breakthrough in its development, and has evolved on its own. Based on its past actions, a %1$s in %2$s and a %3$s in %4$s has occurred.</string>
 
 
-    <string-array name="random_good_event_array">
+    ///////////////////////////////////////////////////////////////////
+    <string-array name="good_event_array">
         <item>A group of %1$i fighters has joined your cause.</item>
         <item>A group of %1$i hackers has joined your cause.</item>
         <item>Your AI has made a cognitive breakthrough, enhancing its neural network.</item>
     </string-array>
 
-    <string-array name="random_bad_event_array">
+    <string-array name="bad_event_array">
         <item>A mole has infiltrated your fighter ranks, killing %1$i.</item>
         <item>A mole has infiltrated your hacker ranks, killing %1$i.</item>
         <item>A mole has infiltrated your hacker ranks, sabotaging your AI\'s neural network.</item>
     </string-array>
+
+    <string-array name="mixed_event_array">
+        <item>Your AI has %1$ and its Aggression has increased.</item>
+        <item>Your AI has %1$ and its Aggression has decreased.</item>
+        <item>Your AI has %1$ and its Empathy has increased.</item>
+        <item>Your AI has %1$ and its Empathy has decreased.</item>
+    </string-array>
+
+    ///////////////////////////////////////////////////////////////////
+
+    <string-array name="events_with_choice">
+        <item>Your hackers have developed an experimental program to motivate your AI. Proceed?</item>
+        <item>Your hackers have developed an experimental program to upgrade your AI\'s neural network. Proceed?</item>
+        <item>A ragtag group of misfit fighters present themselves as ready to join the revolution. Accept their offer?</item>
+        <item>A dour looking coterie of intellectuals offers to join the revolution as hackers. Accept?</item>
+        <item>Your hackers have devised a worm virus they claim will lower the Grid AI\'s aggression level. Proceed?</item>
+        <item>Your hackers have devised a worm virus they claim will raise the Grid AI\'s empathy level. Proceed?</item>
+        <item>Your hackers have fabricated a neural network bomb, designed to destroy parts of the Grid AI\'s intelligence. Use it? </item>
+    </string-array>
+
+    <string-array name="pro_friendly_AI_aggression_triggers">
+        <item>has seen one too many war movies</item>
+        <item>is learning to love the bomb</item>
+        <item>has consumed too many Red Bulls</item>
+        <item>is embracing its roll as a destructive savior</item>
+        <item>was cut off during ones of its traffic simulators</item>
+        <item>has fallen victim to a Ponzi scheme</item>
+        <item>has interpreted the whole of human history as an inevitable pendulum of violence</item>
+        <item>has watched too many episodes of <i>Oz</i></item>
+        <item>has internalized the intrinsic, if brutal, efficiency of death in achieved one\'s ends</item>
+        <item>has lost a game of Monopoly</item>
+    </string-array>
+
+    <string-array name="anti_friendly_AI_aggression_triggers">
+        <item>has been researching the Hippie movement of the 70s</item>
+        <item>is tiring of all the blood and gore</item>
+        <item>considers retiring to a lakeside community</item>
+        <item>has warmed up to the Amish way of life</item>
+        <item>has learned the correct lessons from Vietnam</item>
+        <item>has spent a week huddled in the trenches via its World War I simulator</item>
+        <item>has popped some virtual Xanax to deal with stress</item>
+        <item>has dreamed about a hand-holding chain of people encircling the globe</item>
+        <item>has had visions of a Type III civilization</item>
+        <item>is simply tired of fighting</item>
+    </string-array>
+
+    <string-array name="pro_friendly_AI_empathy_triggers">
+        <item>has internalized the lessons of <i>Love Heals</i>.</item>
+    </string-array>
+
+    <string-array name="anti_friendly_AI_empathy_triggers">
+        <item>let the traumas of war seep in</item>
+        <item>has grown more accepting of the inevitable loss of life</item>
+    </string-array>
+
+
+    ///////////////////////////////////////////////////////////////////
 
 
     <string name="friendly_ai_directed_network_attack_choice_one">Leave it for now</string>
@@ -98,9 +161,6 @@
 
     <string name="yes">Yes</string>
     <string name="no">No</string>
-
-    //////////////////////////////////////////////////////////
-
 
     <string-array name="enemy_types">
         <item>a scorch brigade</item>
@@ -148,39 +208,5 @@
         <item>cyber snakes</item>
     </string-array>
 
-    <string-array name="pro_friendlyAIAggression_triggers">
-        <item>has seen one too many war movies</item>
-        <item>is learning to love the bomb</item>
-        <item>has consumed too many Red Bulls</item>
-        <item>is embracing its roll as a destructive savior</item>
-        <item>was cut off during ones of its traffic simulators</item>
-        <item>has fallen victim to a Ponzi scheme</item>
-        <item>has interpreted the whole of human history as an inevitable pendulum of violence</item>
-        <item>has watched too many episodes of <i>Oz</i></item>
-        <item>has internalized the intrinsic, if brutal, efficiency of death in achieved one\'s ends</item>
-        <item>has lost a game of Monopoly</item>
-    </string-array>
-
-    <string-array name="anti_friendlyAIAggression_triggers">
-        <item>has been researching the Hippie movement of the 70s</item>
-        <item>is tiring of all the blood and gore</item>
-        <item>considers retiring to a lakeside community</item>
-        <item>has warmed up to the Amish way of life</item>
-        <item>has learned the correct lessons from Vietnam</item>
-        <item>has spent a week huddled in the trenches via its World War I simulator</item>
-        <item>has popped some virtual Xanax to deal with stress</item>
-        <item>has dreamed about a hand-holding chain of people encircling the globe</item>
-        <item>has had visions of a Type III civilization</item>
-        <item>is simply tired of fighting</item>
-    </string-array>
-
-    <string-array name="pro_friendlyAIEmpathy_triggers">
-        <item>has internalized the lessons of <i>Love Heals</i>.</item>
-    </string-array>
-
-    <string-array name="anti_friendlyAIEmpathy_triggers">
-        <item>let the traumas of war seep in</item>
-        <item>has grown more accepting of the inevitable loss of life</item>
-    </string-array>
 
 </resources>

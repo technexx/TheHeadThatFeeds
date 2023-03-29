@@ -9,8 +9,11 @@ import kotlin.math.roundToInt
 class Events(context : Context) {
     private val mContext = context
 
+    val EVENT_WITH_CHOICE = 1
+
     val RANDOM_GOOD = 11
-    val RANDOM_BAD = 12
+    val RANDOM_MIXED = 12
+    val RANDOM_BAD = 13
 
     val FRIENDLY_AI_DIRECTED_NETWORK_ATTACK = 21
     val FRIENDLY_AI_DIRECTED_MILITARY_ATTACK = 22
@@ -33,7 +36,8 @@ class Events(context : Context) {
     val FRIENDLY_AI_EVOLUTION_CHOICE = 81
     val FRIENDLY_AI_EVOLUTION_NO_CHOICE = 82
 
-    var randomEventWeight = 0
+    var eventWithChoiceWeight = 0
+    var goodOrBadEventWeight = 0
     var playerAttackWeight = 0
     var gridLowAttackWeight = 0
     var gridHighAttackWeight = 0
@@ -47,8 +51,10 @@ class Events(context : Context) {
 
     fun eventString(eventType: Int) : String {
         when (eventType) {
-            RANDOM_GOOD -> return (randomStringFromArray(R.array.random_good_event_array))
-            RANDOM_BAD -> return (randomStringFromArray(R.array.random_bad_event_array))
+            RANDOM_GOOD -> return (randomStringFromArray(R.array.good_event_array))
+            //Todo: Needs different placeholders rolls from aggression/empathy arrays depending on which index hits.
+            RANDOM_MIXED -> return randomStringFromArray(R.array.mixed_event_array)
+            RANDOM_BAD -> return (randomStringFromArray(R.array.bad_event_array))
 
             FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_network_attack)
             FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_military_attack)
@@ -104,7 +110,8 @@ class Events(context : Context) {
     }
 
     private fun setAllEventWeights(trackingLevel: Int, fighters: Int, programmers: Int) {
-        setRandomEventWeight()
+        setEventWithChoiceWeight()
+        setGoodOrBadEventWeight()
         setPlayerAttackWeight()
         setGridAILowAttackWeight(trackingLevel)
         setGridAIHighAttackWeight(trackingLevel)
@@ -116,7 +123,7 @@ class Events(context : Context) {
     }
 
     private fun totalEventsWeight() : Int {
-        return randomEventWeight + playerAttackWeight + gridLowAttackWeight + gridHighAttackWeight + playerRecruitmentWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIEvolutionLevelProgressRepairWeight + gridAIIntegrityRepairWeight
+        return eventWithChoiceWeight + goodOrBadEventWeight + playerAttackWeight + gridLowAttackWeight + gridHighAttackWeight + playerRecruitmentWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIEvolutionLevelProgressRepairWeight + gridAIIntegrityRepairWeight
     }
 
     private fun eventsAsIntArray() : ArrayList<Int> {
@@ -124,12 +131,14 @@ class Events(context : Context) {
     }
 
     private fun eventsWeightArray() : ArrayList<Int> {
-        return ArrayList(listOf(randomEventWeight, playerAttackWeight, gridLowAttackWeight, gridHighAttackWeight, playerRecruitmentWeight, friendlyAIRecruitmentWeight, friendlyAIStatChangeWeight, friendlyAIEvolutionLevelProgressRepairWeight, gridAIIntegrityRepairWeight))
+        return ArrayList(listOf(eventWithChoiceWeight, goodOrBadEventWeight, playerAttackWeight, gridLowAttackWeight, gridHighAttackWeight, playerRecruitmentWeight, friendlyAIRecruitmentWeight, friendlyAIStatChangeWeight, friendlyAIEvolutionLevelProgressRepairWeight, gridAIIntegrityRepairWeight))
     }
 
     private fun addEventToPastEventsList(event: Int) { pastEventsArray.add(event) }
 
-    fun setRandomEventWeight() { randomEventWeight = 50 }
+    fun setEventWithChoiceWeight() { eventWithChoiceWeight = 50 }
+
+    fun setGoodOrBadEventWeight() { goodOrBadEventWeight = 20 }
 
     fun setPlayerAttackWeight() { playerAttackWeight = 20 }
 
@@ -173,6 +182,6 @@ class Events(context : Context) {
     }
 
     fun testEventWeights() {
-        randomEventWeight = 10; playerAttackWeight = 10; gridLowAttackWeight = 10; gridHighAttackWeight = 10; playerRecruitmentWeight = 10; friendlyAIRecruitmentWeight = 10; friendlyAIStatChangeWeight = 10; friendlyAIEvolutionLevelProgressRepairWeight = 10; gridAIIntegrityRepairWeight = 10
+        eventWithChoiceWeight = 10; goodOrBadEventWeight = 10; playerAttackWeight = 10; gridLowAttackWeight = 10; gridHighAttackWeight = 10; playerRecruitmentWeight = 10; friendlyAIRecruitmentWeight = 10; friendlyAIStatChangeWeight = 10; friendlyAIEvolutionLevelProgressRepairWeight = 10; gridAIIntegrityRepairWeight = 10
     }
 }
