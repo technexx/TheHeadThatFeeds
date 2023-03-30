@@ -8,7 +8,7 @@ import kotlin.math.roundToInt
 
 class Events(context : Context) {
     private val mContext = context
-    var rolledEvent = 0
+    var rolledEventInteger = 0
 
     val EVENT_WTH_CHOICE = 11
     val RANDOM_GOOD = 12
@@ -55,7 +55,7 @@ class Events(context : Context) {
         return fetchedArray[(fetchedArray.indices).random()].toString()
     }
 
-    fun setRolledEvent(trackingLevel: Int, fighters: Int, programmers: Int) {
+    fun setrolledEventInteger(trackingLevel: Int, fighters: Int, programmers: Int) {
         setAllEventWeights(trackingLevel, fighters, programmers)
 
         val totalEventsWeight = totalEventsWeight()
@@ -71,7 +71,7 @@ class Events(context : Context) {
 
             if (valueToRollAgainst >= roll) {
                 addEventToPastEventsList(eventsAsIntArray[i])
-                 rolledEvent = eventsAsIntArray[i]
+                 rolledEventInteger = eventsAsIntArray[i]
             }
         }
     }
@@ -87,16 +87,6 @@ class Events(context : Context) {
         setFriendlyAIStatChangeWeight()
         setFriendlyAIEvolutionProgressWeight()
     }
-
-//    var eventWithChoiceWeight = 0
-//    var goodOrBadEventWeight = 0
-//    var playerAttackWeight = 0
-//    var gridLowAttackWeight = 0
-//    var gridHighAttackWeight = 0
-//    var playerRecruitmentWeight = 0
-//    var friendlyAIRecruitmentWeight = 0
-//    var friendlyAIStatChangeWeight = 0
-//    var friendlyAIEvolutionLevelProgressWeight = 0
 
     private fun totalEventsWeight() : Int {
         return eventWithChoiceWeight + goodOrBadEventWeight + playerAttackWeight + gridLowAttackWeight + gridHighAttackWeight + playerRecruitmentWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIEvolutionLevelProgressWeight
@@ -206,6 +196,7 @@ class Events(context : Context) {
 
             FRIENDLY_AI_STAT_CHANGE -> return mContext.getString(R.string.friendly_ai_stat_altering_event)
 
+            FRIENDLY_AI_EVOLUTION_PROGRESS -> return mContext.getString(R.string.friendly_ai_evolution_progress)
             FRIENDLY_AI_EVOLUTION_CHOICE -> return mContext.getString(R.string.friendly_ai_evolution_with_choice)
             FRIENDLY_AI_EVOLUTION_NO_CHOICE -> return mContext.getString(R.string.friendly_ai_evolution_no_choice)
 

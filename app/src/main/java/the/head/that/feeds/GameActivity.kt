@@ -389,7 +389,9 @@ fun GameBodyTopColumn() {
 
 @Composable
 fun GameInteraction(height: Int) {
-    var buttonText by remember { mutableStateOf("") }
+    var firstButtonText by remember { mutableStateOf("") }
+    var secondButtonText by remember { mutableStateOf("") }
+    var thirdButtonText by remember { mutableStateOf("") }
 
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -400,24 +402,32 @@ fun GameInteraction(height: Int) {
     ) {
 
         Button(onClick = {
-            events.setRolledEvent(stats.gridAITrackingLevel, stats.fighters, stats.programmers)
-            gameViewModel.setEventText(events.rolledEvent.toString())
+            events.setrolledEventInteger(stats.gridAITrackingLevel, stats.fighters, stats.programmers)
+            Log.i("testButton", "rolled event integer is ${events.rolledEventInteger}")
+
+            val eventString = events.eventString(events.rolledEventInteger)
+            gameViewModel.setEventText(eventString)
+
+            Log.i("testButton", "rolled event string is $eventString")
+
+            firstButtonText = events.firstButtonString(events.rolledEventInteger)
+            secondButtonText = events.secondButtonString(events.rolledEventInteger)
+            thirdButtonText = events.thirdButtonString(events.rolledEventInteger)
+
+            Log.i("testButton", "first button text is $firstButtonText")
+            Log.i("testButton", "second button text is $secondButtonText")
+            Log.i("testButton", "third button text is $thirdButtonText")
         }) {
             Text(text = "Roll Event")
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        val firstButtonText = events.firstButtonString(events.rolledEvent)
-        val secondButtonText = events.secondButtonString(events.rolledEvent)
-        val thirdButtonText = events.thirdButtonString(events.rolledEvent)
-
         if (firstButtonText != "") {
             Log.i("testButton", "drawing Button 1!")
             Button(onClick = {
             }) {
-                buttonText = events.firstButtonString(events.rolledEvent)
-                Text(text = buttonText)
+                Text(text = events.firstButtonString(events.rolledEventInteger))
             }
         }
 
@@ -425,7 +435,7 @@ fun GameInteraction(height: Int) {
             Log.i("testButton", "drawing Button 2!")
             Button(onClick = {
             }) {
-                Text(text = events.secondButtonString(events.rolledEvent))
+                Text(text = events.secondButtonString(events.rolledEventInteger))
             }
         }
 
@@ -433,7 +443,7 @@ fun GameInteraction(height: Int) {
             Log.i("testButton", "drawing Button 3!")
             Button(onClick = {
             }) {
-                Text(text = events.thirdButtonString(events.rolledEvent))
+                Text(text = events.thirdButtonString(events.rolledEventInteger))
             }
         }
     }
