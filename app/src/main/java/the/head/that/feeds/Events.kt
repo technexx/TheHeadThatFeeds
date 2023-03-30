@@ -29,8 +29,7 @@ class Events(context : Context) {
     val GRID_AI_HIGH_NETWORK_ATTACK = 53
     val GRID_AI_HIGH_PHYSICAL_ATTACK = 54
 
-    val PLAYER_RECRUITMENT = 61
-    val FRIENDLY_AI_RECRUITMENT = 62
+    val FRIENDLY_AI_RECRUITMENT = 61
 
     val FRIENDLY_AI_STAT_CHANGE = 71
 
@@ -55,11 +54,14 @@ class Events(context : Context) {
         return fetchedArray[(fetchedArray.indices).random()].toString()
     }
 
-    fun setrolledEventInteger(trackingLevel: Int, fighters: Int, programmers: Int) {
+    fun setRolledEventInteger(trackingLevel: Int, fighters: Int, programmers: Int) {
         setAllEventWeights(trackingLevel, fighters, programmers)
 
         val totalEventsWeight = totalEventsWeight()
         val roll = (0..totalEventsWeight).random()
+
+        Log.i("testRoll", "roll is $roll")
+        Log.i("testRoll", "event weight is $totalEventsWeight")
 
         val eventsWeightArray = eventsWeightArray()
         val eventsAsIntArray = eventsAsIntArray()
@@ -68,10 +70,12 @@ class Events(context : Context) {
 
         for (i in eventsWeightArray.indices) {
             valueToRollAgainst += eventsWeightArray[i]
+            Log.i("testRoll", "value to roll against is $valueToRollAgainst")
 
             if (valueToRollAgainst >= roll) {
                 addEventToPastEventsList(eventsAsIntArray[i])
                  rolledEventInteger = eventsAsIntArray[i]
+                return
             }
         }
     }
@@ -89,15 +93,15 @@ class Events(context : Context) {
     }
 
     private fun totalEventsWeight() : Int {
-        return eventWithChoiceWeight + goodOrBadEventWeight + playerAttackWeight + gridLowAttackWeight + gridHighAttackWeight + playerRecruitmentWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIEvolutionLevelProgressWeight
+        return eventWithChoiceWeight + goodOrBadEventWeight + playerAttackWeight + gridLowAttackWeight + gridHighAttackWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIEvolutionLevelProgressWeight
     }
 
     private fun eventsAsIntArray() : ArrayList<Int> {
-        return ArrayList(listOf(eventWithChoice(), randomEvent(), playerAttack(), gridAIAttackLowDamage(), gridAIAttackHighDamage(), playerRecruitment(), friendlyAIRecruitment(), friendlyAIStatChange(), friendlyAIEvolutionProgress()))
+        return ArrayList(listOf(eventWithChoice(), randomEvent(), playerAttack(), gridAIAttackLowDamage(), gridAIAttackHighDamage(), friendlyAIRecruitment(), friendlyAIStatChange(), friendlyAIEvolutionProgress()))
     }
 
     private fun eventsWeightArray() : ArrayList<Int> {
-        return ArrayList(listOf(eventWithChoiceWeight, goodOrBadEventWeight, playerAttackWeight, gridLowAttackWeight, gridHighAttackWeight, playerRecruitmentWeight, friendlyAIRecruitmentWeight, friendlyAIStatChangeWeight, friendlyAIEvolutionLevelProgressWeight))
+        return ArrayList(listOf(eventWithChoiceWeight, goodOrBadEventWeight, playerAttackWeight, gridLowAttackWeight, gridHighAttackWeight, friendlyAIRecruitmentWeight, friendlyAIStatChangeWeight, friendlyAIEvolutionLevelProgressWeight))
     }
 
     private fun addEventToPastEventsList(event: Int) { pastEventsArray.add(event) }
@@ -125,6 +129,8 @@ class Events(context : Context) {
 
     fun setFriendlyAIEvolutionProgressWeight() { friendlyAIEvolutionLevelProgressWeight = 10 }
 
+    //////////////////////////////////////////////////////////////////////////////////////
+
     fun eventWithChoice() : Int { return EVENT_WTH_CHOICE }
 
     fun randomEvent() : Int { return (RANDOM_GOOD..RANDOM_BAD).random() }
@@ -134,8 +140,6 @@ class Events(context : Context) {
     fun gridAIAttackLowDamage() : Int { return (GRID_AI_LOW_NETWORK_ATTACK..GRID_AI_LOW_PHYSICAL_ATTACK).random() }
 
     fun gridAIAttackHighDamage() : Int { return (GRID_AI_LOW_PHYSICAL_ATTACK..GRID_AI_HIGH_PHYSICAL_ATTACK).random() }
-
-    fun playerRecruitment() : Int { return PLAYER_RECRUITMENT }
 
     fun friendlyAIRecruitment() : Int { return FRIENDLY_AI_RECRUITMENT }
 
@@ -147,8 +151,14 @@ class Events(context : Context) {
     fun friendlyAIEvolutionNoChoice() : Int { return FRIENDLY_AI_EVOLUTION_NO_CHOICE }
 
     fun eventString(eventType: Int) : String {
+        if (eventType == EVENT_WTH_CHOICE) {
+            val array = mContext.resources.getStringArray(R.array.events_with_choice)
+            return array[array.indices.random()]
+        }
+
         if (eventType == RANDOM_GOOD || eventType == RANDOM_BAD) {
             var array = emptyArray<String>()
+            val
             if (eventType == RANDOM_GOOD) array = mContext.resources.getStringArray(R.array.good_event_array)
             if (eventType == RANDOM_BAD) array = mContext.resources.getStringArray(R.array.bad_event_array)
 
@@ -205,17 +215,19 @@ class Events(context : Context) {
     }
 
     fun firstButtonString(eventType: Int) : String {
-        return when (eventType) {
-            FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> mContext.getString(R.string.friendly_ai_directed_network_attack_choice_one)
-            FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> mContext.getString(R.string.friendly_ai_directed_military_attack_choice_one)
-            FRIENDLY_AI_AUTONOMOUS_NETWORK_ATTACK, FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK -> mContext.getString(R.string.yes)
-            PLAYER_NETWORK_ATTACK, PLAYER_MILITARY_ATTACK -> mContext.getString(R.string.yes)
-            else -> ""
+        when (eventType) {
+            EVENT_WTH_CHOICE -> return mContext.getString(R.string.yes)
+            FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_network_attack_choice_one)
+            FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_military_attack_choice_one)
+            FRIENDLY_AI_AUTONOMOUS_NETWORK_ATTACK, FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK -> return mContext.getString(R.string.yes)
+            PLAYER_NETWORK_ATTACK, PLAYER_MILITARY_ATTACK -> return mContext.getString(R.string.yes)
+            else -> return ""
         }
     }
 
     fun secondButtonString(eventType: Int) : String {
         return when (eventType) {
+            EVENT_WTH_CHOICE -> return mContext.getString(R.string.no)
             FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> mContext.getString(R.string.friendly_ai_directed_network_attack_choice_two)
             FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> mContext.getString(R.string.friendly_ai_directed_military_attack_choice_two)
             FRIENDLY_AI_AUTONOMOUS_NETWORK_ATTACK, FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK -> mContext.getString(R.string.no)

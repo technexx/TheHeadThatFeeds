@@ -402,7 +402,7 @@ fun GameInteraction(height: Int) {
     ) {
 
         Button(onClick = {
-            events.setrolledEventInteger(stats.gridAITrackingLevel, stats.fighters, stats.programmers)
+            events.setRolledEventInteger(stats.gridAITrackingLevel, stats.fighters, stats.programmers)
             Log.i("testButton", "rolled event integer is ${events.rolledEventInteger}")
 
             val eventString = events.eventString(events.rolledEventInteger)

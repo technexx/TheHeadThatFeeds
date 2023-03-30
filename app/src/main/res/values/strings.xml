@@ -83,14 +83,14 @@
 
     ///////////////////////////////////////////////////////////////////
     <string-array name="good_event_array">
-        <item>A group of %1$i fighters has joined your cause.</item>
-        <item>A group of %1$i hackers has joined your cause.</item>
+        <item>A group of %1$s fighters has joined your cause.</item>
+        <item>A group of %1$s hackers has joined your cause.</item>
         <item>Your AI has made a cognitive breakthrough, enhancing its neural network.</item>
     </string-array>
 
     <string-array name="bad_event_array">
-        <item>A mole has infiltrated your fighter ranks, killing %1$i.</item>
-        <item>A mole has infiltrated your hacker ranks, killing %1$i.</item>
+        <item>A mole has infiltrated your fighter ranks, killing %1$s.</item>
+        <item>A mole has infiltrated your hacker ranks, killing %1$s.</item>
         <item>A mole has infiltrated your hacker ranks, sabotaging your AI\'s neural network.</item>
     </string-array>
 
@@ -165,9 +165,7 @@
         <item>has learned that love and fear can be uncomfortably coupled</item>
     </string-array>
 
-
     ///////////////////////////////////////////////////////////////////
-
 
     <string name="friendly_ai_directed_network_attack_choice_one">Leave it for now</string>
     <string name="friendly_ai_directed_network_attack_choice_two">Proceed cautiously</string>
