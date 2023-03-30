@@ -10,8 +10,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -390,6 +389,7 @@ fun GameBodyTopColumn() {
 
 @Composable
 fun GameInteraction(height: Int) {
+    var buttonText by remember { mutableStateOf("") }
 
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -399,20 +399,42 @@ fun GameInteraction(height: Int) {
         verticalArrangement = Arrangement.Center
     ) {
 
-
         Button(onClick = {
-            //Todo: Set buttons for rolled event. If button string is "", do not show button (for 3rd option).
-            gameViewModel.setEventText(events.eventString(events.rolledEvent(stats.gridAITrackingLevel, stats.fighters, stats.programmers)))
+            events.setRolledEvent(stats.gridAITrackingLevel, stats.fighters, stats.programmers)
+            gameViewModel.setEventText(events.rolledEvent.toString())
         }) {
             Text(text = "Roll Event")
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
-        Button(onClick = {
-            cycleGridAI()
-        }) {
-            Text(text = "Cycle Grid AI")
+        val firstButtonText = events.firstButtonString(events.rolledEvent)
+        val secondButtonText = events.secondButtonString(events.rolledEvent)
+        val thirdButtonText = events.thirdButtonString(events.rolledEvent)
+
+        if (firstButtonText != "") {
+            Log.i("testButton", "drawing Button 1!")
+            Button(onClick = {
+            }) {
+                buttonText = events.firstButtonString(events.rolledEvent)
+                Text(text = buttonText)
+            }
+        }
+
+        if (secondButtonText != "") {
+            Log.i("testButton", "drawing Button 2!")
+            Button(onClick = {
+            }) {
+                Text(text = events.secondButtonString(events.rolledEvent))
+            }
+        }
+
+        if (thirdButtonText != "") {
+            Log.i("testButton", "drawing Button 3!")
+            Button(onClick = {
+            }) {
+                Text(text = events.thirdButtonString(events.rolledEvent))
+            }
         }
     }
 }
