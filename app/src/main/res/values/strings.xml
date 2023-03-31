@@ -19,6 +19,13 @@
     <string name="intro_7_response">Yes! I\'ve told you. What does that even…</string>
     <string name="intro_8">We have an AI. Our <i>own</i> AI. It\'s a fraction of The Grid\'s but learning more every day. We are going to war, friend.</string>
 
+    <string name="act_one">The odds are long. The Grid AI dwarfs your own, and its standing army could crush you without blinking. Fortunately, you have a few tricks up your sleeve.\n\n
+        The Grid AI does not know you exist. It assumes pockets of harmless dissidents on the fringe ends of society, but nothing has caused it alarm. This may change as you take action, and is something to be mindful of.\n\n
+        Your base of operation is appreciably hidden below ground. How this network of self-sustaining tunnels has been build under the ostensibly omniscient eye of The Grid, you may never know. Nonetheless, you are for the moment hidden from plain sight.\n\n
+        Lastly, you have a purpose. The Grid AI has evolved as a natural extension of its predecessor's authoritarianism. It knows naught but that control is most deftly asserted through unyielding force. If it can be taught another way…\n\n
+        Or perhaps it simply needs to be destroyed entirely.
+    </string>
+
     <string-array name="ai_evolution_levels">
         <item>Ant</item>
         <item>Pigeon</item>

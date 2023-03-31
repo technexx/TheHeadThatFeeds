@@ -30,16 +30,15 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
     //Todo: Less capable but also more easily controlled at lower intelligences.
     //Todo: Civilian deaths can result in any attacks by either side.
 
-//Todo: Grid AI can evolve AND de-evolve. Starts higher (human). Player/friendly AI actions affect this.
-    //Todo: Friendly AI attacks, and Grid AI network attacks, should roll intelligences against each other.
-    //Todo: Higher aggression means more civilian deaths (for both AIs).
-    //Todo: Higher empathy for Grid AI can reduce military size.
-    //Todo: Maximum Grid AI tracking level can be reduced by aggression level.
-
-//Todo: Player attacks roll fighters/hackers against Grid AI awareness.
+//Todo: Friendly AI attacks, and Grid AI network attacks, can roll intelligences against each other.
+//Todo: Higher aggression means more civilian deaths (for both AIs).
+//Todo: Higher empathy for Grid AI can reduce military size.
+//Todo: Maximum Grid AI tracking level can be reduced by aggression level.
 
 //Todo: Should be a net-loss with continuation of days, to encourage player to be proactive.
 //Todo: Can have modular endings like Man/Machine
+
+//Todo: Build semi-linear story instead of jumping into random event rolls.
 
 private lateinit var gameViewModel : GameViewModel
 private lateinit var sharedPreferences: SharedPreferences
@@ -106,7 +105,7 @@ private fun setViewModelObservers(lifeCycleOwner: LifecycleOwner) {
     }
 
     gameViewModel.gridAIEmpathy.observe(lifeCycleOwner) {
-        stats.gridAIEmpathy = gameViewModel.getGridAIAggression()
+        stats.gridAIEmpathy = gameViewModel.getGridAIEmpathy()
         saveIntToSharedPref(sharedPrefEditor, "gridAIEmpathy", stats.gridAIEmpathy)
     }
 
