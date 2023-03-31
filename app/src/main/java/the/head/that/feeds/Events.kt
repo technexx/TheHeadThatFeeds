@@ -158,14 +158,13 @@ class Events(context : Context) {
 
         if (eventType == RANDOM_GOOD || eventType == RANDOM_BAD) {
             var array = emptyArray<String>()
-            val
             if (eventType == RANDOM_GOOD) array = mContext.resources.getStringArray(R.array.good_event_array)
             if (eventType == RANDOM_BAD) array = mContext.resources.getStringArray(R.array.bad_event_array)
 
             val index = array.indices.random()
             val valueChangeRoll = (20..60).random()
 
-            if (index == 0 || index == 1) return mContext.getString(array[index].toInt(), valueChangeRoll.toString())
+            if (index == 0 || index == 1) return String.format( (array[index]), valueChangeRoll.toString())
             else return array[index]
         }
 
@@ -184,7 +183,7 @@ class Events(context : Context) {
             }
             if (index == 3) { specifierRollString = mContext.resources.getStringArray(R.array.anti_friendly_AI_empathy_triggers)[specifierRoll]
             }
-            return mContext.getString(array[index].toInt(), specifierRollString)
+            return String.format(array[index], specifierRollString)
         }
 
         when (eventType) {
