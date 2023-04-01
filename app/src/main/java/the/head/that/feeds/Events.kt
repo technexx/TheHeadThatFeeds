@@ -24,13 +24,11 @@ class Events(context : Context) {
     val PLAYER_NETWORK_ATTACK = 41
     val PLAYER_MILITARY_ATTACK = 42
 
-    val GRID_AI_LOW_NETWORK_ATTACK = 51
-    val GRID_AI_LOW_PHYSICAL_ATTACK = 52
-    val GRID_AI_HIGH_NETWORK_ATTACK = 53
-    val GRID_AI_HIGH_PHYSICAL_ATTACK = 54
+    val GRID_AI_PHYSICAL_ATTACK = 51
+    val GRID_AI_NETWORK_ATTACK = 52
 
     val FRIENDLY_AI_RECRUITMENT = 61
-
+    
     val FRIENDLY_AI_STAT_CHANGE = 71
 
     val FRIENDLY_AI_EVOLUTION_PROGRESS = 81
@@ -38,16 +36,24 @@ class Events(context : Context) {
     val FRIENDLY_AI_EVOLUTION_NO_CHOICE = 83
 
     var eventWithChoiceWeight = 0
-    var goodOrBadEventWeight = 0
-    var playerAttackWeight = 0
-    var gridLowAttackWeight = 0
-    var gridHighAttackWeight = 0
+    var goodEventWeight = 0
+    var badEventWeight = 0
+    var mixedEventWeight = 0
+    var playerMilitaryAttackWeight = 0
+    var playerNetworkAttackWeight = 0
+    var gridAILowAttackWeight = 0
+    var gridAIHighAttackWeight = 0
     var playerRecruitmentWeight = 0
     var friendlyAIRecruitmentWeight = 0
     var friendlyAIStatChangeWeight = 0
     var friendlyAIEvolutionLevelProgressWeight = 0
 
     var pastEventsArray = ArrayList<Int>()
+
+
+    private fun eventsAsIntArray() : ArrayList<Int> {
+        return ArrayList(listOf(EVENT_WTH_CHOICE, RANDOM_GOOD, RANDOM_BAD, RANDOM_MIXED, FRIENDLY_AI_DIRECTED_NETWORK_ATTACK, FRIENDLY_AI_DIRECTED_MILITARY_ATTACK, FRIENDLY_AI_AUTONOMOUS_NETWORK_ATTACK, FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK, PLAYER_NETWORK_ATTACK, PLAYER_MILITARY_ATTACK, GRID_AI_PHYSICAL_ATTACK, GRID_AI_NETWORK_ATTACK, FRIENDLY_AI_RECRUITMENT, FRIENDLY_AI_STAT_CHANGE, FRIENDLY_AI_EVOLUTION_PROGRESS, FRIENDLY_AI_EVOLUTION_CHOICE, FRIENDLY_AI_EVOLUTION_NO_CHOICE))
+    }
 
     fun randomStringFromArray(array: Int) : String {
         val fetchedArray = mContext.resources.getStringArray(array)
@@ -81,74 +87,60 @@ class Events(context : Context) {
     }
 
     private fun setAllEventWeights(trackingLevel: Int, fighters: Int, programmers: Int) {
-        setEventWithChoiceWeight()
-        setGoodOrBadEventWeight()
-        setPlayerAttackWeight()
-        setGridAILowAttackWeight(trackingLevel)
-        setGridAIHighAttackWeight(trackingLevel)
-        setResistanceRecruitmentWeight(fighters, programmers)
-        setFriendlyAIRecruitmentWeight()
-        setFriendlyAIStatChangeWeight()
-        setFriendlyAIEvolutionProgressWeight()
+        assignEventWithChoiceWeight()
+        assignGoodEventWeight()
+        assignBadEventWeight()
+        assignMixedEventWeight()
+        assignPlayerMilitaryAttackWeight()
+        assignPlayerNetworkAttackWeight()
+        assignGridAILowAttackWeight(trackingLevel)
+        assignGridAIHighAttackWeight(trackingLevel)
+        assignResistanceRecruitmentWeight(fighters, programmers)
+        assignFriendlyAIRecruitmentWeight()
+        assignFriendlyAIStatChangeWeight()
+        assignFriendlyAIEvolutionProgressWeight()
     }
 
     private fun totalEventsWeight() : Int {
-        return eventWithChoiceWeight + goodOrBadEventWeight + playerAttackWeight + gridLowAttackWeight + gridHighAttackWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIEvolutionLevelProgressWeight
-    }
-
-    private fun eventsAsIntArray() : ArrayList<Int> {
-        return ArrayList(listOf(eventWithChoice(), randomEvent(), playerAttack(), gridAIAttackLowDamage(), gridAIAttackHighDamage(), friendlyAIRecruitment(), friendlyAIStatChange(), friendlyAIEvolutionProgress()))
+        return eventWithChoiceWeight + goodEventWeight + badEventWeight + mixedEventWeight + playerMilitaryAttackWeight + playerNetworkAttackWeight + gridAILowAttackWeight + gridAIHighAttackWeight + friendlyAIRecruitmentWeight + friendlyAIStatChangeWeight + friendlyAIEvolutionLevelProgressWeight
     }
 
     private fun eventsWeightArray() : ArrayList<Int> {
-        return ArrayList(listOf(eventWithChoiceWeight, goodOrBadEventWeight, playerAttackWeight, gridLowAttackWeight, gridHighAttackWeight, friendlyAIRecruitmentWeight, friendlyAIStatChangeWeight, friendlyAIEvolutionLevelProgressWeight))
+        return ArrayList(listOf(eventWithChoiceWeight, goodEventWeight, badEventWeight, mixedEventWeight, playerMilitaryAttackWeight, playerNetworkAttackWeight, gridAILowAttackWeight, gridAIHighAttackWeight, friendlyAIRecruitmentWeight, friendlyAIStatChangeWeight, friendlyAIEvolutionLevelProgressWeight))
     }
 
     private fun addEventToPastEventsList(event: Int) { pastEventsArray.add(event) }
 
-    fun setEventWithChoiceWeight() { eventWithChoiceWeight = 50 }
+    fun assignEventWithChoiceWeight() { eventWithChoiceWeight = 50 }
 
-    fun setGoodOrBadEventWeight() { goodOrBadEventWeight = 20 }
+    fun assignGoodEventWeight() { goodEventWeight = 20 }
+    
+    fun assignBadEventWeight() { badEventWeight = 20 }
+    
+    fun assignMixedEventWeight() { mixedEventWeight = 20 }
 
-    fun setPlayerAttackWeight() { playerAttackWeight = 20 }
+    fun assignPlayerMilitaryAttackWeight() { playerMilitaryAttackWeight = 20 }
 
-    fun setGridAILowAttackWeight(trackingLevel: Int) {
-        if (trackingLevel <= 20) gridLowAttackWeight = (trackingLevel * 1.2).roundToInt()
-        else gridLowAttackWeight = (trackingLevel * 0.5).roundToInt() }
+    fun assignPlayerNetworkAttackWeight() { playerNetworkAttackWeight = 20 }
 
-    fun setGridAIHighAttackWeight(trackingLevel: Int) {
-        if (trackingLevel > 20) gridHighAttackWeight = (trackingLevel * 1.2).roundToInt()
-        else gridHighAttackWeight = (trackingLevel * 0.3).roundToInt()
+    fun assignGridAILowAttackWeight(trackingLevel: Int) {
+        if (trackingLevel <= 20) gridAILowAttackWeight = (trackingLevel * 1.2).roundToInt()
+        else gridAILowAttackWeight = (trackingLevel * 0.5).roundToInt() }
+
+    fun assignGridAIHighAttackWeight(trackingLevel: Int) {
+        if (trackingLevel > 20) gridAIHighAttackWeight = (trackingLevel * 1.2).roundToInt()
+        else gridAIHighAttackWeight = (trackingLevel * 0.3).roundToInt()
     }
 
-    fun setResistanceRecruitmentWeight(fighters: Int, programmers: Int) { playerRecruitmentWeight = ((fighters + programmers) / 100) }
+    fun assignResistanceRecruitmentWeight(fighters: Int, programmers: Int) { playerRecruitmentWeight = ((fighters + programmers) / 100) }
 
-    fun setFriendlyAIRecruitmentWeight() { friendlyAIRecruitmentWeight = 5 }
+    fun assignFriendlyAIRecruitmentWeight() { friendlyAIRecruitmentWeight = 5 }
 
-    fun setFriendlyAIStatChangeWeight() { friendlyAIStatChangeWeight = 5 }
+    fun assignFriendlyAIStatChangeWeight() { friendlyAIStatChangeWeight = 5 }
 
-    fun setFriendlyAIEvolutionProgressWeight() { friendlyAIEvolutionLevelProgressWeight = 10 }
+    fun assignFriendlyAIEvolutionProgressWeight() { friendlyAIEvolutionLevelProgressWeight = 10 }
 
     //////////////////////////////////////////////////////////////////////////////////////
-
-    fun eventWithChoice() : Int { return EVENT_WTH_CHOICE }
-
-    fun randomEvent() : Int { return (RANDOM_GOOD..RANDOM_BAD).random() }
-
-    fun playerAttack() : Int { return (PLAYER_NETWORK_ATTACK..PLAYER_MILITARY_ATTACK).random() }
-
-    fun gridAIAttackLowDamage() : Int { return (GRID_AI_LOW_NETWORK_ATTACK..GRID_AI_LOW_PHYSICAL_ATTACK).random() }
-
-    fun gridAIAttackHighDamage() : Int { return (GRID_AI_LOW_PHYSICAL_ATTACK..GRID_AI_HIGH_PHYSICAL_ATTACK).random() }
-
-    fun friendlyAIRecruitment() : Int { return FRIENDLY_AI_RECRUITMENT }
-
-    fun friendlyAIStatChange() : Int { return FRIENDLY_AI_STAT_CHANGE }
-
-    fun friendlyAIEvolutionProgress() : Int { return FRIENDLY_AI_EVOLUTION_PROGRESS }
-
-    fun friendlyAIEvolutionChoice() : Int { return FRIENDLY_AI_EVOLUTION_CHOICE }
-    fun friendlyAIEvolutionNoChoice() : Int { return FRIENDLY_AI_EVOLUTION_NO_CHOICE }
 
     fun eventString(eventType: Int) : String {
         if (eventType == EVENT_WTH_CHOICE) {
@@ -196,13 +188,13 @@ class Events(context : Context) {
             PLAYER_NETWORK_ATTACK -> return mContext.getString(R.string.player_network_attack)
             PLAYER_MILITARY_ATTACK -> return mContext.getString(R.string.player_military_attack)
 
-            GRID_AI_LOW_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack_low_threat,  randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.enemy_ai_malware))
-            GRID_AI_LOW_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack_low_threat, randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.destruction_synonyms))
-            GRID_AI_HIGH_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack_high_threat, randomStringFromArray(R.array.enemy_types))
-            GRID_AI_HIGH_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack_high_threat, randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.destruction_synonyms))
+            //Todo: We have two sets of Strings for low/high attack here.
+            GRID_AI_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack_low_threat,  randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.enemy_ai_malware))
+            GRID_AI_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack_low_threat, randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.destruction_synonyms))
 
             FRIENDLY_AI_RECRUITMENT -> return mContext.getString(R.string.friendly_ai_recruitment)
 
+            //Todo: Needs its placeholders set.
             FRIENDLY_AI_STAT_CHANGE -> return mContext.getString(R.string.friendly_ai_stat_altering_event)
 
             FRIENDLY_AI_EVOLUTION_PROGRESS -> return mContext.getString(R.string.friendly_ai_evolution_progress)
@@ -246,9 +238,5 @@ class Events(context : Context) {
     fun dailyFriendlyAIProgress(programmers : Int) : Int {
         val doubleValue : Double = (programmers/50).toDouble()
         return doubleValue.roundToInt()
-    }
-
-    fun testEventWeights() {
-        eventWithChoiceWeight = 10; goodOrBadEventWeight = 10; playerAttackWeight = 10; gridLowAttackWeight = 10; gridHighAttackWeight = 10; playerRecruitmentWeight = 10; friendlyAIRecruitmentWeight = 10; friendlyAIStatChangeWeight = 10; friendlyAIEvolutionLevelProgressWeight = 10;
     }
 }

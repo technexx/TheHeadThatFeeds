@@ -136,8 +136,6 @@ private fun saveStringToSharedPref(editor: SharedPreferences.Editor, key: String
 }
 
 private fun setStatsClassValuesFromSharedPreferences() {
-    Log.i("testStats", "value is ${stats.friendlyAIEvolutionLevel}")
-
     stats.friendlyAIMood = sharedPreferences.getInt("friendlyAIMood", 25)
     stats.friendlyAIEvolutionLevel = sharedPreferences.getInt("friendlyAIEvolutionLevel", 0)
 
@@ -155,10 +153,8 @@ private fun setStatsClassValuesFromSharedPreferences() {
     stats.military = sharedPreferences.getString("military", "840.0")!!.toDouble()
     stats.civilians = sharedPreferences.getString("civilians", "42.0")!!.toDouble()
 
+    //Todo: Change to String/set to "real date"
     stats.currentDay = sharedPreferences.getInt("currentDay", 1)
-
-    Log.i("testStats", "value is ${stats.friendlyAIEvolutionLevel}")
-
 }
 
 private fun setViewModelValuesFromStatsClass() {
