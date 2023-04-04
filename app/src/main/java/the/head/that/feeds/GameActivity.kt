@@ -28,7 +28,6 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 
 //Todo: As friendly AI evolves, it gains new abilities and becomes more autonomous.
     //Todo: Less capable but also more easily controlled at lower intelligences.
-    //Todo: Civilian deaths can result in any attacks by either side.
 
 //Todo: Friendly AI attacks, and Grid AI network attacks, can roll intelligences against each other.
 //Todo: Higher aggression means more civilian deaths (for both AIs).
@@ -38,7 +37,9 @@ import the.head.that.feeds.ui.theme.TheHeadThatFeedsTheme
 //Todo: Should be a net-loss with continuation of days, to encourage player to be proactive.
 //Todo: Can have modular endings like Man/Machine
 
-//Todo: Build semi-linear story instead of jumping into random event rolls.
+//Todo: Idea: Everyone is hooked into The Grid, Matrix-style, with all the reliance-based consequences.
+
+//Todo: Add some one-time "story progression" events.
 
 private lateinit var gameViewModel : GameViewModel
 private lateinit var sharedPreferences: SharedPreferences
@@ -348,7 +349,7 @@ fun StatusBarRightRowColumn() {
 
         Spacer(modifier = Modifier.weight(1.0f))
 
-        Text(text = "Military (millions): $military", color = Color.White, fontSize = 15.sp)
+        Text(text = "Military (thousands): $military", color = Color.White, fontSize = 15.sp)
         Text(text = "Civilians (billions): $civilians", color = Color.White, fontSize = 15.sp)
     }
 }

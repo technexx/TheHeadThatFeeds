@@ -30,7 +30,9 @@
         Or perhaps it should be destroyed entirely.
     </string>
 
-    <string name="act_one_2">A slow dawn breaks through the visual sensors above your warrens. </string>
+    <string name="act_one_2">A slow dawn breaks through the visual sensors above your warrens. Tracts of mile-high skyscrapers stretch in every direction, weather beaten and aesthetically dour but possessing the no-frills efficiency of AI-generated urban design. The absorption of nation states into The Grid made borders obsolete, and now some 42 billion souls exist side-by-side across the globe. While the scenery may change, the homogeneity of single-organism living pods does not.\n\n
+
+    </string>
 
     <string-array name="ai_evolution_levels">
         <item>Ant</item>
@@ -64,23 +66,37 @@
     </string-array>
 
     ///////////////////////////////////////////////////////////////////
-    <string name="friendly_ai_directed_network_attack">Your AI has located a weakness within the Grid\'s neural network. Attempt to exploit it?</string>
-    <string name="friendly_ai_directed_military_attack">Your AI has discovered an exposed system within one of the Grid\'s military installations. Attempt to inflict fatal damage?</string>
+    <string name="friendly_ai_directed_network_attack">Your AI has located %1$s weakness within the Grid\'s neural network. Attempt to exploit it?</string>
+    <string name="friendly_ai_directed_military_attack">Your AI has discovered %1$s system within one of the Grid\'s military installations. Attempt to inflict fatal damage?</string>
     <!--Restraint depends on hackers and can result in some of their deaths-->
-    <string name="friendly_ai_autonomous_network_attack">Your AI has decided to attack the Grid\'s neural network. Attempt to restrain it?</string>
-    <string name="friendly_ai_autonomous_military_attack">Your AI has decided to attack a vulnerable military installation. Attempt to restrain it?</string>
+    <string name="friendly_ai_autonomous_network_attack">Your AI has decided to attack %1$s weakness within the Grid\'s neural network. Attempt to restrain it?</string>
+    <string name="friendly_ai_autonomous_military_attack">Your AI has decided to attack %1$s military installation. Attempt to restrain it?</string>
 
-    <string name="player_network_attack">One of your hackers has discovered a weakness within the Grid AI\'s network. Attempt to exploit it?</string>
-    <string name="player_military_attack">A scouting patrol has identified a Grid AI network node with inadequate security. Attempt to destroy it?</string>
-    ///////////////////////////////////////////////////////////////////
+    <!--Placeholder is strength of defense against attack -->
+    <string name="player_network_attack">Your hackers has discovered %1$s exploit within the Grid AI\'s network. Attempt to exploit it?</string>
+    <string name="player_military_attack">One of your fighter patrols have spotted %1$s military detachment and may be able to ambush them.</string>
+
+    <string-array name="network_defense_level">
+        <item>an unguarded</item>
+        <item>a lightly guarded</item>
+        <item>a guarded</item>
+        <item>a heavily guarded</item>
+        <item>an extremely guarded</item>
+    </string-array>
+
+    <string-array name="military_defense_level">
+        <item>an unarmed</item>
+        <item>a weak</item>
+        <item>a moderate</item>
+        <item>a strong</item>
+        <item>a fierce</item>
+    </string-array>
 
 
-    ///////////////////////////////////////////////////////////////////
-    <string name="grid_ai_physical_attack_low_threat">The Grid\'s AI has located one of your resistance cells, and has sent %1$s to %2$s it.</string>
-    <string name="grid_ai_physical_attack_high_threat">The Grid\'s AI has pinpointed a major nerve center of your resistance operation, and is sending %1$s to %2$s it.</string>
-    <string name="grid_ai_network_attack_low_threat">The Grid\'s AI has infiltrated one of your AI\'s network hubs, and is running %1$s to %2$s it.</string>
-    <string name="grid_ai_network_attack_high_threat">The Grid\'s AI has breached a massive hole in your AI\'s network and has multiple %1$s pouring in.</string>
-    ///////////////////////////////////////////////////////////////////
+    <string name="grid_ai_physical_attack">The Grid\'s AI has located one of your resistance cells, and has sent %1$s to %2$s it.</string>
+    <string name="grid_ai_network_attack">The Grid\'s AI has infiltrated one of your AI\'s network hubs, and is running %1$s to %2$s it.</string>
+<!--    <string name="grid_ai_physical_attack_high_threat">The Grid\'s AI has pinpointed a major nerve center of your resistance operation, and is sending %1$s to %2$s it.</string>-->
+<!--    <string name="grid_ai_network_attack_high_threat">The Grid\'s AI has breached a massive hole in your AI\'s network and has multiple %1$s pouring in.</string>-->
 
 
     <string name="friendly_ai_recruitment">Your AI has intercepted the network traffic of a group of dissidents, .</string>
