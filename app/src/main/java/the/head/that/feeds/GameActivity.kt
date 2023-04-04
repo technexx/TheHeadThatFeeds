@@ -333,7 +333,7 @@ fun StatusBarRightRowColumn() {
     ) {
         Text(text = "Grid AI", color = colorResource(id = R.color.android_red), fontSize = 16.sp)
 
-        Text(text = statusBarViews.gridAIActionLevelString(trackingLevel), color = colorResource(id = statusBarViews.actionLevelColor(trackingLevel)), fontSize = 14.sp)
+        Text(text = statusBarViews.gridAITrackingLevelString(trackingLevel), color = colorResource(id = statusBarViews.actionLevelColor(trackingLevel)), fontSize = 14.sp)
 
         Spacer(modifier = Modifier.height(10.dp))
 

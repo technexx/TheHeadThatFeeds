@@ -76,7 +76,7 @@
     <string name="player_network_attack">Your hackers has discovered %1$s exploit within the Grid AI\'s network. Attempt to exploit it?</string>
     <string name="player_military_attack">One of your fighter patrols have spotted %1$s military detachment and may be able to ambush them.</string>
 
-    <string-array name="network_defense_level">
+    <string-array name="grid_ai_network_defense_level">
         <item>an unguarded</item>
         <item>a lightly guarded</item>
         <item>a guarded</item>
@@ -84,7 +84,7 @@
         <item>an extremely guarded</item>
     </string-array>
 
-    <string-array name="military_defense_level">
+    <string-array name="grid_ai_military_defense_level">
         <item>an unarmed</item>
         <item>a weak</item>
         <item>a moderate</item>
@@ -92,12 +92,24 @@
         <item>a fierce</item>
     </string-array>
 
+    <string name="grid_ai_network_attack">The Grid\'s AI has infiltrated one of your AI\'s network hubs, and is running %1$s of %2$s to %3$s it.</string>
+    <string name="grid_ai_physical_attack">The Grid\'s AI has located one of your resistance cells, and has sent %1$s of %2$s to %3$s it.</string>
 
-    <string name="grid_ai_physical_attack">The Grid\'s AI has located one of your resistance cells, and has sent %1$s to %2$s it.</string>
-    <string name="grid_ai_network_attack">The Grid\'s AI has infiltrated one of your AI\'s network hubs, and is running %1$s to %2$s it.</string>
-<!--    <string name="grid_ai_physical_attack_high_threat">The Grid\'s AI has pinpointed a major nerve center of your resistance operation, and is sending %1$s to %2$s it.</string>-->
-<!--    <string name="grid_ai_network_attack_high_threat">The Grid\'s AI has breached a massive hole in your AI\'s network and has multiple %1$s pouring in.</string>-->
+    <string-array name="grid_ai_network_attack_level">
+        <item>a sprinkle</item>
+        <item>a handful</item>
+        <item>a lot</item>
+        <item>a mass</item>
+        <item>an endless spiral</item>
+    </string-array>
 
+    <string-array name="grid_ai_physical_attack_level">
+        <item>a few</item>
+        <item>a group</item>
+        <item>a platoon</item>
+        <item>a horde</item>
+        <item>an army</item>
+    </string-array>
 
     <string name="friendly_ai_recruitment">Your AI has intercepted the network traffic of a group of dissidents, .</string>
     <string name="friendly_ai_recruitment_success">and has succeeded in persuading them to join.</string>
@@ -208,6 +220,21 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <string-array name="enemy_ai_malware">
+        <item>super buff malware</item>
+        <item>trojan horses</item>
+        <item>electro-liquefiers</item>
+        <item>cryptoworms</item>
+        <item>a legion of kill bots</item>
+        <item>scareware</item>
+        <item>superconductor saboteurs</item>
+        <item>silicon sappers</item>
+        <item>untethered cyber dogs</item>
+        <item>lithium lions</item>
+        <item>bytes bombers</item>
+        <item>cyber snakes</item>
+    </string-array>
+
     <string-array name="enemy_types">
         <item>a scorch brigade</item>
         <item>a death squad</item>
@@ -238,21 +265,4 @@
         <item>exterminate</item>
         <item>dispatch</item>
     </string-array>
-
-    <string-array name="enemy_ai_malware">
-        <item>super buff malware</item>
-        <item>trojan horses</item>
-        <item>electro-liquefiers</item>
-        <item>cryptoworms</item>
-        <item>a legion of kill bots</item>
-        <item>scareware</item>
-        <item>superconductor saboteurs</item>
-        <item>silicon sappers</item>
-        <item>untethered cyber dogs</item>
-        <item>lithium lions</item>
-        <item>bytes bombers</item>
-        <item>cyber snakes</item>
-    </string-array>
-
-
 </resources>

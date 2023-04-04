@@ -52,7 +52,7 @@ class StatusBarViews (context: Context) {
         }
     }
 
-    fun gridAIActionLevelString(level: Int) : String {
+    fun gridAITrackingLevelString(level: Int) : String {
         val levelArray = mContext.resources.getStringArray(R.array.grid_ai_tracking_levels)
         when (level) {
             in 0..9 -> return levelArray[0]

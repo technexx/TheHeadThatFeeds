@@ -55,6 +55,11 @@ class Events(context : Context) {
 
     var pastEventsArray = ArrayList<Int>()
 
+    var gridAINetworkAttackLevel = 0
+    var gridAIMilitaryAttackLevel = 0
+    var gridAINetworkAIDefenseLevel = 0
+    var gridAIMilitaryDefenseLevel = 0
+
     fun randomStringFromArray(array: Int) : String {
         val fetchedArray = mContext.resources.getStringArray(array)
         return fetchedArray[(fetchedArray.indices).random()].toString()
@@ -183,6 +188,11 @@ class Events(context : Context) {
             return String.format(array[index], specifierRollString)
         }
 
+        //Todo: Stats class access. Why even have a separate Stats class?
+        if (eventType == PLAYER_NETWORK_ATTACK) {
+            gridAINetworkDefenseString()
+        }
+
         when (eventType) {
             FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_network_attack)
             FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_military_attack)
@@ -207,6 +217,42 @@ class Events(context : Context) {
 
             else -> return ""
         }
+    }
+
+    fun gridAINetworkDefenseString(attackLevel: Int) : String {
+        val array = mContext.resources.getStringArray(R.array.grid_ai_network_defense_level)
+        return array[attackLevel]
+    }
+
+    fun gridAIMilitaryDefenseString(attackLevel: Int) : String {
+        val array = mContext.resources.getStringArray(R.array.grid_ai_military_defense_level)
+        return array[attackLevel]
+    }
+
+    fun gridAINetworkAttackString(attackLevel: Int) : String {
+        val array = mContext.resources.getStringArray(R.array.grid_ai_network_attack_level)
+        return array[attackLevel]
+    }
+
+    fun gridAIMilitaryAttackString(attackLevel: Int) : String {
+        val array = mContext.resources.getStringArray(R.array.grid_ai_physical_attack_level)
+        return array[attackLevel]
+    }
+
+    fun assignLevelOfGridAINetworkDefense(trackingLevel: Int) {
+        gridAINetworkAIDefenseLevel =  (trackingLevel + (-15..15).random()) / 10
+    }
+
+    fun assignLevelOfGridAIMilitaryDefense(trackingLevel: Int) {
+        gridAIMilitaryDefenseLevel = (trackingLevel + (-15..15).random())  / 10
+    }
+
+    fun assignLevelOfGridAINetworkAttack(trackingLevel: Int) {
+        gridAINetworkAttackLevel = (trackingLevel + (-15..15).random())  / 10
+    }
+
+    fun assignLevelOfGridAIPhysicalAttack(trackingLevel: Int) {
+        gridAIMilitaryDefenseLevel = (trackingLevel + (-15..15).random())  / 10
     }
 
     fun firstButtonString(eventType: Int) : String {
