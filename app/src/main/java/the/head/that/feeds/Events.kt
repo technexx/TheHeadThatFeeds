@@ -1,12 +1,17 @@
 package the.head.that.feeds
 
+import android.app.AppComponentFactory
 import android.content.Context
 import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.viewModels
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
-class Events(context : Context) {
+class Events(context : Context) : ComponentActivity() {
+    val gameViewModel : GameViewModel by viewModels()
+
     private val mContext = context
     var rolledEventInteger = 0
 
@@ -188,24 +193,41 @@ class Events(context : Context) {
             return String.format(array[index], specifierRollString)
         }
 
-        //Todo: Stats class access. Why even have a separate Stats class?
-        if (eventType == PLAYER_NETWORK_ATTACK) {
-            gridAINetworkDefenseString()
+        if (eventType == PLAYER_NETWORK_ATTACK || eventType == FRIENDLY_AI_DIRECTED_NETWORK_ATTACK || eventType == FRIENDLY_AI_AUTONOMOUS_NETWORK_ATTACK) {
+            assignLevelOfGridAINetworkDefense(gameViewModel.getGridAITrackingLevel())
+
+            val defenseLevelString = gridAINetworkDefenseLevelString(gridAINetworkAIDefenseLevel)
+
+            when (eventType) {
+                PLAYER_NETWORK_ATTACK -> return mContext.getString(R.string.player_network_attack, defenseLevelString)
+                FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_network_attack, defenseLevelString)
+                FRIENDLY_AI_AUTONOMOUS_NETWORK_ATTACK -> return mContext.getString(R.string.friendly_ai_autonomous_network_attack, defenseLevelString)
+            }
+        }
+
+        if (eventType == PLAYER_MILITARY_ATTACK || eventType == FRIENDLY_AI_DIRECTED_MILITARY_ATTACK || eventType == FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK) {
+            assignLevelOfGridAINetworkDefense(gameViewModel.getGridAITrackingLevel())
+
+            val attackLevelString = gridAIMilitaryDefenseLevelString(gridAIMilitaryDefenseLevel)
+
+            when (eventType) {
+                PLAYER_MILITARY_ATTACK ->  return mContext.getString(R.string.player_military_attack, attackLevelString)
+                FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_military_attack, attackLevelString)
+                FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK -> return mContext.getString(R.string.friendly_ai_autonomous_military_attack, attackLevelString)
+            }
+        }
+
+        if (eventType == GRID_AI_NETWORK_ATTACK) {
+            assignLevelOfGridAINetworkAttack(gameViewModel.getGridAITrackingLevel())
+
+            return mContext.getString(R.string.grid_ai_network_attack,  randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.enemy_ai_malware), gridAINetworkAttackLevelString(gridAINetworkAttackLevel))
+        }
+
+        if (eventType == GRID_AI_PHYSICAL_ATTACK) {
+            return mContext.getString(R.string.grid_ai_physical_attack, randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.destruction_synonyms), gridAIMilitaryAttackLevelString(gridAIMilitaryAttackLevel))
         }
 
         when (eventType) {
-            FRIENDLY_AI_DIRECTED_NETWORK_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_network_attack)
-            FRIENDLY_AI_DIRECTED_MILITARY_ATTACK -> return mContext.getString(R.string.friendly_ai_directed_military_attack)
-
-            FRIENDLY_AI_AUTONOMOUS_NETWORK_ATTACK -> return mContext.getString(R.string.friendly_ai_autonomous_network_attack)
-            FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK -> return mContext.getString(R.string.friendly_ai_autonomous_military_attack)
-
-            PLAYER_NETWORK_ATTACK -> return mContext.getString(R.string.player_network_attack)
-            PLAYER_MILITARY_ATTACK -> return mContext.getString(R.string.player_military_attack)
-
-            GRID_AI_NETWORK_ATTACK -> return mContext.getString(R.string.grid_ai_network_attack,  randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.enemy_ai_malware))
-            GRID_AI_PHYSICAL_ATTACK -> return mContext.getString(R.string.grid_ai_physical_attack, randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.destruction_synonyms))
-
             FRIENDLY_AI_RECRUITMENT -> return mContext.getString(R.string.friendly_ai_recruitment)
 
             //Todo: Needs its placeholders set.
@@ -219,22 +241,22 @@ class Events(context : Context) {
         }
     }
 
-    fun gridAINetworkDefenseString(attackLevel: Int) : String {
+    fun gridAINetworkDefenseLevelString(attackLevel: Int) : String {
         val array = mContext.resources.getStringArray(R.array.grid_ai_network_defense_level)
         return array[attackLevel]
     }
 
-    fun gridAIMilitaryDefenseString(attackLevel: Int) : String {
+    fun gridAIMilitaryDefenseLevelString(attackLevel: Int) : String {
         val array = mContext.resources.getStringArray(R.array.grid_ai_military_defense_level)
         return array[attackLevel]
     }
 
-    fun gridAINetworkAttackString(attackLevel: Int) : String {
+    fun gridAINetworkAttackLevelString(attackLevel: Int) : String {
         val array = mContext.resources.getStringArray(R.array.grid_ai_network_attack_level)
         return array[attackLevel]
     }
 
-    fun gridAIMilitaryAttackString(attackLevel: Int) : String {
+    fun gridAIMilitaryAttackLevelString(attackLevel: Int) : String {
         val array = mContext.resources.getStringArray(R.array.grid_ai_physical_attack_level)
         return array[attackLevel]
     }
