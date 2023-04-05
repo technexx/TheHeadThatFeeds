@@ -70,8 +70,8 @@ class Events(context : Context) : ComponentActivity() {
         return fetchedArray[(fetchedArray.indices).random()].toString()
     }
 
-    fun setRolledEventInteger(trackingLevel: Int, fighters: Int, programmers: Int) {
-        setAllEventWeights(trackingLevel, fighters, programmers)
+    fun setRolledEventInteger() {
+        setAllEventWeights()
 
         val totalEventsWeight = totalEventsWeight()
         val roll = (0..totalEventsWeight).random()
@@ -96,16 +96,20 @@ class Events(context : Context) : ComponentActivity() {
         }
     }
 
-    private fun setAllEventWeights(trackingLevel: Int, fighters: Int, programmers: Int) {
+    private fun setAllEventWeights() {
         assignEventWithChoiceWeight()
         assignGoodEventWeight()
         assignBadEventWeight()
         assignMixedEventWeight()
         assignPlayerMilitaryAttackWeight()
         assignPlayerNetworkAttackWeight()
-        assignGridAIPhysicalAttackWeight(trackingLevel)
-        assignGridAINetworkAttackWeight(trackingLevel)
-        assignResistanceRecruitmentWeight(fighters, programmers)
+        assignFriendlyAIDirectedNetworkAttackWeight()
+        assignFriendlyAIDirectedMilitaryAttackWeight()
+        assignFriendlyAIAutonomousNetworkAttackWeight(gameViewModel.getFriendlyAIAggression())
+        assignFriendlyAIAutonomousMilitaryAttackWeight(gameViewModel.getFriendlyAIAggression())
+        assignGridAIPhysicalAttackWeight(gameViewModel.getGridAITrackingLevel())
+        assignGridAINetworkAttackWeight(gameViewModel.getGridAITrackingLevel())
+        assignResistanceRecruitmentWeight(gameViewModel.getFighters(), gameViewModel.getProgrammers())
         assignFriendlyAIRecruitmentWeight()
         assignFriendlyAIStatChangeWeight()
         assignFriendlyAIEvolutionProgressWeight()
@@ -157,6 +161,7 @@ class Events(context : Context) : ComponentActivity() {
 
     fun assignFriendlyAIEvolutionProgressWeight() { friendlyAIEvolutionLevelProgressWeight = 10 }
 
+    //Todo: Change stats depending on event via viewModel. Possibly refactor into 2 parts, both based on event roll: First returns String, second sets any values/stats.
     fun eventString(eventType: Int) : String {
         if (eventType == EVENT_WTH_CHOICE) {
             val array = mContext.resources.getStringArray(R.array.events_with_choice)
@@ -206,7 +211,7 @@ class Events(context : Context) : ComponentActivity() {
         }
 
         if (eventType == PLAYER_MILITARY_ATTACK || eventType == FRIENDLY_AI_DIRECTED_MILITARY_ATTACK || eventType == FRIENDLY_AI_AUTONOMOUS_MILITARY_ATTACK) {
-            assignLevelOfGridAINetworkDefense(gameViewModel.getGridAITrackingLevel())
+            assignLevelOfGridAIMilitaryDefense(gameViewModel.getGridAITrackingLevel())
 
             val attackLevelString = gridAIMilitaryDefenseLevelString(gridAIMilitaryDefenseLevel)
 
@@ -224,6 +229,8 @@ class Events(context : Context) : ComponentActivity() {
         }
 
         if (eventType == GRID_AI_PHYSICAL_ATTACK) {
+            assignLevelOfGridAIMilitaryAttack(gameViewModel.getGridAITrackingLevel())
+
             return mContext.getString(R.string.grid_ai_physical_attack, randomStringFromArray(R.array.enemy_types), randomStringFromArray(R.array.destruction_synonyms), gridAIMilitaryAttackLevelString(gridAIMilitaryAttackLevel))
         }
 
@@ -273,8 +280,8 @@ class Events(context : Context) : ComponentActivity() {
         gridAINetworkAttackLevel = (trackingLevel + (-15..15).random())  / 10
     }
 
-    fun assignLevelOfGridAIPhysicalAttack(trackingLevel: Int) {
-        gridAIMilitaryDefenseLevel = (trackingLevel + (-15..15).random())  / 10
+    fun assignLevelOfGridAIMilitaryAttack(trackingLevel: Int) {
+        gridAIMilitaryAttackLevel = (trackingLevel + (-15..15).random())  / 10
     }
 
     fun firstButtonString(eventType: Int) : String {
